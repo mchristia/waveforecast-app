@@ -22,4 +22,32 @@ lassen.
     4. Grobes Kachel-Design festlegen 
     5. 
    
-neue zeile zum Testen
+
+## Woche 09 Project beginn
+
+-  In meiner WebApp will ich dem Nutzer eine Vorhersage der Srufedingungen an einem 
+bestimmten Spot zur Verfügung stellen. Dafür möchte ich Wetter -und Wellendaten aus API's
+   einbinden und übersichtlich darstellen. Weiterhin soll der Nutzer die Möglichkeit haben
+   Surfspots zu einer Favoritenliste hinzufügen und wieder löschen zu können.
+   
+-  Key Probleme:
+
+   - API für die Spots (Koordinaten) finden und einbinden
+   - Karte (z.B Google Maps) einbinden und die Spots mit der Karte verbinden, damit diese
+   dort angezeigt werden
+     
+   - Login um die Favoritenliste entsprechend für jeden Nutzer zu speichern
+   
+-  (Excalidraw)
+
+-  Das Ziel der ersten 2 Wochen:
+
+   - Eine Liste mit Spots auf einer Seite anzeigen lassen. Diese Liste kann auch erst einmal
+   hard gecodet sein.
+     
+   - Das einbinden einer Karte (z.B Google Maps)
+   - Die Spotkoordinaten auf der Karte highlighten
+   - Genaue Informationen der einzelnen Spots auf einer extra Seite für einen Spot anzeigen lassen
+   - Den Spot zur Favoritenliste hinzufügen
+   - Bei der Suche nach Spots soll zwischen der Suche durh Filter und der Suche über die
+   Karte hin und her gewechselt werden dürfen
