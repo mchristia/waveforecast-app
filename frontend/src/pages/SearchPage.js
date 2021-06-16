@@ -1,0 +1,23 @@
+import SpotItem from "../component/SpotItem";
+import styled from "styled-components/macro";
+
+export default function SearchPage({spots}){
+    return(
+        <Wrapper>
+            <ul>
+                {spots.map((spot) => (
+                    <li>
+                        <SpotItem spot ={spot}/>
+                    </li>
+                    ))}
+            </ul>
+        </Wrapper>
+    )
+}
+
+const Wrapper = styled.div`
+  ul{
+    padding : 2px;
+    
+  }    
+`
