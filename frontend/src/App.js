@@ -10,7 +10,7 @@ function App() {
             "name" : "Spot1",
             "geography" : {
                 "longitude" : 1,
-                "latidude" : 1,
+                "latitude" : 1,
                 "continent" : "Europa",
                 "country" : "France",
                 "Region" : "Basque",
@@ -25,10 +25,40 @@ function App() {
             "name" : "Spot2",
             "geography" : {
                 "longitude" : 2,
-                "latidude" : 1,
+                "latitude" : 1,
                 "continent" : "Europa",
                 "country" : "France",
                 "Region" : "Bretagne",
+            },
+            "break" : "Beach and Reef",
+            "level" : "All",
+
+        }
+        ,
+        {
+            "id" : "ghi",
+            "name" : "Spot3",
+            "geography" : {
+                "longitude" : 3,
+                "latitude" : 3,
+                "continent" : "Europa",
+                "country" : "Protugal",
+                "Region" : "Algarve",
+            },
+            "break" : "Beach and Reef",
+            "level" : "All",
+
+        }
+        ,
+        {
+            "id" : "jkl",
+            "name" : "Spot4",
+            "geography" : {
+                "longitude" : 2,
+                "latitude" : 2,
+                "continent" : "Europa",
+                "country" : "Spain",
+                "Region" : "Andalusia",
             },
             "break" : "Beach and Reef",
             "level" : "All",

@@ -2,6 +2,8 @@ import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 
 export default function SearchPage({spots}){
+
+
     return(
         <Wrapper>
             <ul>
@@ -23,5 +25,6 @@ const Wrapper = styled.div`
   li{
     padding: 2px;
     background-color: aqua;
+    border: black solid 1px;
   }
 `
