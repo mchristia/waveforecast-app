@@ -23,5 +23,6 @@ export default function SpotItem({spot}){
 }
 
 const Wrapper = styled.div`
-      
+    font-family: Arial;
+      color: black
 `

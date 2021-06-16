@@ -20,4 +20,8 @@ const Wrapper = styled.div`
     padding : 2px;
     
   }    
+  li{
+    padding: 2px;
+    background-color: aqua;
+  }
 `
