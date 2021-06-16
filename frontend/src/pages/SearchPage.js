@@ -2,6 +2,7 @@ import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React from 'react';
+import SpotList from "../component/SpotList";
 
 
 
@@ -11,15 +12,14 @@ export default function SearchPage({spots}){
 
 
         const classes = useStyles();
-        const [state, setState] = React.useState({
-            age: '',
-            name: 'hai',
+        const [filterCountry, setFilterCountry] = React.useState({
+            name: '',
         });
 
-        const handleChange = (event) => {
+        const handleChangeCountry = (event) => {
             const name = event.target.name;
-            setState({
-                ...state,
+            setFilterCountry({
+                ...filterCountry,
                 [name]: event.target.value,
             });
         };
@@ -30,26 +30,22 @@ export default function SearchPage({spots}){
                 <InputLabel htmlFor="age-native-simple">Country</InputLabel>
                 <Select
                     native
-                    value={state.age}
-                    onChange={handleChange}
+                    value={filterCountry.name}
+                    onChange={handleChangeCountry}
                     inputProps={{
-                        name: 'age',
+                        name: 'name',
                         id: 'age-native-simple',
                     }}
                 >
                     <option aria-label="None" value="" />
-                    <option value={10}>France</option>
-                    <option value={20}>Portugal</option>
-                    <option value={30}>Spain</option>
+                    <option value={"France"}>France</option>
+                    <option value={"Portugal"}>Portugal</option>
+                    <option value={"Spain"}>Spain</option>
                 </Select>
             </FormControl>
-            <ul>
-                {spots.map((spot) => (
-                    <li>
-                        <SpotItem spot ={spot}/>
-                    </li>
-                    ))}
-            </ul>
+            <div>
+                <SpotList spots={spots}/>
+            </div>
         </Wrapper>
     )
 }
@@ -63,6 +59,10 @@ const Wrapper = styled.div`
     padding: 2px;
     background-color: aqua;
     border: black solid 1px;
+  }
+  
+  FormControll{
+    border: darkblue solid 1px;
   }
 `
 
