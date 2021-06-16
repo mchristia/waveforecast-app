@@ -14,12 +14,12 @@ public class SurfSpotController {
     private final SurfSpotService surfSpotService;
 
     @Autowired
-    public SurfSpotController(SurfSporService surfSporService){
-        this.surfSpotService = surfSporService;
+    public SurfSpotController(SurfSpotService surfSpotService){
+        this.surfSpotService = surfSpotService;
     }
 
     @GetMapping()
     public List<SurfSpot> getAllSurfSpot(){
-
+        return surfSpotService.getAllSurfSpots();
     }
 }
