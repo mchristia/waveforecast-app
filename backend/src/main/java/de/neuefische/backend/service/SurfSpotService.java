@@ -1,8 +1,11 @@
 package de.neuefische.backend.service;
 
+import de.neuefische.backend.model.SurfSpot;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SurfSpotService {
