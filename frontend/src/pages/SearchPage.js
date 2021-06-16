@@ -44,7 +44,7 @@ export default function SearchPage({spots}){
                 </Select>
             </FormControl>
             <div>
-                <SpotList spots={spots}/>
+                <SpotList spots={spots} filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )

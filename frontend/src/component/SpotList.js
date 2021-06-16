@@ -1,8 +1,15 @@
 import SpotItem from "./SpotItem";
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components/macro";
 
-export default function SpotList({spots}){
+export default function SpotList({spots, filterCountry}){
+    const [filter, setFilter] = useState({
+        country :"",
+        continent : "",
+        region : "",
+        }
+    )
+
     return (
         <Wrapper>
             <ul>
