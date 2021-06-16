@@ -1,4 +1,4 @@
-import FavouritesList from "../component/FavouritesList";
+import {Link} from "react-router-dom";
 
 export default function HomePage(){
 
@@ -9,8 +9,11 @@ export default function HomePage(){
                 Wind und Wellen
             </p>
             <div>
-                <FavouritesList/>
+                <Link to="/dashboard">
+                    <button component={Link} to={"/search"}>Look for Spots</button>
+                </Link>
             </div>
+
         </div>
     )
 }

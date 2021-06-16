@@ -37,18 +37,12 @@ function App() {
 
   return (
       <Switch>
-        <div>
             <Route path = "/" exact>
                 <HomePage/>
-            </Route>
-            <Route path = "/favourites">
-                <FavouriteListPage/>
             </Route>
             <Route path = "/search">
                 <SearchPage spots={spots}/>
             </Route>
-
-        </div>
       </Switch>
   );
 }
