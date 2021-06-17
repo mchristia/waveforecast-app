@@ -5,6 +5,7 @@ import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,4 +25,5 @@ public class SurfSpotService {
     public void addSurfSpot(SurfSpot surfSpot){
         surfSpotRepo.addSurfSpot(surfSpot);
     }
+
 }
