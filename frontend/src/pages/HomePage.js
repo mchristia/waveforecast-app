@@ -1,4 +1,5 @@
-import FavouritesList from "../component/FavouritesList";
+import {Link} from "react-router-dom";
+import {Button} from "@material-ui/core";
 
 export default function HomePage(){
 
@@ -9,8 +10,9 @@ export default function HomePage(){
                 Wind und Wellen
             </p>
             <div>
-                <FavouritesList/>
+                <Button variant="outlined" component={Link} to={"/search"}>Look for Spots here</Button>
             </div>
+
         </div>
     )
 }
