@@ -30,7 +30,7 @@ export default function SearchPage({spots}){
         const latitude = "43.95339608383859";
 
     useEffect( () =>{
-        axios.get("/sgAPI", {params: longitude, latitude})
+        axios.get("/api/stormglass", {params: {longitude, latitude}})
             .then(response => response.data)
             .then(data => console.log(data))
             .catch(error => console.error(error))

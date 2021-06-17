@@ -12,14 +12,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class SGApiService {
 
-    @Value("storm.glass.key")
+    @Value("${storm.glass.key}")
     private String sgApiKey;
 
 
 
     public String getSGData(String longitude, String latitude){
         HttpHeaders header = new HttpHeaders();
-        header.set("Authorization", "storm.glass.key");
+        header.set("Authorization", sgApiKey);
 
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
 
