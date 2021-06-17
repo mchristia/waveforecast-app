@@ -20,4 +20,8 @@ public class SurfSpotService {
     public List<SurfSpot> getAllSurfSpots() {
         return surfSpotRepo.getAllSurfSpots();
     }
+
+    public void addSurfSpot(SurfSpot surfSpot){
+        surfSpotRepo.addSurfSpot(surfSpot);
+    }
 }

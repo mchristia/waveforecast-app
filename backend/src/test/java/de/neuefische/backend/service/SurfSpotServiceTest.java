@@ -26,11 +26,40 @@ class SurfSpotServiceTest {
         surfSpotRepo.addSurfSpot(surfSpotList.get(1));
         surfSpotRepo.addSurfSpot(surfSpotList.get(2));
 
-        List<SurfSpot> expectedList;
+
         //When
-        expectedList = surfSpotService.getAllSurfSpots();
+        List<SurfSpot> expectedList = surfSpotService.getAllSurfSpots();
 
         //Then
         assertEquals(expectedList, surfSpotList);
+    }
+
+    @Test
+    public void addSurfSpotShouldAddANewSurfSpot(){
+        //Given
+        List<SurfSpot> surfSpotList = List.of(
+                new SurfSpot("ABC", "Spot1", 1, 1),
+                new SurfSpot("DEF", "Spot2", 1, 2),
+                new SurfSpot("GHI", "Spot1", 1, 3)
+        );
+
+        surfSpotRepo.addSurfSpot(surfSpotList.get(0));
+        surfSpotRepo.addSurfSpot(surfSpotList.get(1));
+        surfSpotRepo.addSurfSpot(surfSpotList.get(2));
+
+        //When
+        SurfSpot oneMoreSpot = new SurfSpot("JKL", "Spot4", 2, 3);
+        surfSpotService.addSurfSpot(oneMoreSpot);
+        List<SurfSpot> actualList =  List.of(
+                new SurfSpot("ABC", "Spot1", 1, 1),
+                new SurfSpot("DEF", "Spot2", 1, 2),
+                new SurfSpot("GHI", "Spot1", 1, 3),
+                new SurfSpot("JKL", "Spot4", 2, 3)
+        );
+        List<SurfSpot> expectedList = surfSpotService.getAllSurfSpots();
+
+        //Then
+
+        assertEquals(expectedList, actualList);
     }
 }

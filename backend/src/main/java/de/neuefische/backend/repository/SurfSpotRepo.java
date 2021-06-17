@@ -18,5 +18,6 @@ public class SurfSpotRepo {
 
     public void addSurfSpot(SurfSpot surfSpot){
         spotList.add(surfSpot);
+
     }
 }

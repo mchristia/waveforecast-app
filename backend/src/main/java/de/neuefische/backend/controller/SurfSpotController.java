@@ -21,8 +21,8 @@ public class SurfSpotController {
         this.surfSpotService = surfSpotService;
     }
 
-    @GetMapping()
-    public List<SurfSpot> getAllSurfSpot(){
+    @GetMapping
+    public List<SurfSpot> getAllSurfSpots(){
         return surfSpotService.getAllSurfSpots();
     }
 }
