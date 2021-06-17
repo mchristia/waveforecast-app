@@ -4,9 +4,12 @@ import de.neuefische.backend.service.SGApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/sgAPI")
+@RestController
+@RequestMapping("/api/stormglass")
 public class SGApiController {
     private final SGApiService sgApiService;
 
@@ -16,7 +19,7 @@ public class SGApiController {
     }
 
     @GetMapping
-    public String sgGetData(int longitude, int latitude){
+    public String sgGetData(@RequestParam String longitude,@RequestParam String latitude){
         return sgApiService.getSGData(longitude, latitude);
     }
 }

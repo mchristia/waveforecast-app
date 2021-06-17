@@ -1,8 +1,9 @@
 import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
-import React from 'react';
+import React, {useEffect} from 'react';
 import SpotList from "../component/SpotList";
+import axios from "axios";
 
 
 
@@ -22,7 +23,19 @@ export default function SearchPage({spots}){
                 ...filterCountry,
                 [name]: event.target.value,
             });
+
         };
+
+        const longitude = "-1.3642210235940333";
+        const latitude = "43.95339608383859";
+
+    useEffect( () =>{
+        axios.get("/sgAPI", {params: longitude, latitude})
+            .then(response => response.data)
+            .then(data => console.log(data))
+            .catch(error => console.error(error))
+    }, [])
+
 
     return(
         <Wrapper>
