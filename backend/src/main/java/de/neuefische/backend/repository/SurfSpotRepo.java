@@ -15,7 +15,7 @@ public class SurfSpotRepo {
 
     public SurfSpotRepo(){
         for(int i=0; i<locationDetailsRepo.getLocationDetails().size(); i++){
-            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i)));
+            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i), null));
         }
     }
 

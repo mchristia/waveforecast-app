@@ -2,8 +2,6 @@ import styled from "styled-components/macro";
 
 export default function SpotItem({spot}){
 
-    console.log(spot.spotLocationDetails.id)
-// Now put all the data in the item!
     return(
         <Wrapper>
             <p>{spot.spotLocationDetails.name}</p>
@@ -16,5 +14,13 @@ export default function SpotItem({spot}){
 
 const Wrapper = styled.div`
     font-family: Arial;
-      color: black
+      color: black;
+      display: flex;
+      flex-direction: column;
+      background: lightblue;
+      border: darkgrey 2px solid;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 12px;
+      text-align: center;
 `

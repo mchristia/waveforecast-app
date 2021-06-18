@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SurfSpot {
     private SpotLocationDetails spotLocationDetails;
-    //private SGSurfData surfData;
+    private SGSurfData surfData;
 }

@@ -1,4 +1,3 @@
-import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
@@ -8,7 +7,7 @@ import axios from "axios";
 
 
 
-export default function SearchPage({spots}){
+export default function SearchPage(){
 
         const classes = useStyles();
         const [filterCountry, setFilterCountry] = React.useState({
@@ -26,23 +25,10 @@ export default function SearchPage({spots}){
 
         };
 
-        const longitude = "-1.3642210235940333";
-        const latitude = "43.95339608383859";
-
-    // useEffect( () =>{
-    //     axios.get("/api/stormglass", {params: {longitude, latitude}})
-    //         .then(response => response.data)
-    //         .then(data => console.log(data))
-    //         .catch(error => console.error(error))
-    // }, [])
-
     useEffect(() => {
         axios.get("/api/surfspots/all")
             .then((response) => response.data)
-            .then(data => {
-                setSurfSpots(data);
-                console.log(data, "From axios");
-            })
+            .then(data => setSurfSpots(data))
             .catch(error => console.error(error))
     }, [])
 
@@ -67,7 +53,7 @@ export default function SearchPage({spots}){
                 </Select>
             </FormControl>
             <div>
-                <SpotList surfSpots={surfSpots} spots={spots} filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )
@@ -77,11 +63,6 @@ const Wrapper = styled.div`
   ul{
     padding : 2px;
     
-  }    
-  li{
-    padding: 2px;
-    background-color: aqua;
-    border: black solid 1px;
   }
   
   FormControll{
