@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class SurfSpot {
     private SpotLocationDetails spotLocationDetails;
-    private SGSurfData surfData;
+    private List<SGSurfData> surfData;
 }

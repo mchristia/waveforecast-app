@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SGApiService {
@@ -20,52 +22,42 @@ public class SGApiService {
     @Value("${storm.glass.key}")
     private String sgApiKey;
 
+    private ObjectMappingService mappingService;
 
+    public SGApiService(ObjectMappingService mappingService){
+        this.mappingService = mappingService;
+    }
 
-    public SGSurfData getSGData(String longitude, String latitude){
+    public SurfSpot getSGData(String longitude, String latitude){
         HttpHeaders header = new HttpHeaders();
         header.set("Authorization", sgApiKey);
 
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
 
-        String sgGetUrl = "https://api.stormglass.io/v2/weather/point?lat=" +latitude+
-                "&lng=" + longitude+"&params=airTemperature,windSpeed,windDirection,waterTemperature," +
-                "waveHeight,wavePeriod,waveDirection&start=2021-06-19T18:00:00&end=2021-06-19T18:00:00&source=sg";
-
+        String sgGetUrl =generateRequestString(longitude, latitude);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
 
         try{
-            return mapSGApiResponseToSGSurfData(response.getBody());
+            return mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
         }catch(Exception e){
             throw new RuntimeException("Json deserialization failed.");
         }
 
     }
 
-    public SGSurfData mapSGApiResponseToSGSurfData(String apiResponseString) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        SGApiResponseData sgResponse = objectMapper.readValue(apiResponseString, SGApiResponseData.class);
-        String time = sgResponse.getHours().get(0).getTime();
-        double airTemperatur = sgResponse.getHours().get(0).getAirTemperature().getSg();
-        double waterTemperatur = sgResponse.getHours().get(0).getWaterTemperature().getSg();
-        double waveDirection = sgResponse.getHours().get(0).getWaveDirection().getSg();
-        double waveHeight = sgResponse.getHours().get(0).getWaveHeight().getSg();
-        double wavePeriod = sgResponse.getHours().get(0).getWavePeriod().getSg();
-        double windSpeed = sgResponse.getHours().get(0).getWindSpeed().getSg();
-        double windDirection = sgResponse.getHours().get(0).getWindDirection().getSg();
+    public String generateRequestString(String longitude, String latitude){
+        return  "https://api.stormglass.io/v2/weather/point?" +
+                "lat=" +latitude+
+                "&lng=" +longitude+
+                "&params=airTemperature,windSpeed," +
+                "windDirection,waterTemperature,waveHeight," +
+                "wavePeriod,waveDirection" +
+                "&start=2021-06-19T18:00:00" +
+                "&end=2021-06-19T21:00:00&source=sg";
 
-        System.out.println(airTemperatur +", " + waterTemperatur+", " + waveDirection+", " + waveHeight +", " + wavePeriod +", " + windDirection+", " + windSpeed);
-        return SGSurfData.builder()
-                .time(time)
-                .airTemperature(new AirTemperature(airTemperatur))
-                .waterTemperature(new WaterTemperature(waterTemperatur))
-                .waveDirection(new WaveDirection(waveDirection))
-                .waveHeight(new WaveHeight(waveHeight))
-                .wavePeriod(new WavePeriod(wavePeriod))
-                .windSpeed(new WindSpeed(windSpeed))
-                .windDirection(new WindDirection(windDirection))
-                .build();
     }
+
+
+
 }
