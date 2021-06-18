@@ -38,14 +38,10 @@ export default function SearchPage({spots}){
 
     useEffect(() => {
         axios.get("/api/surfspots/all")
-            .then(response => response.data)
+            .then((response) => response.data)
             .then(data => {
-                console.log(data);
-                return data;
-            })
-            .then(data => {
-                setSurfSpots(data.spotLocationDetails);
-                console.log(surfSpots);
+                setSurfSpots(data);
+                console.log(data, "From axios");
             })
             .catch(error => console.error(error))
     }, [])
@@ -71,7 +67,7 @@ export default function SearchPage({spots}){
                 </Select>
             </FormControl>
             <div>
-                <SpotList surfSpots={surfSpots} filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots} spots={spots} filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )

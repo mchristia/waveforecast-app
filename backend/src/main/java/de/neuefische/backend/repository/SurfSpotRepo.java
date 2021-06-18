@@ -13,6 +13,12 @@ public class SurfSpotRepo {
     private List<SurfSpot> spotList = new ArrayList<>();
 
 
+    public SurfSpotRepo(){
+        for(int i=0; i<locationDetailsRepo.getLocationDetails().size(); i++){
+            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i)));
+        }
+    }
+
     public List<SurfSpot> getAllSurfSpots() {
         return spotList;
     }
@@ -23,9 +29,6 @@ public class SurfSpotRepo {
     }
 
     public List<SurfSpot> getSpotList(){
-        for(int i=0; i<locationDetailsRepo.getLocationDetails().size(); i++){
-            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i)));
-        }
         return spotList;
     }
 }
