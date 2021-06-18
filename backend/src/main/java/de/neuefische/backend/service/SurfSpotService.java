@@ -26,4 +26,8 @@ public class SurfSpotService {
         surfSpotRepo.addSurfSpot(surfSpot);
     }
 
+    public List<SurfSpot> getSpotList(){
+        return surfSpotRepo.getSpotList();
+    }
+
 }

@@ -1,7 +1,7 @@
 import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
 import axios from "axios";
 
@@ -10,12 +10,12 @@ import axios from "axios";
 
 export default function SearchPage({spots}){
 
-
-
         const classes = useStyles();
         const [filterCountry, setFilterCountry] = React.useState({
             name: '',
         });
+
+        const [surfSpots, setSurfSpots] = useState([])
 
         const handleChangeCountry = (event) => {
             const name = event.target.name;
@@ -29,10 +29,24 @@ export default function SearchPage({spots}){
         const longitude = "-1.3642210235940333";
         const latitude = "43.95339608383859";
 
-    useEffect( () =>{
-        axios.get("/api/stormglass", {params: {longitude, latitude}})
+    // useEffect( () =>{
+    //     axios.get("/api/stormglass", {params: {longitude, latitude}})
+    //         .then(response => response.data)
+    //         .then(data => console.log(data))
+    //         .catch(error => console.error(error))
+    // }, [])
+
+    useEffect(() => {
+        axios.get("/api/surfspots/all")
             .then(response => response.data)
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                return data;
+            })
+            .then(data => {
+                setSurfSpots(data.spotLocationDetails);
+                console.log(surfSpots);
+            })
             .catch(error => console.error(error))
     }, [])
 
@@ -57,7 +71,7 @@ export default function SearchPage({spots}){
                 </Select>
             </FormControl>
             <div>
-                <SpotList spots={spots} filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots} filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )

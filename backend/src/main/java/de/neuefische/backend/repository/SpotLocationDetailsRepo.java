@@ -4,6 +4,9 @@ import de.neuefische.backend.model.SpotLocationDetails;
 import org.springframework.stereotype.Repository;
 
 import static java.util.Map.entry;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -73,4 +76,8 @@ public class SpotLocationDetailsRepo {
                     .region("Peniche")
                     .build())
                );
+
+    public List<SpotLocationDetails> getLocationDetails(){
+        return new ArrayList<SpotLocationDetails>(spotLocationDetailsList.values());
+    }
 }
