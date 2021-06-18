@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SGSurfData {
-    private LocalDateTime timeStamp;
-    private String airTemperature;
-    private String windSpeed;
-    private String windDirection;
-    private String waterTemperature;
-    private String waveHeight;
-    private String wavePeriod;
-    private String waveDirection;
+    private String time;
+    private AirTemperature airTemperature;
+    private WindSpeed windSpeed;
+    private WindDirection windDirection;
+    private WaterTemperature waterTemperature;
+    private WaveHeight waveHeight;
+    private WavePeriod wavePeriod;
+    private WaveDirection waveDirection;
 
 }
