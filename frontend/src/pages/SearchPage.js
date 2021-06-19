@@ -39,6 +39,7 @@ export default function SearchPage(){
             .catch(error => console.error(error))
     }, []);
 
+    console.log(surfSpots);
     const longitude = surfSpots[0]?.spotLocationDetails.longitude;
     const latitude = surfSpots[0]?.spotLocationDetails.latitude;
 

@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.model.SurfSpot;
+import de.neuefische.backend.service.SGApiService;
 import de.neuefische.backend.service.SurfSpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import java.util.List;
 public class SurfSpotController {
 
     private final SurfSpotService surfSpotService;
+    private final SGApiService sgApiService;
 
     @Autowired
-    public SurfSpotController(SurfSpotService surfSpotService){
+    public SurfSpotController(SurfSpotService surfSpotService, SGApiService sgApiService){
         this.surfSpotService = surfSpotService;
+        this.sgApiService = sgApiService;
     }
 
     @GetMapping

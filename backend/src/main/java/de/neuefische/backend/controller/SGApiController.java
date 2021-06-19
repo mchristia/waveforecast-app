@@ -20,7 +20,8 @@ public class SGApiController {
     }
 
     @GetMapping
-    public SurfSpot sgGetData(@RequestParam String longitude, @RequestParam String latitude){
+    public SurfSpot getSGData(@RequestParam String longitude, @RequestParam String latitude){
         return sgApiService.getSGData(longitude, latitude);
     }
 }
+
