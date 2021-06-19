@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SurfSpotServiceTest {
 
-    private SurfSpotRepo surfSpotRepo = new SurfSpotRepo();
-    private  SurfSpotService surfSpotService = new SurfSpotService(surfSpotRepo);
+//    private SurfSpotRepo surfSpotRepo = new SurfSpotRepo();
+//    private  SurfSpotService surfSpotService = new SurfSpotService(surfSpotRepo);
 
 //    @Test
 //    public void getAllSurfSpotsShouldReturnAllSurfSpots(){

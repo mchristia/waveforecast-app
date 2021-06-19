@@ -26,7 +26,7 @@ public class ObjectMappingService {
 
         SpotLocationDetails locationDetails = locationDetailsRepo.findSpotLocationById(latitude+longitude);
 
-        return  new SurfSpot(locationDetails, sgResponse.getHours());
+        return  new SurfSpot(locationDetails.getId(), locationDetails, sgResponse.getHours());
 
 //        List<SGSurfData> surfDataList = new ArrayList<>();
 //        for(SGSurfData surfData : sgResponse.getHours()){

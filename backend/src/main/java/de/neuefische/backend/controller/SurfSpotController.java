@@ -24,13 +24,13 @@ public class SurfSpotController {
         this.sgApiService = sgApiService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<SurfSpot> getAllSurfSpots(){
         return surfSpotService.getAllSurfSpots();
     }
 
-    @GetMapping("/all")
-    public List<SurfSpot> getSpotList(){
-        return surfSpotService.getSpotList();
-    }
+//    @GetMapping
+//    public List<SurfSpot> getSpotList(){
+//        return surfSpotService.getSpotList();
+//    }
 }

@@ -19,16 +19,14 @@ public class SurfSpotService {
     }
 
     public List<SurfSpot> getAllSurfSpots() {
-        return surfSpotRepo.getAllSurfSpots();
+        return surfSpotRepo.findAll();
     }
 
     public void addSurfSpot(SurfSpot surfSpot){
-        surfSpotRepo.addSurfSpot(surfSpot);
+        surfSpotRepo.save(surfSpot);
     }
 
-    public List<SurfSpot> getSpotList(){
-        return surfSpotRepo.getSpotList();
-    }
+
 
     /***************** wie bekomme ich die Spots in die Datenbank? *********
      Hard reincode funktioniert nicht richtig, MongoDB bleibt beim hinzufügen hängen und es passiert nichts

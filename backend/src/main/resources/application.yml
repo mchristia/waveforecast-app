@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      database: WaveForecast
+server:
+  error:
+    include-message: always
