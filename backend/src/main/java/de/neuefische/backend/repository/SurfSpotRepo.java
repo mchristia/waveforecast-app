@@ -2,7 +2,7 @@ package de.neuefische.backend.repository;
 
 import de.neuefische.backend.model.*;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -145,11 +145,11 @@ public class SurfSpotRepo {
 
             ));
 
-    public SurfSpotRepo(){
-        for(int i=0; i<locationDetailsRepo.getLocationDetails().size(); i++){
-            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i), null));
-        }
-    }
+//    public SurfSpotRepo(){
+//        for(int i=0; i<locationDetailsRepo.getLocationDetails().size(); i++){
+//            spotList.add(new SurfSpot(locationDetailsRepo.getLocationDetails().get(i), null));
+//        }
+//    }
 
     public List<SurfSpot> getAllSurfSpots() {
         return spotList;
