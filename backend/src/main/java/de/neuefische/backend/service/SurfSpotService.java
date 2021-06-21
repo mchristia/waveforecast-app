@@ -5,8 +5,10 @@ import de.neuefische.backend.model.SurfSpot;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +24,16 @@ public class SurfSpotService {
         this.sgApiService= sgApiService;
     }
 
-    public List<SurfSpot> getAllSurfSpots() {
-        SurfSpot surfSpotWithSGData ;
+    @PostConstruct
+    @Scheduled(fixedRate = (60*60*1000), fixedDelay =(60*1000))
+    public void loadSpotData(){
         for(SurfSpot spot : surfSpotRepo.findAll()){
-            surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
+            SurfSpot surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
                     spot.getSpotLocationDetails().getLatitude());
-            addSGDataToSurfSpot(surfSpotWithSGData);
+            surfSpotRepo.save(surfSpotWithSGData);
         }
+    }
+    public List<SurfSpot> getAllSurfSpots() {
         return surfSpotRepo.findAll();
     }
 
