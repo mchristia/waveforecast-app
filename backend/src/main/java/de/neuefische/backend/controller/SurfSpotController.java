@@ -28,8 +28,4 @@ public class SurfSpotController {
         return surfSpotService.getAllSurfSpots();
     }
 
-//    @GetMapping
-//    public List<SurfSpot> getSpotList(){
-//        return surfSpotService.getSpotList();
-//    }
 }
