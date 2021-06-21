@@ -1,5 +1,6 @@
 package de.neuefische.backend.service;
 
+import de.neuefische.backend.model.SGSurfData;
 import de.neuefische.backend.model.SurfSpot;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,21 @@ import java.util.List;
 public class SurfSpotService {
 
     private final SurfSpotRepo surfSpotRepo;
+    private final SGApiService sgApiService;
 
     @Autowired
-    public SurfSpotService(SurfSpotRepo surfSpotRepo){
+    public SurfSpotService(SurfSpotRepo surfSpotRepo, SGApiService sgApiService){
         this.surfSpotRepo = surfSpotRepo;
+        this.sgApiService= sgApiService;
     }
 
     public List<SurfSpot> getAllSurfSpots() {
+        SurfSpot surfSpotWithSGData ;
+        for(SurfSpot spot : surfSpotRepo.findAll()){
+            surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
+                    spot.getSpotLocationDetails().getLatitude());
+            addSGDataToSurfSpot(surfSpotWithSGData);
+        }
         return surfSpotRepo.findAll();
     }
 

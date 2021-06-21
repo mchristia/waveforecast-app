@@ -14,7 +14,6 @@ public interface SurfSpotRepo extends PagingAndSortingRepository<SurfSpot, Strin
     List<SurfSpot> findAll();
 
 
-
 //    private SpotLocationDetailsRepo locationDetailsRepo = new SpotLocationDetailsRepo();
 //    private List<SurfSpot> spotList = List.of(
 //            new SurfSpot( SpotLocationDetails.builder()

@@ -14,7 +14,8 @@ import static org.mockito.Mockito.*;
 class SurfSpotServiceTest {
 
     private SurfSpotRepo surfSpotRepo = mock(SurfSpotRepo.class);
-    private  SurfSpotService surfSpotService = new SurfSpotService(surfSpotRepo);
+    private SGApiService sgApiService = mock(SGApiService.class);
+    private  SurfSpotService surfSpotService = new SurfSpotService(surfSpotRepo, sgApiService);
 
     @Test
     public void getAllSurfSpotsShouldReturnAllSurfSpots(){

@@ -16,22 +16,15 @@ import java.util.List;
 public class SurfSpotController {
 
     private final SurfSpotService surfSpotService;
-    private final SGApiService sgApiService;
+
 
     @Autowired
-    public SurfSpotController(SurfSpotService surfSpotService, SGApiService sgApiService){
+    public SurfSpotController(SurfSpotService surfSpotService){
         this.surfSpotService = surfSpotService;
-        this.sgApiService = sgApiService;
     }
 
     @GetMapping("/all")
     public List<SurfSpot> getAllSurfSpots(){
-        SurfSpot surfSpotWithSGData ;
-        for(SurfSpot spot : surfSpotService.getAllSurfSpots()){
-            surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
-                    spot.getSpotLocationDetails().getLatitude());
-            surfSpotService.addSGDataToSurfSpot(surfSpotWithSGData);
-        }
         return surfSpotService.getAllSurfSpots();
     }
 

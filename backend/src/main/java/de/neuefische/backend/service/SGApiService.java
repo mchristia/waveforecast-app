@@ -48,15 +48,15 @@ public class SGApiService {
     }
 
     public String generateRequestString(String longitude, String latitude){
-        Instant.now().plus(3, ChronoUnit.HOURS);
+        //Instant.now().plus(3, ChronoUnit.HOURS);
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
                 "&lng=" +longitude+
                 "&params=airTemperature,windSpeed," +
                 "windDirection,waterTemperature,waveHeight," +
                 "wavePeriod,waveDirection" +
-                "&start=2021-06-19T18:00:00" +
-                "&end=2021-06-19T21:00:00&source=sg";
+                "&start=2021-06-21T18:00:00" +
+                "&end=2021-06-21T21:00:00&source=sg";
 // start Instant.now() auf volle Stunde ab oder aufrunden
 // Instant.now().plus(<0ffset of 3 days>)
     }
