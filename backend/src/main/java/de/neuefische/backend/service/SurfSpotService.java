@@ -3,6 +3,7 @@ package de.neuefische.backend.service;
 import de.neuefische.backend.model.SurfSpot;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class SurfSpotService {
         return surfSpotRepo.findAll();
     }
 
-    public void addSurfSpot(SurfSpot surfSpot){
+    public void addSGDataToSurfSpot(SurfSpot surfSpot){
         surfSpotRepo.save(surfSpot);
     }
 

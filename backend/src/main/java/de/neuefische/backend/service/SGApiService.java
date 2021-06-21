@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class SGApiService {
 
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
 
-        String sgGetUrl =generateRequestString(longitude, latitude);
+        String sgGetUrl = generateRequestString(longitude, latitude);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
 
@@ -47,6 +48,7 @@ public class SGApiService {
     }
 
     public String generateRequestString(String longitude, String latitude){
+        Instant.now().plus(3, ChronoUnit.HOURS);
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
                 "&lng=" +longitude+
@@ -55,7 +57,8 @@ public class SGApiService {
                 "wavePeriod,waveDirection" +
                 "&start=2021-06-19T18:00:00" +
                 "&end=2021-06-19T21:00:00&source=sg";
-
+// start Instant.now() auf volle Stunde ab oder aufrunden
+// Instant.now().plus(<0ffset of 3 days>)
     }
 
 

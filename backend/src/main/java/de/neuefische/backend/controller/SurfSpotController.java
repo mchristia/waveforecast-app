@@ -26,6 +26,12 @@ public class SurfSpotController {
 
     @GetMapping("/all")
     public List<SurfSpot> getAllSurfSpots(){
+        SurfSpot surfSpotWithSGData ;
+        for(SurfSpot spot : surfSpotService.getAllSurfSpots()){
+            surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
+                    spot.getSpotLocationDetails().getLatitude());
+            surfSpotService.addSGDataToSurfSpot(surfSpotWithSGData);
+        }
         return surfSpotService.getAllSurfSpots();
     }
 
