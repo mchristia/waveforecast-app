@@ -1,20 +1,20 @@
-import SpotItem from "../component/SpotItem";
 import styled from "styled-components/macro";
 import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
+import axios from "axios";
 
 
 
 
-export default function SearchPage({spots}){
-
-
+export default function SearchPage(){
 
         const classes = useStyles();
         const [filterCountry, setFilterCountry] = React.useState({
             name: '',
         });
+
+        const [surfSpots, setSurfSpots] = useState([])
 
         const handleChangeCountry = (event) => {
             const name = event.target.name;
@@ -22,7 +22,16 @@ export default function SearchPage({spots}){
                 ...filterCountry,
                 [name]: event.target.value,
             });
+
         };
+
+    useEffect(() => {
+        axios.get("/api/surfspots/all")
+            .then((response) => response.data)
+            .then(data => setSurfSpots(data))
+            .catch(error => console.error(error))
+    }, [])
+
 
     return(
         <Wrapper>
@@ -44,7 +53,7 @@ export default function SearchPage({spots}){
                 </Select>
             </FormControl>
             <div>
-                <SpotList spots={spots} filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )
@@ -54,11 +63,6 @@ const Wrapper = styled.div`
   ul{
     padding : 2px;
     
-  }    
-  li{
-    padding: 2px;
-    background-color: aqua;
-    border: black solid 1px;
   }
   
   FormControll{

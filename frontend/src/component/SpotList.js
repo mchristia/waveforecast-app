@@ -2,7 +2,7 @@ import SpotItem from "./SpotItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
 
-export default function SpotList({spots, filterCountry}){
+export default function SpotList({filterCountry, surfSpots}){
     const [filter, setFilter] = useState({
         country :"",
         continent : "",
@@ -13,8 +13,8 @@ export default function SpotList({spots, filterCountry}){
     return (
         <Wrapper>
             <ul>
-                {spots.map((spot) => (
-                    <li>
+                {surfSpots.map((spot) => (
+                    <li >
                         <SpotItem spot ={spot}/>
                     </li>
                 ))}
@@ -25,11 +25,5 @@ export default function SpotList({spots, filterCountry}){
 const Wrapper = styled.div`
   ul{
     padding : 2px;
-    
-  }    
-  li{
-    padding: 2px;
-    background-color: aqua;
-    border: black solid 1px;
   }
 `
