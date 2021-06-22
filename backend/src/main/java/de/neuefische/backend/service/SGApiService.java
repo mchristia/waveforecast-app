@@ -40,7 +40,8 @@ public class SGApiService {
         ResponseEntity<String> response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
 
         try{
-            return mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
+            SurfSpot updatedSurfSpot = mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
+            return getEvery3rdHour(updatedSurfSpot);
         }catch(Exception e){
             throw new RuntimeException("Json deserialization failed.");
         }
@@ -93,11 +94,15 @@ public class SGApiService {
         return generatedTime;
     }
 
-    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
+    public SurfSpot getEvery3rdHour(SurfSpot givenSurfSpot){
         SurfSpot updatedSurfSpot = new SurfSpot();
+        updatedSurfSpot.setId(givenSurfSpot.getId());
+        updatedSurfSpot.setSpotLocationDetails(givenSurfSpot.getSpotLocationDetails());
+
         List<SGSurfData> updatedSGSurfData = new ArrayList<>();
         Instant timeToCompareWith = Instant.now().truncatedTo(ChronoUnit.DAYS);
-        for(SGSurfData surfData : givenSurfData.getSurfData()){
+
+        for(SGSurfData surfData : givenSurfSpot.getSurfData()){
             Instant dataTimeStamp = Instant.parse(surfData.getTime());
             if(timeToCompareWith.equals(dataTimeStamp)){ // 00:00Uhr
                 updatedSGSurfData.add(surfData);
