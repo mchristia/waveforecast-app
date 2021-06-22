@@ -47,8 +47,8 @@ public class SGApiService {
 
     public String generateRequestString(String longitude, String latitude){
         //Instant.now().plus(3, ChronoUnit.HOURS);
-        startTimeStampForSGRequest = Instant.now().truncatedTo(ChronoUnit.HOURS); //Auf genaue Stunde abrunden
-        endTimeStampForSGRequest = Instant.now().truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*3); // Plus 3 Tage
+        startTimeStampForSGRequest = generateStartTime(); //Auf genaue Stunde abrunden
+        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24); // Plus 3 Tage
 
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
@@ -62,13 +62,44 @@ public class SGApiService {
 // Instant.now().plus(<0ffset of 3 days>)
     }
 
-    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
-        SurfSpot updatedSurfSpot = new SurfSpot();
-        for(SGSurfData surfData : givenSurfData.getSurfData()){
-            Instant dataTimeStamp = Instant.parse(surfData.getTime());
-            if(startTimeStampForSGRequest)
+    public Instant generateStartTime(){
+        Instant generatedTime = Instant.now().truncatedTo(ChronoUnit.HOURS);
+        Instant compareTime = Instant.now().truncatedTo(ChronoUnit.DAYS);// Aud 00 Uhr gesetzt
+
+        if(generatedTime.isBefore(compareTime.plusSeconds(60*60*3))){ // Vergleich mit 03:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS);
         }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*6))){ // Vergleich mit 06:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*3);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*9))){ // Vergleich mit 09:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*6);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*12))){ // Vergleich mit 12:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*9);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*15))){ // Vergleich mit 15:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*12);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*18))){ // Vergleich mit 18:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*15);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*21))){ // Vergleich mit 21:00 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*18);
+        }
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*23 + 60*59 + 59))){ // Vergleich mit 23:59:59 Uhr
+            generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*21);
+        }
+        return generatedTime;
     }
+
+//    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
+//        SurfSpot updatedSurfSpot = new SurfSpot();
+//        for(SGSurfData surfData : givenSurfData.getSurfData()){
+//            Instant dataTimeStamp = Instant.parse(surfData.getTime());
+//            if(startTimeStampForSGRequest)
+//        }
+//    }
 
 
 
