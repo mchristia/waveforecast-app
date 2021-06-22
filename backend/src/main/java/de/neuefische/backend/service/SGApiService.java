@@ -1,8 +1,5 @@
 package de.neuefische.backend.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.neuefische.backend.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class SGApiService {
@@ -24,6 +19,9 @@ public class SGApiService {
     private String sgApiKey;
 
     private ObjectMappingService mappingService;
+
+    private Instant startTimeStampForSGRequest;
+    private Instant endTimeStampForSGRequest;
 
     public SGApiService(ObjectMappingService mappingService){
         this.mappingService = mappingService;
@@ -49,16 +47,27 @@ public class SGApiService {
 
     public String generateRequestString(String longitude, String latitude){
         //Instant.now().plus(3, ChronoUnit.HOURS);
+        startTimeStampForSGRequest = Instant.now().truncatedTo(ChronoUnit.HOURS); //Auf genaue Stunde abrunden
+        endTimeStampForSGRequest = Instant.now().truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*3); // Plus 3 Tage
+
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
                 "&lng=" +longitude+
                 "&params=airTemperature,windSpeed," +
                 "windDirection,waterTemperature,waveHeight," +
                 "wavePeriod,waveDirection" +
-                "&start=2021-06-21T18:00:00" +
-                "&end=2021-06-21T21:00:00&source=sg";
+                "&start="+ startTimeStampForSGRequest +
+                "&end=" + endTimeStampForSGRequest +"&source=sg";
 // start Instant.now() auf volle Stunde ab oder aufrunden
 // Instant.now().plus(<0ffset of 3 days>)
+    }
+
+    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
+        SurfSpot updatedSurfSpot = new SurfSpot();
+        for(SGSurfData surfData : givenSurfData.getSurfData()){
+            Instant dataTimeStamp = Instant.parse(surfData.getTime());
+            if(startTimeStampForSGRequest)
+        }
     }
 
 

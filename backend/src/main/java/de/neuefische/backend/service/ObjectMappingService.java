@@ -8,9 +8,6 @@ import de.neuefische.backend.repository.SpotLocationDetailsRepo;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class ObjectMappingService {
 
@@ -25,12 +22,14 @@ public class ObjectMappingService {
     public SurfSpot mapSGApiResponseToSGSurfData(String apiResponseString, String longitude, String latitude) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        SGApiResponseData sgResponse = objectMapper.readValue(apiResponseString, SGApiResponseData.class);
+        SGApiResponseDto sgResponse = objectMapper.readValue(apiResponseString, SGApiResponseDto.class);
 
-        SpotLocationDetails locationDetails = locationDetailsRepo.findSpotLocationById(latitude+longitude);
+        return new SurfSpot(latitude+longitude,
+                surfSpotRepo.findSurfSpotById(latitude+longitude).getSpotLocationDetails(),
+                sgResponse.getHours());
 
 
-         return  new SurfSpot(locationDetails.getId(), locationDetails, sgResponse.getHours());
+//         return  new SurfSpot(locationDetails.getId(), locationDetails, sgResponse.getHours());
 
     }
 }

@@ -9,6 +9,6 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class SGApiResponseData {
+public class SGApiResponseDto {
     ArrayList<SGSurfData> hours;
 }
