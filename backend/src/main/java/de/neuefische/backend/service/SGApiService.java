@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SGApiService {
@@ -58,8 +60,6 @@ public class SGApiService {
                 "wavePeriod,waveDirection" +
                 "&start="+ startTimeStampForSGRequest +
                 "&end=" + endTimeStampForSGRequest +"&source=sg";
-// start Instant.now() auf volle Stunde ab oder aufrunden
-// Instant.now().plus(<0ffset of 3 days>)
     }
 
     public Instant generateStartTime(){
@@ -93,13 +93,41 @@ public class SGApiService {
         return generatedTime;
     }
 
-//    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
-//        SurfSpot updatedSurfSpot = new SurfSpot();
-//        for(SGSurfData surfData : givenSurfData.getSurfData()){
-//            Instant dataTimeStamp = Instant.parse(surfData.getTime());
-//            if(startTimeStampForSGRequest)
-//        }
-//    }
+    public SurfSpot getEvery3rdHour(SurfSpot givenSurfData){
+        SurfSpot updatedSurfSpot = new SurfSpot();
+        List<SGSurfData> updatedSGSurfData = new ArrayList<>();
+        Instant timeToCompareWith = Instant.now().truncatedTo(ChronoUnit.DAYS);
+        for(SGSurfData surfData : givenSurfData.getSurfData()){
+            Instant dataTimeStamp = Instant.parse(surfData.getTime());
+            if(timeToCompareWith.equals(dataTimeStamp)){ // 00:00Uhr
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*3).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*6).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*9).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*12).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*15).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*18).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+            else if(timeToCompareWith.plusSeconds(60*60*21).equals(dataTimeStamp)){
+                updatedSGSurfData.add(surfData);
+            }
+        }
+        updatedSurfSpot.setSurfData(updatedSGSurfData);
+
+        return updatedSurfSpot;
+    }
 
 
 
