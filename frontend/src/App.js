@@ -9,16 +9,16 @@ function App() {
   return (
       <Switch>
             <Route path = "/" exact>
-                <HomePage/>
+                <HomePage />
             </Route>
             <Route path = "/search">
-                <SearchPage/>
+                <SearchPage  />
             </Route>
             <Route path = "/map">
-                <SearchMapPage/>
+                <SearchMapPage />
             </Route>
             <Route path = "/:id">
-                <SpotDetailsPage/>
+                <SpotDetailsPage />
             </Route>
 
       </Switch>

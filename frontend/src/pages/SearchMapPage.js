@@ -1,6 +1,7 @@
 import React, {useCallback, useRef, useState} from "react";
 import  {GoogleMap, Marker,useLoadScript} from "@react-google-maps/api";
 import styled from "styled-components/macro";
+import useSurfSpot from "../hooks/useSrufSpots";
 
 const libraries = ["places"];
 const options = {
@@ -10,6 +11,8 @@ const options = {
 };
 
 export default function SearchMapPage() {
+    const {surfSpots} = useSurfSpot();
+
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -51,8 +54,11 @@ export default function SearchMapPage() {
                 onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {markers.map((marker) =>(
-                    <Marker key={marker.lat} position={{lat: marker.lat, lng: marker.lng}}/>
+                {surfSpots.map((spot) =>(
+                    <Marker key={spot.spotLocationDetails.id}
+                            position={{
+                                lat: parseFloat(spot.spotLocationDetails.latitude),
+                                lng: parseFloat(spot.spotLocationDetails.longitude)}}/>
                 ))}
             </GoogleMap>
         </Wrapper>

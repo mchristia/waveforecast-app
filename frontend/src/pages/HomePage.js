@@ -10,7 +10,7 @@ export default function HomePage(){
                 Wind und Wellen
             </p>
             <div>
-                <Button variant="outlined" component={Link} to={"/search"}>Look for Spots here</Button>
+                <Button variant="outlined" component={Link} to={"/search"} >Look for Spots here</Button>
             </div>
 
         </div>
