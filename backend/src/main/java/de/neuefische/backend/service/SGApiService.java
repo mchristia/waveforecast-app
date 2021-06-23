@@ -1,5 +1,9 @@
 package de.neuefische.backend.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.neuefische.backend.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,27 +12,55 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SGApiService {
 
     @Value("${storm.glass.key}")
     private String sgApiKey;
 
+    private ObjectMappingService mappingService;
 
+    public SGApiService(ObjectMappingService mappingService){
+        this.mappingService = mappingService;
+    }
 
-    public String getSGData(String longitude, String latitude){
+    public SurfSpot getSGData(String longitude, String latitude){
         HttpHeaders header = new HttpHeaders();
         header.set("Authorization", sgApiKey);
 
         HttpEntity<Void> entity = new HttpEntity<>(null, header);
 
-        String sgGetUrl = "https://api.stormglass.io/v2/weather/point?lat=" +latitude+
-                "&lng=" + longitude+"&params=airTemperature,windSpeed,windDirection,waterTemperature," +
-                "waveHeight,wavePeriod,waveDirection&start=2021-06-17T05:00:00&&end=2021-06-17T06:00:00&source=sg";
-
+        String sgGetUrl = generateRequestString(longitude, latitude);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
 
-        return response.getBody();
+        try{
+            return mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
+        }catch(Exception e){
+            throw new RuntimeException("Json deserialization failed.");
+        }
+
     }
+
+    public String generateRequestString(String longitude, String latitude){
+        //Instant.now().plus(3, ChronoUnit.HOURS);
+        return  "https://api.stormglass.io/v2/weather/point?" +
+                "lat=" +latitude+
+                "&lng=" +longitude+
+                "&params=airTemperature,windSpeed," +
+                "windDirection,waterTemperature,waveHeight," +
+                "wavePeriod,waveDirection" +
+                "&start=2021-06-21T18:00:00" +
+                "&end=2021-06-21T21:00:00&source=sg";
+// start Instant.now() auf volle Stunde ab oder aufrunden
+// Instant.now().plus(<0ffset of 3 days>)
+    }
+
+
+
 }

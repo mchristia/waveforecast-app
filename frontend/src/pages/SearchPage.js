@@ -25,12 +25,31 @@ export default function SearchPage(){
 
         };
 
+    // useEffect( () =>{
+    //     axios.get("/api/stormglass", {params: {longitude, latitude}})
+    //         .then(response => response.data)
+    //         .then(data => console.log(data))
+    //         .catch(error => console.error(error))
+    // }, [])
+
     useEffect(() => {
         axios.get("/api/surfspots/all")
             .then((response) => response.data)
             .then(data => setSurfSpots(data))
             .catch(error => console.error(error))
-    }, [])
+    }, []);
+
+    console.log(surfSpots);
+    const longitude = surfSpots[0]?.spotLocationDetails.longitude;
+    const latitude = surfSpots[0]?.spotLocationDetails.latitude;
+
+    const buttonClick =(event) => {
+        axios.get("/api/stormglass",
+        {params: {longitude, latitude}})
+            .then(response => response.data)
+            .then(data => console.log(data))
+            .catch(error => console.error(error))
+    }
 
 
     return(
@@ -52,6 +71,9 @@ export default function SearchPage(){
                     <option value={"Spain"}>Spain</option>
                 </Select>
             </FormControl>
+            <div>
+                <button onClick={buttonClick}>click here for forecast in console</button>
+            </div>
             <div>
                 <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
             </div>

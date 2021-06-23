@@ -1,4 +1,4 @@
-package de.neuefische.backend;
+package de.neuefische.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -78,6 +78,15 @@ public class SpotLocationDetailsRepo {
                );
 
     public List<SpotLocationDetails> getLocationDetails(){
-        return new ArrayList<SpotLocationDetails>(spotLocationDetailsList.values());
+        return new ArrayList<>(spotLocationDetailsList.values());
+    }
+
+    public SpotLocationDetails findSpotLocationById(String id){
+        if(id != null){
+            if(spotLocationDetailsList.containsKey(id)){
+                return spotLocationDetailsList.get(id);
+            }
+        }
+        return new SpotLocationDetails();
     }
 }
