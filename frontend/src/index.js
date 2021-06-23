@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import GlobalStyle from "./component/GlobalStyle";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom";
@@ -8,6 +8,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
       <Router>
+          <GlobalStyle/>
           <App />
       </Router>
   </React.StrictMode>,

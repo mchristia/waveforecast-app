@@ -4,9 +4,6 @@ import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
 import axios from "axios";
 
-
-
-
 export default function SearchPage(){
 
         const classes = useStyles();
@@ -24,13 +21,6 @@ export default function SearchPage(){
             });
 
         };
-
-    // useEffect( () =>{
-    //     axios.get("/api/stormglass", {params: {longitude, latitude}})
-    //         .then(response => response.data)
-    //         .then(data => console.log(data))
-    //         .catch(error => console.error(error))
-    // }, [])
 
     useEffect(() => {
         axios.get("/api/surfspots/all")
@@ -82,10 +72,6 @@ export default function SearchPage(){
 }
 
 const Wrapper = styled.div`
-  ul{
-    padding : 2px;
-    
-  }
   
   FormControll{
     border: darkblue solid 1px;

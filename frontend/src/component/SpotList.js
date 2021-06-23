@@ -14,7 +14,7 @@ export default function SpotList({filterCountry, surfSpots}){
         <Wrapper>
             <ul>
                 {surfSpots.map((spot) => (
-                    <li >
+                    <li>
                         <SpotItem spot ={spot}/>
                     </li>
                 ))}
