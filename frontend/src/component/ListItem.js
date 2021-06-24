@@ -13,11 +13,11 @@ import {Link} from "react-router-dom";
 
 
 
-    const useStyles = makeStyles({
+    const useStyles = makeStyles( {
         root: {
             minWidth: 150,
             minHeight: 30,
-            bgcolor: "red"
+            backgroundColor: "cadetblue"
         },
 
        box:{
@@ -48,48 +48,36 @@ export default function ListItem({spot}){
     const classes = useStyles();
 
     console.log(spot)
+
     return(
-        <Paper className={classes.root} variant="outlined" component={Link} to={"/"+spot.id}>
-            <Box className={classes.box} component="div" >
-                <p>Hallo Welt</p>
-            </Box>
-            <Box className={classes.box} component="div">
-                <p>Hallo Welt2</p>
-            </Box>
+        <Card className={classes.root}  variant="outlined" >
+            <CardContent>
+                <Box className={classes.box} component="div" borderColor="primary.main">
+                    <Typography className={classes.title} variant="h5" component="h1" gutterBottom>
+                        {spot.spotLocationDetails.name}
+                    </Typography>
 
-        </Paper>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {spot.spotLocationDetails.continent},
+                        {spot.spotLocationDetails.country},
+                        {spot.spotLocationDetails.region}
+                    </Typography>
+                </Box>
+                <Box className={classes.box} component="div">
+                    <Typography className={classes.wavedata} variant="body2" component="p">
+                        <Box className={classes.weather}>
+                            Alle daten
+                        </Box>
+
+                    </Typography>
+                </Box>
+
+            </CardContent>
+            <CardActions>
+                <Button size="small">Add to Favourites</Button>
+            </CardActions>
+        </Card>
     )
-
-    //
-    // return(
-    //     <Card className={classes.root} variant="outlined">
-    //         <CardContent >
-    //             <Box className={classes.box} component="div" borderColor="primary.main">
-    //                 <Typography className={classes.title} variant="h5" component="h1" gutterBottom>
-    //                     {spot.spotLocationDetails.name}
-    //                 </Typography>
-    //
-    //                 <Typography className={classes.pos} color="textSecondary">
-    //                     {spot.spotLocationDetails.continent},
-    //                     {spot.spotLocationDetails.country},
-    //                     {spot.spotLocationDetails.region}
-    //                 </Typography>
-    //             </Box>
-    //             <Box className={classes.box} component="div">
-    //                 <Typography className={classes.wavedata} variant="body2" component="p">
-    //                     <Box className={classes.weather}>
-    //                         Alle daten
-    //                     </Box>
-    //
-    //                 </Typography>
-    //             </Box>
-    //
-    //         </CardContent>
-    //         <CardActions>
-    //             <Button size="small">Add to Favourites</Button>
-    //         </CardActions>
-    //     </Card>
-    // )
 }
 //
 // const Wrapper = styled.div`

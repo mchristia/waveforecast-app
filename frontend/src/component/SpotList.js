@@ -1,6 +1,7 @@
 import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
+import {Link, NavLink} from "react-router-dom";
 
 export default function SpotList({filterCountry, surfSpots}){
     const [filter, setFilter] = useState({
@@ -14,9 +15,11 @@ export default function SpotList({filterCountry, surfSpots}){
         <Wrapper>
             <ul>
                 {surfSpots.map((spot) => (
-                    <li>
-                        <ListItem spot ={spot}/>
-                    </li>
+                    <a href={"/"+spot.id} >
+                        <li>
+                            <ListItem spot ={spot} />
+                        </li>
+                    </a>
                 ))}
             </ul>
         </Wrapper>
@@ -25,5 +28,12 @@ export default function SpotList({filterCountry, surfSpots}){
 const Wrapper = styled.div`
   ul{
     padding : 2px;
+  }
+  
+  li{
+    padding: 1%
+  }
+  a{
+    text-decoration: none;
   }
 `
