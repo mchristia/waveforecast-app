@@ -1,4 +1,4 @@
-import SpotItem from "./SpotItem";
+import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
 
@@ -15,7 +15,7 @@ export default function SpotList({filterCountry, surfSpots}){
             <ul>
                 {surfSpots.map((spot) => (
                     <li>
-                        <SpotItem spot ={spot}/>
+                        <ListItem spot ={spot}/>
                     </li>
                 ))}
             </ul>

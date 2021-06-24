@@ -1,17 +1,18 @@
 import styled from "styled-components/macro";
-import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
+import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
-import axios from "axios";
 import useSurfSpot from "../hooks/useSrufSpots";
+import { useHistory } from "react-router-dom";
+import {Link} from "react-router-dom";
 
-export default function SearchPage(){
+export default function SearchPage({surfSpots}){
 
         const classes = useStyles();
-        const [filterCountry, setFilterCountry] = React.useState({
+        const [filterCountry, setFilterCountry] = useState({
             name: '',
         });
-        const {surfSpots} = useSurfSpot();
+        // const {surfSpots} = useSurfSpot();
 
         const handleChangeCountry = (event) => {
             const name = event.target.name;
@@ -33,9 +34,17 @@ export default function SearchPage(){
     //         .then(data => console.log(data))
     //         .catch(error => console.error(error))
     // }
+    const history = useHistory();
+    function handleClick() {
+
+        history.push("/map");
+    }
 
     return(
         <Wrapper >
+            <div>
+                <Button component={Link} to={"/map"}>go to maps</Button>
+            </div>
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Country</InputLabel>
                 <Select
@@ -53,9 +62,7 @@ export default function SearchPage(){
                     <option value={"Spain"}>Spain</option>
                 </Select>
             </FormControl>
-            <div>
-                <button >click here for forecast in console</button>
-            </div>
+
             <div>
                 <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
             </div>
@@ -64,7 +71,11 @@ export default function SearchPage(){
 }
 
 const Wrapper = styled.div`
-  
+  button{
+    container:flex;
+    flex-flow: row-reverse;
+    
+  }
   FormControll{
     border: darkblue solid 1px;
   }

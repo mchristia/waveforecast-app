@@ -1,9 +1,9 @@
-import SpotItem from "./SpotItem";
+import ListItem from "./ListItem";
 
 export default function FavouritesList(){
     return(
         <div>
-            <SpotItem/>
+            <ListItem/>
         </div>
     )
 }
