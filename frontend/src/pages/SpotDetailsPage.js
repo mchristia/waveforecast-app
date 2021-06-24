@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
 import styled from "styled-components/macro";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {getSurfSpot} from "../service/surfSpotDataService";
+import DetailsHeader from "../component/DetailsHeader";
+import DetailTable from "../component/DeatailsTable";
 
 export default function SpotDetailsPage(){
     const { id } = useParams();
@@ -14,112 +15,38 @@ export default function SpotDetailsPage(){
             .catch(error => console.error(error))
     },[id])
 
-    console.log(surfSpot?.surfData)
     const now = Date.now()
-    console.log(new Date(now).toUTCString())
+    console.log(surfSpot)
 
 
     function rightTimeToShowCurrentTemp () {
-        console.log("in function")
+
         for(let i=0; i < surfSpot?.surfData.length; i++){
             if(i === 0 && (now < Date.parse(surfSpot?.surfData[i].time))){
-                console.log(surfSpot?.surfData[0].time)
                 return surfSpot?.surfData[0]
             }
+
             if(now < Date.parse(surfSpot?.surfData[i+1].time)){
                 const a = Math.abs(now-Date.parse(surfSpot?.surfData[i].time))
                 const b = Math.abs(now-Date.parse(surfSpot?.surfData[i+1].time))
                 if(a < b){
-                    console.log(surfSpot?.surfData[i].time)
                     return surfSpot?.surfData[i]
                 }else{
-                    console.log(surfSpot?.surfData[i+1].time)
                     return surfSpot?.surfData[i+1]
                 }
             }
-
         }
-
     }
-
     return (
         <Wrapper>
-            <section className="overview">
-               <div>
-                  {surfSpot?.spotLocationDetails.name}
-                   {surfSpot?.spotLocationDetails.continent}
-                   {surfSpot?.spotLocationDetails.country}
-                   {surfSpot?.spotLocationDetails.region}
-               </div>
-                <div>
-                    {new Date(now).toUTCString()}
-                </div>
-                <div>
-                    <label>
-                        Ait Temperature:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.airTemperature.sg}
-               </div>
-                <div>
-                    <label>
-                        Water Temperature:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.waterTemperature.sg}
-               </div>
-                <div>
-                    <label>
-                        Wave Direction:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.waveDirection.sg}
-               </div>
-                <div>
-                    <label>
-                        Wave Height:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.waveHeight.sg}
-               </div>
-                <div>
-                    <label>
-                        Wave Period:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.wavePeriod.sg}
-               </div>
-                <div>
-                    <label>
-                        Wind Direction:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.windDirection.sg}
-               </div>
-                <div>
-                    <label>
-                       Wind Speed:
-                    </label>
-                    {rightTimeToShowCurrentTemp()?.windSpeed.sg}
-               </div>
-            </section>
-            <section class="time01">
-                placeholder
-            </section>
-             <section class="time02">
-                    placeholder
-             </section>
-            <section class="time03">
-                    placeholder
-            </section>
-            <section class="time04">
-                placeholder
-            </section>
-            <section class="time05">
-                placeholder
-            </section>
-            <section class="time06">
-                placeholder
-            </section>
-            <section class="time07">
-                placeholder
-            </section>
-            <section class="time08">
-                placeholder
+            <div className="overview">
+                <DetailsHeader  surfSpot={surfSpot}
+                               rightTimeToShowCurrentTemp={rightTimeToShowCurrentTemp}
+                               now={now}
+                />
+            </div>
+            <section className="table">
+                <DetailTable surfSpot={surfSpot} />
             </section>
 </Wrapper>)
 }
@@ -127,8 +54,13 @@ export default function SpotDetailsPage(){
 const Wrapper = styled.div`
   margin: 2px;
   padding: 5px;
-  
+
   .overview{
+    padding: 1%;
     
+  }
+  
+  .table{
+    margin-top: 2%;
   }
 `
