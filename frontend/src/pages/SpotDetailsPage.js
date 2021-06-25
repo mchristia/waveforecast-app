@@ -20,22 +20,18 @@ export default function SpotDetailsPage(){
 
 
     function rightTimeToShowCurrentTemp () {
-
-        for(let i=0; i < surfSpot?.surfData.length; i++){
-            if(i === 0 && (now < Date.parse(surfSpot?.surfData[i].time))){
+        if(now < Date.parse(surfSpot?.surfData[1].time)){
+            const a = Math.abs(now-Date.parse(surfSpot?.surfData[0].time))
+            const b = Math.abs(now-Date.parse(surfSpot?.surfData[1].time))
+            if(a < b){
+                console.log(surfSpot?.surfData[0])
                 return surfSpot?.surfData[0]
-            }
-
-            if(now < Date.parse(surfSpot?.surfData[i+1].time)){
-                const a = Math.abs(now-Date.parse(surfSpot?.surfData[i].time))
-                const b = Math.abs(now-Date.parse(surfSpot?.surfData[i+1].time))
-                if(a < b){
-                    return surfSpot?.surfData[i]
-                }else{
-                    return surfSpot?.surfData[i+1]
-                }
+            }else{
+                console.log(surfSpot?.surfData[0])
+                return surfSpot?.surfData[1]
             }
         }
+
     }
     return (
         <Wrapper>
