@@ -30,20 +30,15 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function createData( day, calories, fat, carbs, protein) {
-    return { day, calories, fat, carbs, protein };
+function createData( day, time1, time2, time3, time4, time5, time6, time7, time8) {
+    return { day, time1, time2, time3, time4, time5, time6, time7, time8 };
 }
-
-
-
 
 const useStyles = makeStyles({
     table: {
         width: "100%",
         overflowY: 'auto'
     },
-
-
 });
 
 
@@ -53,58 +48,75 @@ export default function DetailTable({surfSpot}){
     const rowsData = useRef();
     console.log(new Date(surfSpot?.surfData[0].time).toDateString())
 
-    const [dayAndTime, setDayAndTime] = useState({
-        today: 0,
-        tomorrow: 0,
-        dayaftertmrw: 0,
-    })
-    // const rows2 = () =>{
-    //     const now = new Date().toDateString()
-    //      for(let i=0; i < surfSpot?.surfData.length; i++){
-    //          const surfDate = new Date(surfSpot?.surfData[i].time).toDateString()
-    //         if(now === surfDate){
-    //             setDayAndTime(daytime.map(item => item.today +1))
-    //         }
-    //         if((now+1) > surfDate){
-    //             setDayAndTime(daytime.map(item => item.tomorrow +1))
-    //         }
-    //         if((now+2) > surfDate){
-    //             setDayAndTime(daytime.map(item => item.dayaftertmrw +1))
-    //         }
-    //      }
-    //
-    // }
+    let today =0;
+    let tmrw = 0;
+    let datmrw = 0;
 
-    const rows = [
-        createData(new Date(surfSpot?.surfData[0].time).toDateString(), 159, 6.0, 24, 4.0),
-        createData("06", 237, 9.0, 37, 4.3),
-        createData("06", 262, 16.0, 24, 6.0),
-        createData("06", 305, 3.7, 67, 4.3),
-        createData("06", 356, 16.0, 49, 3.9),
-    ];
+
+        const now = new Date().toDateString()
+        // surfSpot.surfData.forEach((element) => {})
+        for (let i = 0; i < surfSpot?.surfData.length; i++) {
+            const surfDate = new Date(surfSpot?.surfData[i].time).toDateString()
+            console.log(surfDate)
+            if (now === surfDate) {
+                today = today + 1;
+            }
+            if ((now + 1) === surfDate) {
+                tmrw = tmrw + 1
+            }
+            if ((now + 2) === surfDate) {
+                datmrw = datmrw + 1
+            }
+        }
+
+        const rows2 = [
+            createData(
+            new Date(surfSpot?.surfData[0].time).toDateString(),
+                surfSpot?.surfData[0].waveHeight.sg,
+                surfSpot?.surfData[1].waveHeight.sg,
+                surfSpot?.surfData[2].waveHeight.sg,
+                surfSpot?.surfData[3].waveHeight.sg,
+                surfSpot?.surfData[4].waveHeight.sg,
+                surfSpot?.surfData[5].waveHeight.sg,
+                surfSpot?.surfData[6].waveHeight.sg,
+                surfSpot?.surfData[7].waveHeight.sg,
+            )];
+
+        console.log(today)
+        console.log(tmrw)
+        console.log(datmrw)
+
+
 
     return(
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                        <StyledTableCell align="right">Calories</StyledTableCell>
-                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                        <StyledTableCell>Day</StyledTableCell>
+                        <StyledTableCell align="right">00:00 am</StyledTableCell>
+                        <StyledTableCell align="right">03:00 am</StyledTableCell>
+                        <StyledTableCell align="right">06:00 am</StyledTableCell>
+                        <StyledTableCell align="right">12:00 pm</StyledTableCell>
+                        <StyledTableCell align="right">15:00 pm</StyledTableCell>
+                        <StyledTableCell align="right">18:00 pm</StyledTableCell>
+                        <StyledTableCell align="right">21:00 pm</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {rows2.map((row) => (
                         <StyledTableRow key={row.day}>
                             <StyledTableCell component="th" scope="row">
                                 {row.day}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time1}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time2}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time3}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time4}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time5}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time6}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time7}</StyledTableCell>
+                            <StyledTableCell align="right">{row.time8}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

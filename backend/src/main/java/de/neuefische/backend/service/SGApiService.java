@@ -51,7 +51,7 @@ public class SGApiService {
     public String generateRequestString(String longitude, String latitude){
         //Instant.now().plus(3, ChronoUnit.HOURS);
         startTimeStampForSGRequest = generateStartTime(); //Auf genaue Stunde abrunden
-        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24); // Plus 3 Tage
+        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24*3); // Plus 3 Tage
 
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
@@ -104,9 +104,9 @@ public class SGApiService {
         updatedSurfSpot.setSpotLocationDetails(givenSurfSpot.getSpotLocationDetails());
 
         List<SGSurfData> updatedSGSurfData = new ArrayList<>();
-        Instant timeToCompareWith = Instant.now().truncatedTo(ChronoUnit.DAYS);
 
         for(SGSurfData surfData : givenSurfSpot.getSurfData()){
+            Instant timeToCompareWith = Instant.parse(surfData.getTime()).truncatedTo(ChronoUnit.DAYS);
             Instant dataTimeStamp = Instant.parse(surfData.getTime());
             if(timeToCompareWith.equals(dataTimeStamp)){ // 00:00Uhr
                 updatedSGSurfData.add(surfData);
