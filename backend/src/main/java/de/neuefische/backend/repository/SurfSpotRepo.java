@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface SurfSpotRepo extends PagingAndSortingRepository<SurfSpot, String> {
 
-
     List<SurfSpot> findAll();
 
+    SurfSpot findSurfSpotById(String id);
 
 //    private SpotLocationDetailsRepo locationDetailsRepo = new SpotLocationDetailsRepo();
 //    private List<SurfSpot> spotList = List.of(
