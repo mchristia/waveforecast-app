@@ -57,8 +57,8 @@ public class SGApiService {
                 "lat=" +latitude+
                 "&lng=" +longitude+
                 "&params=airTemperature,windSpeed," +
-                "windDirection,waterTemperature,waveHeight," +
-                "wavePeriod,waveDirection" +
+                "windDirection,waterTemperature,swellHeight," +
+                "swellPeriod,swellDirection" +
                 "&start="+ startTimeStampForSGRequest +
                 "&end=" + endTimeStampForSGRequest +"&source=sg";
     }
