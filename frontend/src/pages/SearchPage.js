@@ -41,10 +41,15 @@ export default function SearchPage({surfSpots}){
 
     return(
         <Wrapper >
-            <div>
-                <Button component={Link} to={"/map"}>go to maps</Button>
-            </div>
-            <div className="filter">
+            <section className="head">
+                <div className="b1">
+                    <Button component={Link} to={"/"}>Back to Start</Button>
+                </div>
+                <div className="b2">
+                    <Button component={Link} to={"/map"}>go to maps</Button>
+                </div>
+            </section>
+            <div className="filter" >
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="age-native-simple">Continent</InputLabel>
                     <Select
@@ -78,6 +83,7 @@ export default function SearchPage({surfSpots}){
                     </Select>
                 </FormControl>
             </div>
+
             <div>
                 <SpotList surfSpots={surfSpots}
                           filterContinent={filterContinent}
@@ -88,17 +94,27 @@ export default function SearchPage({surfSpots}){
 }
 
 const Wrapper = styled.div`
-  button{
-    container:flex;
-    flex-flow: row-reverse;
-    
-  }
+  
   FormControll{
     border: darkblue solid 1px;
   }
   .filter{
     display: flex;
     justify-content: space-around;
+  }
+  .head{
+    display: flex;
+    justify-content: space-between;
+  }
+  .b1{
+    margin: 5px;
+    border: solid black 1px;
+    border-radius: 3px
+  }
+  .b2{
+    margin: 5px;
+    border: solid black 1px;
+    border-radius: 3px;
   }
 `
 
