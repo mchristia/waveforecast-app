@@ -1,49 +1,34 @@
-import {Box, Button, CardActions, CardMedia, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Box, makeStyles, Typography, ThemeProvider} from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 
-    const useStyles = makeStyles( {
+    const useStyles = makeStyles({
         root: {
             minWidth: 150,
             minHeight: 30,
             backgroundColor: "cadetblue",
+
         },
         content: {
-            display: "grid",
-            gridTemplateColumns: "repeat(8, 1fr)",
-            gridTemplateRows: "repeat(2,1fr)",
-
+            padding: 8,
+            margin: 1,
         },
-       box: {
-            gridColumnStart: 1,
-           gridColumnEnd: 6,
-           gridRowStart: 1,
-           gridRowEnd: 2,
-
+       title: {
+           textAlign: "center",
        },
-        box2:{
-            gridColumnStart: 6,
-            gridColumnEnd: 9,
-            gridRowStart: 1,
-            gridRowEnd: 3,
+        subtitle:{
+            textAlign: "center",
+            margin: 0,
+            padding: 0,
 
         },
-
-        box3:{
-            gridColumnStart: 1,
-            gridColumnEnd: 5,
-            gridRowStart: 2,
-            gridRowEnd: 3,
-        },
-        title: {
-
-        },
-        pos: {
-            marginBottom: 1,
-        },
-        wavedata:{
-
+        databox:{
+            display: "flex",
+            textAlign: "center" ,
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            fontSize: 12,
         },
         weather:{
             display: "flex",
@@ -51,8 +36,9 @@ import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService"
 
         },
         text:{
-          margin: 1,
-          textAlign: "start",
+            fontSize: 11 ,
+          margin: 0,
+          padding: 0,
 
         }
     });
@@ -66,109 +52,50 @@ export default function ListItem({spot}){
 
     return(
         <Card className={classes.root} variant="outlined">
-        <CardContent>
-        <Box className={classes.content}  borderColor="black">
-            <Box className={classes.box} component="div" borderColor="black" >
+
+        <CardContent className={classes.content} >
+        <Box  borderColor="black">
+            <Box className={classes.title}  >
                 <Typography className={classes.title} variant="h5" component="h1">
                     {spot.spotLocationDetails.name}
                 </Typography>
             </Box>
-            <Box className={classes.box2} sx={{gridRow:"span 2", gridColumn: "span 1",}}>
-                <Box className={classes.weather}>
-                    <div>
-                        <p>
-                            Air: {currentSurfData?.airTemperature.sg} °C
-                        </p>
-
-                    </div>
-                    <div>
-                        <p>
-                            Water: {currentSurfData?.waterTemperature.sg} °C
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            {currentSurfData?.swellHeight.sg} m
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            {currentSurfData?.swellPeriod.sg} s
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            {currentSurfData?.windSpeed.sg} km/h
-                        </p>
-                    </div>
-                </Box>
-            </Box>
-            <Box className={classes.box3} sx={{gridRow: 2/3, gridColumn: 1/3,}} component="div">
+            <Box className={classes.subtitle} >
                 <p className={classes.text}>
                     {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
                 </p>
             </Box>
+            <Box className={classes.databox} >
+                <div>
+                    <p>
+                        Air: {currentSurfData?.airTemperature.sg} °C
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Water: {currentSurfData?.waterTemperature.sg} °C
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        {currentSurfData?.swellHeight.sg} m
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        {currentSurfData?.swellPeriod.sg} s
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        {currentSurfData?.windSpeed.sg} km/h
+                    </p>
+                </div>
+            </Box>
         </Box>
         </CardContent>
         </Card>
-        // <Card className={classes.root}  variant="outlined" >
-        //
-        //     <CardContent >
-        //         <Box sx={{display: "gird", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "repeat(2,1fr)",}}>
-        //         <Box sx={{ gridRow: "span 3", color: 'white',}} component="div" borderColor="primary.main" >
-        //             <Typography className={classes.title} variant="h5" component="h1" gutterBottom>
-        //                 {spot.spotLocationDetails.name}
-        //             </Typography>
-        //         </Box>
-        //         <Box sx={{gridRow:"span 2", gridColumn: "span 1",}}>
-        //             <Typography className={classes.pos} color="textSecondary">
-        //                 <Box className={classes.weather}>
-        //                     <div>
-        //                         <p>
-        //                             Air: {currentSurfData?.airTemperature.sg} °C
-        //                         </p>
-        //
-        //                     </div>
-        //                     <div>
-        //                         <p>
-        //                            Water: {currentSurfData?.waterTemperature.sg} °C
-        //                         </p>
-        //                     </div>
-        //                     <div>
-        //                         <p>
-        //                             {currentSurfData?.swellHeight.sg} m
-        //                         </p>
-        //                     </div>
-        //                     <div>
-        //                         <p>
-        //                             {currentSurfData?.swellPeriod.sg} s
-        //                         </p>
-        //                     </div>
-        //                     <div>
-        //                         <p>
-        //                             {currentSurfData?.windSpeed.sg} km/h
-        //                         </p>
-        //                     </div>
-        //                 </Box>
-        //
-        //             </Typography>
-        //         </Box>
-        //         <Box sx={{gridRow: 2/3, gridColumn: 1/3,}} component="div">
-        //             <Typography className={classes.wavedata} component="p">
-        //                 <p className={classes.text}>
-        //                     {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
-        //                 </p>
-        //
-        //
-        //             </Typography>
-        //         </Box>
-        //         </Box>
-        //     </CardContent>
-        //
-        //     <CardActions>
-        //         <Button size="small">Add to Favourites</Button>
-        //     </CardActions>
-        // </Card>
+
     )
 }
 //

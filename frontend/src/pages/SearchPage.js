@@ -44,39 +44,40 @@ export default function SearchPage({surfSpots}){
             <div>
                 <Button component={Link} to={"/map"}>go to maps</Button>
             </div>
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Continent</InputLabel>
-                <Select
-                    native
-                    value={filterContinent.name}
-                    onChange={handleChangeContinent}
-                    inputProps={{
-                        name: 'name',
-                        id: 'continent',
-                    }}
-                >
-                    <option aria-label="None" value="" />
-                    {continents.map((continent) =>(<option value={continent}>{continent}</option>))}
-                </Select>
-            </FormControl>
-            <div>
-
+            <div className="filter">
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="age-native-simple">Continent</InputLabel>
+                    <Select
+                        native
+                        value={filterContinent.name}
+                        onChange={handleChangeContinent}
+                        inputProps={{
+                            name: 'name',
+                            id: 'continent',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {continents.map((continent) =>(<option value={continent}>{continent}</option>))}
+                    </Select>
+                </FormControl>
+                <div>
+                </div>
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="age-native-simple">Country</InputLabel>
+                    <Select
+                        native
+                        value={filterCountry.name}
+                        onChange={handleChangeCountry}
+                        inputProps={{
+                            name: 'name',
+                            id: 'country',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {countries.map((country) =>(<option value={country}>{country}</option>))}
+                    </Select>
+                </FormControl>
             </div>
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Country</InputLabel>
-                <Select
-                    native
-                    value={filterCountry.name}
-                    onChange={handleChangeCountry}
-                    inputProps={{
-                        name: 'name',
-                        id: 'country',
-                    }}
-                >
-                    <option aria-label="None" value="" />
-                    {countries.map((country) =>(<option value={country}>{country}</option>))}
-                </Select>
-            </FormControl>
             <div>
                 <SpotList surfSpots={surfSpots}
                           filterContinent={filterContinent}
@@ -94,6 +95,10 @@ const Wrapper = styled.div`
   }
   FormControll{
     border: darkblue solid 1px;
+  }
+  .filter{
+    display: flex;
+    justify-content: space-around;
   }
 `
 
