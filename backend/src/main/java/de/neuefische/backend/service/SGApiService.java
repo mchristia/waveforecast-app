@@ -49,9 +49,8 @@ public class SGApiService {
     }
 
     public String generateRequestString(String longitude, String latitude){
-        //Instant.now().plus(3, ChronoUnit.HOURS);
-        startTimeStampForSGRequest = generateStartTime(); //Auf genaue Stunde abrunden
-        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24); // Plus 3 Tage
+        startTimeStampForSGRequest = generateStartTime();
+        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24*3);
 
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
@@ -64,31 +63,32 @@ public class SGApiService {
     }
 
     public Instant generateStartTime(){
-        Instant generatedTime = Instant.now().truncatedTo(ChronoUnit.HOURS);
-        Instant compareTime = Instant.now().truncatedTo(ChronoUnit.DAYS);// Aud 00 Uhr gesetzt
 
-        if(generatedTime.isBefore(compareTime.plusSeconds(60*60*3))){ // Vergleich mit 03:00 Uhr
+        Instant generatedTime = Instant.now().truncatedTo(ChronoUnit.HOURS);
+        Instant compareTime = Instant.now().truncatedTo(ChronoUnit.DAYS);
+
+        if(generatedTime.isBefore(compareTime.plusSeconds(60*60*3))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*6))){ // Vergleich mit 06:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*6))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*3);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*9))){ // Vergleich mit 09:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*9))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*6);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*12))){ // Vergleich mit 12:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*12))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*9);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*15))){ // Vergleich mit 15:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*15))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*12);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*18))){ // Vergleich mit 18:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*18))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*15);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*21))){ // Vergleich mit 21:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*21))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*18);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*23 + 60*59 + 59))){ // Vergleich mit 23:59:59 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*23 + 60*59 + 59))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*21);
         }
         return generatedTime;
@@ -100,9 +100,9 @@ public class SGApiService {
         updatedSurfSpot.setSpotLocationDetails(givenSurfSpot.getSpotLocationDetails());
 
         List<SGSurfData> updatedSGSurfData = new ArrayList<>();
-        Instant timeToCompareWith = Instant.now().truncatedTo(ChronoUnit.DAYS);
 
         for(SGSurfData surfData : givenSurfSpot.getSurfData()){
+            Instant timeToCompareWith = Instant.parse(surfData.getTime()).truncatedTo(ChronoUnit.DAYS);
             Instant dataTimeStamp = Instant.parse(surfData.getTime());
             if(timeToCompareWith.equals(dataTimeStamp)){ // 00:00Uhr
                 updatedSGSurfData.add(surfData);

@@ -1,17 +1,17 @@
 import styled from "styled-components/macro";
-import {FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
+import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
-import axios from "axios";
+import useSurfSpot from "../hooks/useSurfSpots";
+import { useHistory } from "react-router-dom";
+import {Link} from "react-router-dom";
 
-export default function SearchPage(){
+export default function SearchPage({surfSpots}){
 
         const classes = useStyles();
-        const [filterCountry, setFilterCountry] = React.useState({
+        const [filterCountry, setFilterCountry] = useState({
             name: '',
         });
-
-        const [surfSpots, setSurfSpots] = useState([])
 
         const handleChangeCountry = (event) => {
             const name = event.target.name;
@@ -22,28 +22,19 @@ export default function SearchPage(){
 
         };
 
-    useEffect(() => {
-        axios.get("/api/surfspots/all")
-            .then((response) => response.data)
-            .then(data => setSurfSpots(data))
-            .catch(error => console.error(error))
-    }, []);
+        console.log(surfSpots);
 
-    console.log(surfSpots);
-    const longitude = surfSpots[0]?.spotLocationDetails.longitude;
-    const latitude = surfSpots[0]?.spotLocationDetails.latitude;
+    const history = useHistory();
+    function handleClick() {
 
-    const buttonClick =(event) => {
-        axios.get("/api/stormglass",
-        {params: {longitude, latitude}})
-            .then(response => response.data)
-            .then(data => console.log(data))
-            .catch(error => console.error(error))
+        history.push("/map");
     }
 
-
     return(
-        <Wrapper>
+        <Wrapper >
+            <div>
+                <Button component={Link} to={"/map"}>go to maps</Button>
+            </div>
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Country</InputLabel>
                 <Select
@@ -52,7 +43,7 @@ export default function SearchPage(){
                     onChange={handleChangeCountry}
                     inputProps={{
                         name: 'name',
-                        id: 'age-native-simple',
+
                     }}
                 >
                     <option aria-label="None" value="" />
@@ -61,9 +52,7 @@ export default function SearchPage(){
                     <option value={"Spain"}>Spain</option>
                 </Select>
             </FormControl>
-            <div>
-                <button onClick={buttonClick}>click here for forecast in console</button>
-            </div>
+
             <div>
                 <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
             </div>
@@ -72,7 +61,11 @@ export default function SearchPage(){
 }
 
 const Wrapper = styled.div`
-  
+  button{
+    container:flex;
+    flex-flow: row-reverse;
+    
+  }
   FormControll{
     border: darkblue solid 1px;
   }
