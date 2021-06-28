@@ -1,29 +1,76 @@
 import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
-import {Link, NavLink} from "react-router-dom";
 
-export default function SpotList({filterCountry, surfSpots}){
-    const [filter, setFilter] = useState({
-        country :"",
-        continent : "",
-        region : "",
-        }
-    )
+export default function SpotList({filterCountry, surfSpots, filterContinent}){
 
-    return (
-        <Wrapper>
-            <ul>
-                {surfSpots.map((spot) => (
-                    <a href={"/"+spot.id} >
+    console.log(filterCountry)
+    console.log(filterContinent)
+
+    if(filterContinent?.name === '' && filterCountry?.name === ''){
+        return (
+            <Wrapper>
+                <ul>
+                    {surfSpots.map((spot) => (
+                     <a href={"/" + spot.id}>
                         <li>
-                            <ListItem spot ={spot} />
+                            <ListItem key={spot.id} spot={spot}/>
                         </li>
                     </a>
-                ))}
-            </ul>
-        </Wrapper>
-    )
+                    ))}
+                </ul>
+            </Wrapper>
+        )
+    }else if(filterContinent?.name !== '' && filterCountry?.name === ''){
+        return (
+            <Wrapper>
+                <ul>
+                    {surfSpots.map((spot) => {
+                        if (spot.spotLocationDetails.continent === filterContinent?.name) {
+                            return <a href={"/" + spot.id}>
+                                <li>
+                                    <ListItem key={spot.id} spot={spot}/>
+                                </li>
+                            </a>
+                        }
+                    })}
+                </ul>
+            </Wrapper>
+        )
+    }else if(filterContinent?.name === '' && filterCountry?.name !== ''){
+        return (
+            <Wrapper>
+                <ul>
+                    {surfSpots.map((spot) => {
+                        if (spot.spotLocationDetails.country === filterCountry?.name) {
+                            return <a href={"/" + spot.id}>
+                                <li>
+                                    <ListItem key={spot.id} spot={spot}/>
+                                </li>
+                            </a>
+                        }
+                    })}
+                </ul>
+            </Wrapper>
+        )
+    }else{
+        return (
+            <Wrapper>
+                <ul>
+                    {surfSpots.map((spot) => {
+                        if (spot.spotLocationDetails.continent === filterContinent?.name
+                            && spot.spotLocationDetails.country === filterCountry?.name) {
+                            return <a href={"/" + spot.id}>
+                                <li>
+                                    <ListItem key={spot.id} spot={spot}/>
+                                </li>
+                            </a>
+                        }
+                    })}
+                </ul>
+            </Wrapper>
+        )
+    }
 }
 const Wrapper = styled.div`
   ul{

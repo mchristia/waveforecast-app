@@ -1,5 +1,9 @@
 import React from "react"
-export default function DetailsHeader({surfSpot, rightTimeToShowCurrentTemp, now}){
+import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+export default function DetailsHeader({surfSpot, currentSurfData}){
+
+    const now = Date.now()
+    //console.log(currentSurfData)
     return(
         <section>
             <div>
@@ -12,45 +16,45 @@ export default function DetailsHeader({surfSpot, rightTimeToShowCurrentTemp, now
                 {new Date(now).toUTCString()}
             </div>
             <div>
-                <label>
-                    Ait Temperature:
-                </label>
-                {rightTimeToShowCurrentTemp()?.airTemperature.sg}
+                <p>
+                    Ait Temperature: {currentSurfData?.airTemperature.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Water Temperature:
-                </label>
-                {rightTimeToShowCurrentTemp()?.waterTemperature.sg}
+                <p>
+                    Water Temperature: {currentSurfData?.waterTemperature.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Wave Direction:
-                </label>
-                {rightTimeToShowCurrentTemp()?.waveDirection.sg}
+                <p>
+                    Wave Direction:  {currentSurfData?.swellDirection.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Wave Height:
-                </label>
-                {rightTimeToShowCurrentTemp()?.waveHeight.sg}
+                <p>
+                    Wave Height: {currentSurfData?.swellHeight.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Wave Period:
-                </label>
-                {rightTimeToShowCurrentTemp()?.wavePeriod.sg}
+                <p>
+                    Wave Period: {currentSurfData?.swellPeriod.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Wind Direction:
-                </label>
-                {rightTimeToShowCurrentTemp()?.windDirection.sg}
+                <p>
+                    Wind Direction: {currentSurfData?.windDirection.sg}
+                </p>
+
             </div>
             <div>
-                <label>
-                    Wind Speed:" "{rightTimeToShowCurrentTemp()?.windSpeed.sg}
-                </label>
+                <p>
+                    Wind Speed: {currentSurfData?.windSpeed.sg}
+                </p>
             </div>
         </section>
     )

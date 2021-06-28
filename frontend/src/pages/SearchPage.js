@@ -2,48 +2,65 @@ import styled from "styled-components/macro";
 import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
-import useSurfSpot from "../hooks/useSrufSpots";
-import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 export default function SearchPage({surfSpots}){
 
-        const classes = useStyles();
-        const [filterCountry, setFilterCountry] = useState({
-            name: '',
-        });
-        // const {surfSpots} = useSurfSpot();
+    const classes = useStyles();
+    const [filterContinent, setFilterContinent] = useState({
+        name: '',
+    });
+    const [filterCountry, setFilterCountry] = useState({
+        name: '',
+    });
 
-        const handleChangeCountry = (event) => {
-            const name = event.target.name;
-            setFilterCountry({
-                ...filterCountry,
-                [name]: event.target.value,
-            });
+    const handleChangeContinent = (event) => {
+        const name = event.target.name;
+        setFilterContinent({...filterContinent, [name]: event.target.value,});
+    };
 
-        };
+    const handleChangeCountry = (event) => {
+        const name = event.target.name;
+        setFilterCountry({...filterCountry, [name]: event.target.value,});
+    };
 
-        console.log(surfSpots);
-    // const longitude = surfSpots[0]?.spotLocationDetails.longitude;
-    // const latitude = surfSpots[0]?.spotLocationDetails.latitude;
-    //
-    // const buttonClick =(event) => {
-    //     axios.get("/api/stormglass",
-    //     {params: {longitude, latitude}})
-    //         .then(response => response.data)
-    //         .then(data => console.log(data))
-    //         .catch(error => console.error(error))
-    // }
-    const history = useHistory();
-    function handleClick() {
+    console.log(surfSpots);
 
-        history.push("/map");
+
+    let continents = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.continent))]
+    let countries = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.country))]
+    if(filterContinent.name !== ""){
+        countries = [...new Set(surfSpots?.map((spot) => {
+            if(spot.spotLocationDetails.continent === filterContinent.name)
+             return spot.spotLocationDetails.country;
+        }))]
     }
+    console.log(filterContinent.name)
+    console.log(countries)
+
 
     return(
         <Wrapper >
             <div>
                 <Button component={Link} to={"/map"}>go to maps</Button>
+            </div>
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="age-native-simple">Continent</InputLabel>
+                <Select
+                    native
+                    value={filterContinent.name}
+                    onChange={handleChangeContinent}
+                    inputProps={{
+                        name: 'name',
+                        id: 'continent',
+                    }}
+                >
+                    <option aria-label="None" value="" />
+                    {continents.map((continent) =>(<option value={continent}>{continent}</option>))}
+                </Select>
+            </FormControl>
+            <div>
+
             </div>
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Country</InputLabel>
@@ -53,18 +70,17 @@ export default function SearchPage({surfSpots}){
                     onChange={handleChangeCountry}
                     inputProps={{
                         name: 'name',
-                        id: 'age-native-simple',
+                        id: 'country',
                     }}
                 >
                     <option aria-label="None" value="" />
-                    <option value={"France"}>France</option>
-                    <option value={"Portugal"}>Portugal</option>
-                    <option value={"Spain"}>Spain</option>
+                    {countries.map((country) =>(<option value={country}>{country}</option>))}
                 </Select>
             </FormControl>
-
             <div>
-                <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots}
+                          filterContinent={filterContinent}
+                          filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )
