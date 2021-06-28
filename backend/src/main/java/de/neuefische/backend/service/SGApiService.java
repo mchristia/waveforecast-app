@@ -49,9 +49,8 @@ public class SGApiService {
     }
 
     public String generateRequestString(String longitude, String latitude){
-        //Instant.now().plus(3, ChronoUnit.HOURS);
-        startTimeStampForSGRequest = generateStartTime(); //Auf genaue Stunde abrunden
-        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24*3); // Plus 3 Tage
+        startTimeStampForSGRequest = generateStartTime();
+        endTimeStampForSGRequest = startTimeStampForSGRequest.truncatedTo(ChronoUnit.HOURS).plusSeconds(60*60*24*3);
 
         return  "https://api.stormglass.io/v2/weather/point?" +
                 "lat=" +latitude+
@@ -62,37 +61,34 @@ public class SGApiService {
                 "&start="+ startTimeStampForSGRequest +
                 "&end=" + endTimeStampForSGRequest +"&source=sg";
     }
-// Start time should always be 00:00 o'clock the day of the request!
-    // so that there is no starting gap in frontend table, e.g request at 15:00 afternoon would mean
-    // the current day would have a gap of surf data between the morning and 15:00.
-    // But every row should be filled, starting at the same time! If data is missing, that does not work.
+
     public Instant generateStartTime(){
 
         Instant generatedTime = Instant.now().truncatedTo(ChronoUnit.HOURS);
-        Instant compareTime = Instant.now().truncatedTo(ChronoUnit.DAYS);// Aud 00 Uhr gesetzt
+        Instant compareTime = Instant.now().truncatedTo(ChronoUnit.DAYS);
 
-        if(generatedTime.isBefore(compareTime.plusSeconds(60*60*3))){ // Vergleich mit 03:00 Uhr
+        if(generatedTime.isBefore(compareTime.plusSeconds(60*60*3))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*6))){ // Vergleich mit 06:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*6))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*3);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*9))){ // Vergleich mit 09:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*9))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*6);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*12))){ // Vergleich mit 12:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*12))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*9);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*15))){ // Vergleich mit 15:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*15))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*12);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*18))){ // Vergleich mit 18:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*18))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*15);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*21))){ // Vergleich mit 21:00 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*21))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*18);
         }
-        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*23 + 60*59 + 59))){ // Vergleich mit 23:59:59 Uhr
+        else if(generatedTime.isBefore(compareTime.plusSeconds(60*60*23 + 60*59 + 59))){
             generatedTime = generatedTime.truncatedTo(ChronoUnit.DAYS).plusSeconds(60*60*21);
         }
         return generatedTime;

@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useState} from "react";
 import  {GoogleMap, InfoWindow,InfoBox, Marker, useLoadScript} from "@react-google-maps/api";
 import styled from "styled-components/macro";
-import useSurfSpot from "../hooks/useSrufSpots";
+import useSurfSpot from "../hooks/useSurfSpots";
 import ListItem from "../component/ListItem";
 import {getGeodode, getLatLng} from "use-places-autocomplete"
 

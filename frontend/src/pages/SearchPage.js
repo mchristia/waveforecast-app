@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
-import useSurfSpot from "../hooks/useSrufSpots";
+import useSurfSpot from "../hooks/useSurfSpots";
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
@@ -12,7 +12,6 @@ export default function SearchPage({surfSpots}){
         const [filterCountry, setFilterCountry] = useState({
             name: '',
         });
-        // const {surfSpots} = useSurfSpot();
 
         const handleChangeCountry = (event) => {
             const name = event.target.name;
@@ -24,16 +23,7 @@ export default function SearchPage({surfSpots}){
         };
 
         console.log(surfSpots);
-    // const longitude = surfSpots[0]?.spotLocationDetails.longitude;
-    // const latitude = surfSpots[0]?.spotLocationDetails.latitude;
-    //
-    // const buttonClick =(event) => {
-    //     axios.get("/api/stormglass",
-    //     {params: {longitude, latitude}})
-    //         .then(response => response.data)
-    //         .then(data => console.log(data))
-    //         .catch(error => console.error(error))
-    // }
+
     const history = useHistory();
     function handleClick() {
 
@@ -53,7 +43,7 @@ export default function SearchPage({surfSpots}){
                     onChange={handleChangeCountry}
                     inputProps={{
                         name: 'name',
-                        id: 'age-native-simple',
+
                     }}
                 >
                     <option aria-label="None" value="" />

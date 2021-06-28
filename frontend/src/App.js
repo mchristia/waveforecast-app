@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import SearchMapPage from "./pages/SearchMapPage";
 import SpotDetailsPage from "./pages/SpotDetailsPage";
-import useSurfSpot from "./hooks/useSrufSpots";
+import useSurfSpot from "./hooks/useSurfSpots";
 
 
 function App() {
