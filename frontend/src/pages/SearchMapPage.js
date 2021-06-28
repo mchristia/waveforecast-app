@@ -1,24 +1,23 @@
 import React, {useCallback, useRef, useState} from "react";
-import  {GoogleMap, InfoWindow,InfoBox, Marker, useLoadScript} from "@react-google-maps/api";
+import  {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api";
 import styled from "styled-components/macro";
-import useSurfSpot from "../hooks/useSurfSpots";
 import ListItem from "../component/ListItem";
 import {getGeodode, getLatLng} from "use-places-autocomplete"
-
+import {useHistory} from "react-router-dom"
 
 const libraries = ["places"];
 const options = {
     disableDefaultUI: true,
     zoomControl: true,
 };
+
 const center = {
     lat:50.9632238,
     lng:6.9369613
 }
 
 export default function SearchMapPage({surfSpots}) {
-    // const {surfSpots} = useSurfSpot();
-
+    const history = useHistory();
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -40,6 +39,11 @@ export default function SearchMapPage({surfSpots}) {
         mapRef.current = map;
     },[]);
 
+    const panTo = useCallback(({lat, lng}) => {
+        mapRef.current.panTo({lat, lng});
+        mapRef.current.setZoom(14);
+    }, []);
+
     if(loadError) return "Error loading Maps";
     if(!isLoaded) return "Loading Maps";
     console.log(React.version)
@@ -49,10 +53,21 @@ export default function SearchMapPage({surfSpots}) {
         width:"100vw",
         height: "100vh"
     };
+ function onButtonClick(){
+     history.goBack();
+ }
+
 
     return(
         <Wrapper>
             <h1>Surf Spots</h1>
+            <Locate panTo={panTo}/>
+            <button onClick={() => {
+                history.goBack();
+            }}>go back to list
+            </button>
+
+            <box className="map">
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={12}
@@ -83,21 +98,42 @@ export default function SearchMapPage({surfSpots}) {
                         <ListItem spot={selected}/>
                     </InfoWindow>
                 ) : null}
-
             </GoogleMap>
+            </box>
         </Wrapper>
+    )
+}
+
+function Locate ({panTo}) {
+    return (
+        <button
+            className="locate"
+            onClick={() => {
+                 navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    panTo({
+                        lat: position.cords.latitude,
+                        lng: position.cords.longitude
+                    });
+             }, ()=>null);
+        }}>
+            find your position
+        </button>
     )
 }
 const Wrapper = styled.div`
 
+  .map{
+    
+  }
     h1{
       position: absolute;
       top: 1rem;
       left:1rem;
       color: darkblue;
       z-index: 2;
-      margin: 0;
-      padding: 0;
+      margin: 1px;
+      padding: 1px;
       font-size: 1.5rem;
     }
 `
