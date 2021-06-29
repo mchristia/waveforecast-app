@@ -17,8 +17,8 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
     });
 
     const mapContainerStyle = {
-        width:"80vw",
-        height: "80vh"
+        width:"100vw",
+        height: "100vh"
     };
 
     const [selected, setSelected] = useState(null);
@@ -27,6 +27,7 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
     if(!isLoaded) return "Loading Maps";
 
     return(
+        <>
         <Wrapper>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -48,7 +49,7 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                 ))}
                 <Marker />
                 {selected ? (
-                    <InfoWindow className="infoWindow" minWidth="500px" position={{
+                    <InfoWindow className="infoWindow" position={{
                         lat: parseFloat(selected.spotLocationDetails.latitude),
                         lng: parseFloat(selected.spotLocationDetails.longitude)
                     }} onCloseClick={()=> {
@@ -62,11 +63,12 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                 ) : null}
             </GoogleMap>
         </Wrapper>
+        </>
     )
 }
 
 const Wrapper = styled.div`
-  a{
+  a {
     text-decoration: none;
-  
+  }
 `

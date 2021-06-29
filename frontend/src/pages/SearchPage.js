@@ -41,7 +41,8 @@ export default function SearchPage({surfSpots}){
 
     return(
         <Wrapper >
-            <section className="head">
+            <div className="head">
+            <section className="buttons">
                 <div className="b1">
                     <Button component={Link} to={"/"}>Back to Start</Button>
                 </div>
@@ -83,7 +84,7 @@ export default function SearchPage({surfSpots}){
                     </Select>
                 </FormControl>
             </div>
-
+            </div>
             <div>
                 <SpotList surfSpots={surfSpots}
                           filterContinent={filterContinent}
@@ -98,23 +99,31 @@ const Wrapper = styled.div`
   FormControll{
     border: darkblue solid 1px;
   }
+  .head{
+    position: sticky;
+    top:0;
+    z-index: 2;
+    background-color: white;
+  }
   .filter{
     display: flex;
     justify-content: space-around;
   }
-  .head{
+  .buttons{
     display: flex;
     justify-content: space-between;
   }
   .b1{
     margin: 5px;
     border: solid black 1px;
-    border-radius: 3px
+    border-radius: 3px;
+    background-image: linear-gradient(45deg, lightblue, yellow);
   }
   .b2{
     margin: 5px;
     border: solid black 1px;
     border-radius: 3px;
+    background-image: linear-gradient(45deg, lightblue, yellow);
   }
 `
 

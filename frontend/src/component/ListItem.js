@@ -7,8 +7,7 @@ import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService"
         root: {
             minWidth: 150,
             minHeight: 30,
-            backgroundColor: "cadetblue",
-
+            background: "linear-gradient(45deg, lightblue, yellow)",
         },
         content: {
             padding: 8,

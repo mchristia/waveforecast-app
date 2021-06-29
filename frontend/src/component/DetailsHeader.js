@@ -1,9 +1,12 @@
 import React from "react"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import styled from "styled-components/macro";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import {useHistory} from "react-router-dom"
+
 const Wrapper = styled.section`
   border-bottom: black solid 2px;
-  background-color: aquamarine;
+  background-image: linear-gradient(45deg, lightblue, yellow);
   border-top-right-radius: 2%;
   border-top-left-radius: 2%;
   
@@ -47,17 +50,29 @@ const Wrapper = styled.section`
     padding: 0px;
     margin: 0px;
   }
+  
+  .button2{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
 `
 
 
 export default function DetailsHeader({surfSpot, currentSurfData}){
 
+    const history = useHistory();
     const now = Date.now()
 
     return(
         <Wrapper>
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
+                <button className="button2" onClick={() => {
+                    history.goBack();
+                }}>
+                    <ListAltIcon />
+                </button>
                 <div className="subtitle">
                     <p>{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
                     <p>{new Date(now).toUTCString()}</p>
