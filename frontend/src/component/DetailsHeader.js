@@ -4,66 +4,11 @@ import styled from "styled-components/macro";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import {useHistory} from "react-router-dom"
 
-const Wrapper = styled.section`
-  border-bottom: black solid 2px;
-  background-image: linear-gradient(45deg, lightblue, yellow);
-  border-top-right-radius: 2%;
-  border-top-left-radius: 2%;
-  
-  .title{
-    padding-top: 2px;
-    
-  }
-  
-  h2{
-    text-align: center;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }
-  
-  .subtitle{
-    display: flex;
-    justify-content: space-between ;
-    font-size: 12px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .body{
-    display: flex;
-   justify-content: space-between;
-    
-  }
-  
-  .body-left{
-    display: flex;
-    flex-flow: column ;
-    font-size: 14px;
-  }
-  
-  .body-right{
-    display: flex;
-    flex-flow: column ;
-    font-size: 14px;
-    
-  }
-  .body.p{
-    padding: 0px;
-    margin: 0px;
-  }
-  
-  .button2{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-`
-
-
-export default function DetailsHeader({surfSpot, currentSurfData}){
+export default function DetailsHeader({surfSpot}){
 
     const history = useHistory();
     const now = Date.now()
-
+    const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
     return(
         <Wrapper>
             <div className="title">
@@ -123,3 +68,57 @@ export default function DetailsHeader({surfSpot, currentSurfData}){
         </Wrapper>
     )
 }
+
+const Wrapper = styled.section`
+  border-bottom: black solid 2px;
+  background-image: linear-gradient(45deg, lightblue, yellow);
+  border-top-right-radius: 2%;
+  border-top-left-radius: 2%;
+  
+  .title{
+    padding-top: 2px;
+    
+  }
+  
+  h2{
+    text-align: center;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+  
+  .subtitle{
+    display: flex;
+    justify-content: space-between ;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .body{
+    display: flex;
+   justify-content: space-between;
+    
+  }
+  
+  .body-left{
+    display: flex;
+    flex-flow: column ;
+    font-size: 14px;
+  }
+  
+  .body-right{
+    display: flex;
+    flex-flow: column ;
+    font-size: 14px;
+    
+  }
+  .body.p{
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  .button2{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+`

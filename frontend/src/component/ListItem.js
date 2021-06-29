@@ -51,48 +51,47 @@ export default function ListItem({spot}){
 
     return(
         <Card className={classes.root} variant="outlined">
-
-        <CardContent className={classes.content} >
-        <Box  borderColor="black">
-            <Box className={classes.title}  >
-                <Typography className={classes.title} variant="h5" component="h1">
-                    {spot.spotLocationDetails.name}
-                </Typography>
-            </Box>
-            <Box className={classes.subtitle} >
-                <p className={classes.text}>
-                    {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
-                </p>
-            </Box>
-            <Box className={classes.databox} >
-                <div>
-                    <p>
-                        Air: {currentSurfData?.airTemperature.sg} °C
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        Water: {currentSurfData?.waterTemperature.sg} °C
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        {currentSurfData?.swellHeight.sg} m
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        {currentSurfData?.swellPeriod.sg} s
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        {currentSurfData?.windSpeed.sg} km/h
-                    </p>
-                </div>
-            </Box>
-        </Box>
-        </CardContent>
+            <CardContent className={classes.content} >
+                <Box  borderColor="black">
+                    <Box className={classes.title}  >
+                        <Typography className={classes.title} variant="h5" component="h1">
+                            {spot.spotLocationDetails.name}
+                        </Typography>
+                    </Box>
+                    <Box className={classes.subtitle} >
+                        <p className={classes.text}>
+                            {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
+                        </p>
+                    </Box>
+                    <Box className={classes.databox} >
+                        <div>
+                            <p>
+                                Air: {currentSurfData?.airTemperature.sg} °C
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Water: {currentSurfData?.waterTemperature.sg} °C
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                {currentSurfData?.swellHeight.sg} m
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                {currentSurfData?.swellPeriod.sg} s
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                {currentSurfData?.windSpeed.sg} km/h
+                            </p>
+                        </div>
+                    </Box>
+                </Box>
+            </CardContent>
         </Card>
 
     )

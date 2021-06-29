@@ -9,6 +9,7 @@ const options = {
     disableDefaultUI: true,
     zoomControl: true,
 };
+
 export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
 
     const {isLoaded, loadError} = useLoadScript({

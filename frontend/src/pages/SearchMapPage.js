@@ -22,8 +22,6 @@ const libraries = ["places"];
          lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
      }
 
-    const [selected, setSelected] = useState(null);
-
     const mapRef = useRef();
     const onMapLoad = useCallback((map) =>{
         mapRef.current = map;
@@ -80,6 +78,7 @@ const Wrapper = styled.div`
     z-index: 2;
     background-image: linear-gradient(45deg, lightblue, yellow);
   }
+  
   .button2{
     position: absolute;
     z-index: 2;
@@ -102,5 +101,5 @@ const Wrapper = styled.div`
     margin: 1px;
     padding: 1px;
     font-size: 1.5rem;
-}
+  }
 `

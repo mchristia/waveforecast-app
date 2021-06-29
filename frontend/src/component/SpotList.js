@@ -4,8 +4,6 @@ import styled from "styled-components/macro";
 
 export default function SpotList({filterCountry, surfSpots, filterContinent}){
 
-    console.log(filterCountry)
-    console.log(filterContinent)
 
     if(filterContinent?.name === '' && filterCountry?.name === ''){
         return (

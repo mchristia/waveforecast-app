@@ -38,8 +38,8 @@ const useStyles = makeStyles({
     table: {
         width: "100%",
         overflowY: 'auto'
-
     },
+
 });
 
 

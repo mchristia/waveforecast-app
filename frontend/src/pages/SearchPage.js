@@ -7,12 +7,10 @@ import {Link} from "react-router-dom";
 export default function SearchPage({surfSpots}){
 
     const classes = useStyles();
-    const [filterContinent, setFilterContinent] = useState({
-        name: '',
-    });
-    const [filterCountry, setFilterCountry] = useState({
-        name: '',
-    });
+
+    const [filterContinent, setFilterContinent] = useState({name: ''});
+
+    const [filterCountry, setFilterCountry] = useState({name: ''});
 
     const handleChangeContinent = (event) => {
         const name = event.target.name;
@@ -24,11 +22,9 @@ export default function SearchPage({surfSpots}){
         setFilterCountry({...filterCountry, [name]: event.target.value,});
     };
 
-    console.log(surfSpots);
-
-
     let continents = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.continent))]
     let countries = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.country))]
+
     if(filterContinent.name !== ""){
         countries = [...new Set(surfSpots?.map((spot) => {
             if(spot.spotLocationDetails.continent === filterContinent.name)
@@ -37,7 +33,6 @@ export default function SearchPage({surfSpots}){
     }
     console.log(filterContinent.name)
     console.log(countries)
-
 
     return(
         <Wrapper >

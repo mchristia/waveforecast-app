@@ -13,7 +13,6 @@ export default function HomePage(){
             <div>
                 <Button className="spotList" variant="outlined" component={Link} to={"/search"} >Look for Spots here</Button>
             </div>
-
         </Wrapper>
     )
 }
