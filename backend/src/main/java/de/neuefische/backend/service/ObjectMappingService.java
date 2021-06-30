@@ -4,18 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.neuefische.backend.model.*;
-import de.neuefische.backend.repository.SpotLocationDetailsRepo;
 import de.neuefische.backend.repository.SurfSpotRepo;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ObjectMappingService {
 
-    private SpotLocationDetailsRepo locationDetailsRepo;
+
     private SurfSpotRepo surfSpotRepo;
 
-    public ObjectMappingService(SpotLocationDetailsRepo locationDetailsRepo, SurfSpotRepo surfSpotRepo){
-        this.locationDetailsRepo = locationDetailsRepo;
+    public ObjectMappingService( SurfSpotRepo surfSpotRepo){
         this.surfSpotRepo = surfSpotRepo;
     }
 
