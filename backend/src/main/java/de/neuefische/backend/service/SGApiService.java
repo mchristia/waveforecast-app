@@ -37,7 +37,13 @@ public class SGApiService {
 
         String sgGetUrl = generateRequestString(longitude, latitude);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response = null;
+        try{
+            response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
+
+        }catch(Exception e){
+            return new SurfSpot();
+        }
 
         try{
             SurfSpot updatedSurfSpot = mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
