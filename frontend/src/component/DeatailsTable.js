@@ -79,7 +79,7 @@ export default function DetailTable({surfSpot}){
                 <TableBody>
                     {rows.map((row) => (
                         <StyledTableRow key={row.date}>
-                            <StyledTableCell component="th" scope="row" borderRight="black" borderStyle="solid">{row.date.toDateString()}
+                            <StyledTableCell component="th" scope="row" >{row.date.toDateString()}
                                 </StyledTableCell>
                             <StyledTableCell component="th" scope="row">{row.date.toLocaleTimeString(navigator.language, {
                                     hour: '2-digit',

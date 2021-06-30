@@ -1,6 +1,6 @@
 package de.neuefische.backend.repository;
 
-import de.neuefische.backend.model.AppUser;
+import de.neuefische.backend.security.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

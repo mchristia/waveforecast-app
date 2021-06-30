@@ -12,21 +12,17 @@ export default function SpotDetailsPage(){
 
     useEffect(() =>{
         getSurfSpot(id)
-            .then((item) => {
-                setSurfSpot(item);
-            })
+            .then(setSurfSpot)
             .catch(error => {
                 console.error(error);
             })
     },[id])
 
-    const now = Date.now()
-
     if(surfSpot){
         return (
             <Wrapper>
                 <div className="overview">
-                    <DetailsHeader  surfSpot={surfSpot}/>
+                    <DetailsHeader  surfSpot={surfSpot} />
                 </div>
                 <section className="table">
                     <DetailTable surfSpot={surfSpot} />

@@ -9,6 +9,7 @@ export default function DetailsHeader({surfSpot}){
     const history = useHistory();
     const now = Date.now()
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
+
     return(
         <Wrapper>
             <div className="title">
