@@ -2,6 +2,10 @@ spring:
   data:
     mongodb:
       database: WaveForecast
+  security:
+    user:
+      name: Mario
+      password: 1234
 server:
   error:
     include-message: always
