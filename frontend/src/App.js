@@ -7,43 +7,31 @@ import useSurfSpot from "./hooks/useSurfSpots";
 import LoginPage from "./pages/LoginPage";
 import {useState} from "react";
 import axios from "axios";
-
+import AuthProvider from "./context/AuthProvider";
+import PrivateRoute from './routing/PrivateRoute'
 
 function App() {
-    const [token, setToken] = useState();
-    const history = useHistory()
-    const {surfSpots} = useSurfSpot(token);
-
-
-    const login =(credentials)=>{
-        axios.post("/auth/login", credentials)
-            .then(res => res.data)
-            .then((item) => {
-                setToken(item);
-                console.log(item)
-            })
-            .then(() => history.push("/home"))
-            .catch(error => console.error(error.message))
-    }
 
   return (
+      <AuthProvider>
           <Switch>
               <Route path = "/" exact>
-                  <LoginPage login={login}/>
+                  <LoginPage/>
               </Route>
               <Route path = "/home">
                   <HomePage />
               </Route>
-              <Route path = "/search">
-                  <SearchPage surfSpots={surfSpots}/>
-              </Route>
-              <Route path = "/map">
-                  <SearchMapPage surfSpots={surfSpots} />
-              </Route>
-              <Route path = "/:id">
-                  <SpotDetailsPage token={token}/>
-              </Route>
+              <PrivateRoute path ={"/search"}>
+                  <SearchPage/>
+              </PrivateRoute>
+              <PrivateRoute path ={"/map"}>
+                  <SearchMapPage  />
+              </PrivateRoute>
+              <PrivateRoute path ={"/:id"}>
+                  <SpotDetailsPage />
+              </PrivateRoute>
           </Switch>
+      </AuthProvider>
   );
 }
 

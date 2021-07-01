@@ -1,14 +1,16 @@
 import { useParams } from 'react-router-dom';
 import styled from "styled-components/macro";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {getSurfSpot} from "../service/surfSpotDataService";
 import DetailsHeader from "../component/DetailsHeader";
 import DetailTable from "../component/DeatailsTable";
-import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+import AuthContext from "../context/AuthContext";
 
-export default function SpotDetailsPage({token}){
+export default function SpotDetailsPage(){
     const { id } = useParams();
     const [surfSpot, setSurfSpot] = useState();
+    const {token} = useContext(AuthContext)
+
     console.log(token)
     useEffect(() =>{
 

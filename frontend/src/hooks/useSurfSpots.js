@@ -1,9 +1,12 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 
-export default function useSurfSpot(token){
+export default function useSurfSpot(){
     const [surfSpots, setSurfSpots] = useState([])
+    const {token} = useContext(AuthContext)
+
     const header = ({
         headers: {
             Authorization: `Bearer ${token}`,

@@ -6,11 +6,12 @@ import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
+import useSurfSpot from "../hooks/useSurfSpots";
 
 const libraries = ["places"];
 
- function SearchMapPage({surfSpots}, geoLocation ) {
-
+ function SearchMapPage( geoLocation ) {
+     const {surfSpots} = useSurfSpot();
     const history = useHistory();
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
