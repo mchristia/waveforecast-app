@@ -18,7 +18,10 @@ function App() {
     const login =(credentials)=>{
         axios.post("/auth/login", credentials)
             .then(res => res.data)
-            .then(setToken)
+            .then((item) => {
+                setToken(item);
+                console.log(item)
+            })
             .then(() => history.push("/home"))
             .catch(error => console.error(error.message))
     }

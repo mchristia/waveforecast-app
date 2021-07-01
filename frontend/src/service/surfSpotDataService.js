@@ -2,11 +2,12 @@ import axios from "axios";
 
 
 export const getSurfSpot = (id, token) =>{
-    const header = ({
+    const config = ({
         headers: {
             Authorization: `Bearer ${token}`,
         },
     })
-    axios.get("/api/surfspots/id/"+id, header)
+    console.log(token)
+    return axios.get("/api/surfspots/id/"+id, config)
         .then((response) => response.data)
 }
