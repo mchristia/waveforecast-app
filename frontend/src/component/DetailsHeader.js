@@ -21,7 +21,7 @@ export default function DetailsHeader({surfSpot}){
                 </button>
                 <div className="subtitle">
                     <p>{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
-                    <p>{new Date(now).toUTCString()}</p>
+                    <p>{new Date(now).toLocaleDateString()}</p>
                 </div>
 
             </div>

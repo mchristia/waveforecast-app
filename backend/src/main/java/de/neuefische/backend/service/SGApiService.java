@@ -38,6 +38,7 @@ public class SGApiService {
         String sgGetUrl = generateRequestString(longitude, latitude);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
+
         try{
             response = restTemplate.exchange(sgGetUrl, HttpMethod.GET, entity, String.class);
 
