@@ -38,7 +38,7 @@ function App() {
                   <SearchMapPage surfSpots={surfSpots} />
               </Route>
               <Route path = "/:id">
-                  <SpotDetailsPage />
+                  <SpotDetailsPage token={token}/>
               </Route>
           </Switch>
   );

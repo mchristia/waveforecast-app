@@ -49,7 +49,7 @@ const libraries = ["places"];
 
                 </button>
                 <button className="button2" onClick={() => {
-                    history.goBack();
+                    history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>

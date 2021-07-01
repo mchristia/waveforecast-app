@@ -6,12 +6,12 @@ import DetailsHeader from "../component/DetailsHeader";
 import DetailTable from "../component/DeatailsTable";
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 
-export default function SpotDetailsPage(){
+export default function SpotDetailsPage(token){
     const { id } = useParams();
     const [surfSpot, setSurfSpot] = useState();
 
     useEffect(() =>{
-        getSurfSpot(id)
+        getSurfSpot(id, token)
             .then(setSurfSpot)
             .catch(error => {
                 console.error(error);

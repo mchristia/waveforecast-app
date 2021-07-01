@@ -15,7 +15,7 @@ export default function DetailsHeader({surfSpot}){
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
                 <button className="button2" onClick={() => {
-                    history.goBack();
+                    history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>
