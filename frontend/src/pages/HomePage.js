@@ -11,7 +11,10 @@ export default function HomePage(){
             </p>
             <div>
                 <Link to={"/search"}>
-                    <Button className="spotList" variant="outlined" component={Link} to={"/search"} >Look for Spots here</Button>
+                    <Button className="spotList" variant="outlined" >Look for Spots here</Button>
+                </Link>
+                <Link to={"/user"} >
+                    <Button className="favourites" variant="outlined" >See Favourites here</Button>
                 </Link>
             </div>
         </Wrapper>
@@ -19,7 +22,7 @@ export default function HomePage(){
 }
 
 const Wrapper = styled.div`
-    .spotList{
+    Button{
       background-image: linear-gradient(45deg, lightblue, yellow);
     }
 `

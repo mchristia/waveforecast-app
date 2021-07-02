@@ -13,7 +13,6 @@ export default function SpotDetailsPage(){
 
     console.log(token)
     useEffect(() =>{
-
         if(token){
             getSurfSpot(id, token)
                 .then(setSurfSpot)

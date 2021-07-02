@@ -12,11 +12,11 @@ const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
      const {surfSpots} = useSurfSpot();
-    const history = useHistory();
-    const {isLoaded, loadError} = useLoadScript({
+     const history = useHistory();
+     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
-    });
+     });
 
      const center = {
          lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,

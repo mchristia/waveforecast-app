@@ -3,33 +3,35 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import SearchMapPage from "./pages/SearchMapPage";
 import SpotDetailsPage from "./pages/SpotDetailsPage";
-import useSurfSpot from "./hooks/useSurfSpots";
 import LoginPage from "./pages/LoginPage";
-import {useState} from "react";
-import axios from "axios";
 import AuthProvider from "./context/AuthProvider";
 import PrivateRoute from './routing/PrivateRoute'
+import FavouritesPage from "./pages/FavouritesPage";
 
 function App() {
 
   return (
       <AuthProvider>
           <Switch>
-              <Route path = "/" exact>
+              <Route path ={"/"} exact>
                   <LoginPage/>
               </Route>
-              <Route path = "/home">
+              <PrivateRoute path ={"/home"}>
                   <HomePage />
-              </Route>
+              </PrivateRoute>
               <PrivateRoute path ={"/search"}>
                   <SearchPage/>
               </PrivateRoute>
               <PrivateRoute path ={"/map"}>
                   <SearchMapPage  />
               </PrivateRoute>
+              <Route path ={"/user"}>
+                  <FavouritesPage />
+              </Route>
               <PrivateRoute path ={"/:id"}>
                   <SpotDetailsPage />
               </PrivateRoute>
+
           </Switch>
       </AuthProvider>
   );
