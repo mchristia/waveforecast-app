@@ -4,9 +4,11 @@ import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
 import {Link} from "react-router-dom";
 import useSurfSpot from "../hooks/useSurfSpots";
+import useFavourites from "../hooks/useFavourites";
 
 export default function SearchPage(){
     const {surfSpots} = useSurfSpot();
+    const {favourites} = useFavourites();
     const classes = useStyles();
 
     const [filterContinent, setFilterContinent] = useState({name: ''});
@@ -83,6 +85,7 @@ export default function SearchPage(){
             </div>
             <div>
                 <SpotList surfSpots={surfSpots}
+                          favouriteSpots={favourites}
                           filterContinent={filterContinent}
                           filterCountry={filterCountry}/>
             </div>

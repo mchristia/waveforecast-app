@@ -1,22 +1,9 @@
-import ListItem from "../component/ListItem";
-import axios from "axios";
-import {useContext, useEffect, useState} from "react";
-import AuthContext from "../context/AuthContext";
-import {getFavourites} from "../service/surfSpotDataService";
 import SpotList from "../component/SpotList";
+import useFavourites from "../hooks/useFavourites";
 
 export default function FavouritesPage(){
 
-    const {token} = useContext(AuthContext)
-    const [favourites, setFavourites] = useState([]);
-
-    console.log(token)
-    useEffect( () => {
-            getFavourites(token)
-                .then(data => {
-                    setFavourites(data);
-                })
-    }, [])
+    const {favourites} = useFavourites();
 
 
     return(
@@ -29,6 +16,7 @@ export default function FavouritesPage(){
             </div>
             <div>
                <SpotList surfSpots={favourites}
+                         favouriteSpots={favourites}
                          filterCountry={{name: ''}}
                          filterContinent={{name: ''}}/>
             </div>

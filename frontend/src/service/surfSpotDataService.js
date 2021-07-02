@@ -12,14 +12,14 @@ export const getSurfSpot = (id, token) =>{
         .then((response) => response.data)
 }
 
-export const getFavourites = (token) =>{
+export const addToFavourites = (id, token) =>{
     const config = ({
         headers: {
             Authorization: `Bearer ${token}`,
         },
     })
-    console.log(token)
-    return axios.get("/api/favourites/", config)
-        .then(response => response.data)
 
+    return axios.post("/api/favourites", {id}, config)
+        .then(response => response.data)
+        .then(data => console.log(data))
 }

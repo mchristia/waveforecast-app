@@ -3,22 +3,39 @@ import React from "react";
 import styled from "styled-components/macro";
 import {Link} from "react-router-dom";
 
-export default function SpotList({filterCountry, surfSpots, filterContinent}){
+export default function SpotList({surfSpots, favouriteSpots, filterCountry, filterContinent}){
+console.log(favouriteSpots)
+console.log(surfSpots)
+console.log(favouriteSpots. includes(surfSpots[0]))
 
-    console.log(filterContinent)
-    console.log(filterCountry)
+    function existsInFavourites(spot){
+        for(let i=0; i < favouriteSpots.length; i++){
+            if(favouriteSpots[i].id === spot.id){
+                return true;
+            }
+        }
+        return false
+    }
+
     if(filterContinent?.name === '' && filterCountry?.name === ''){
         return (
             <Wrapper>
-                {console.log(surfSpots)}
                 <ul>
-                    {surfSpots?.map((spot) => (
-                        <li>
-                            <Link to={"/" + spot.id}>
-                                <ListItem key={spot.id} spot={spot}/>
-                            </Link>
-                        </li>
-                    ))}
+                    {surfSpots?.map((spot) => {
+                        if (existsInFavourites(spot)) {
+                            return <li>
+                                <Link to={"/" + spot.id}>
+                                    <ListItem key={spot.id} spot={spot} isFavourite={true}/>
+                                </Link>
+                            </li>
+                        } else {
+                            return <li>
+                                <Link to={"/" + spot.id}>
+                                    <ListItem key={spot.id} spot={spot} isFavourite={false}/>
+                                </Link>
+                            </li>
+                        }
+                    })}
                 </ul>
             </Wrapper>
         )

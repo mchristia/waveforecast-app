@@ -1,14 +1,22 @@
-import React from "react"
+import React, {useContext, useState} from "react"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import styled from "styled-components/macro";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import {useHistory} from "react-router-dom"
+import {addToFavourites} from "../service/surfSpotDataService";
+import AuthContext from "../context/AuthContext";
 
 export default function DetailsHeader({surfSpot}){
 
+    const {token} = useContext(AuthContext)
     const history = useHistory();
     const now = Date.now()
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
+    const [isFavourite, setIsFavourite] = useState(false)
+
+    function handleAdd(surfSpot) {
+        addToFavourites(surfSpot.id, token).then(() => setIsFavourite(true))
+    }
 
     return(
         <Wrapper>
@@ -65,6 +73,7 @@ export default function DetailsHeader({surfSpot}){
                         </p>
                     </div>
                 </div>
+                <button onClick={handleAdd}>Add to Favourites</button>
             </section>
         </Wrapper>
     )
@@ -104,6 +113,7 @@ const Wrapper = styled.section`
     display: flex;
     flex-flow: column ;
     font-size: 14px;
+    
   }
   
   .body-right{

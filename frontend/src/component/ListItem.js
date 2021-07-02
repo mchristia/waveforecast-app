@@ -2,6 +2,9 @@ import {Box, makeStyles, Typography, ThemeProvider} from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+import {addToFavourites} from "../service/surfSpotDataService";
+import {useContext} from "react";
+import AuthContext from "../context/AuthContext";
 
     const useStyles = makeStyles({
         root: {
@@ -42,12 +45,16 @@ import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService"
         }
     });
 
-export default function ListItem({spot}){
+export default function ListItem({spot, isFavourite}){
     const classes = useStyles();
-
+    const {token} = useContext(AuthContext)
     console.log(spot)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
     console.log(currentSurfData)
+
+    // function handleAdd(surfSpot) {
+    //     addToFavourites(surfSpot.id, token).then(() => isFavourite = true)
+    // }
 
     return(
         <Card className={classes.root} variant="outlined">
@@ -89,6 +96,11 @@ export default function ListItem({spot}){
                                 {currentSurfData?.windSpeed.sg} km/h
                             </p>
                         </div>
+                    </Box>
+                    <Box className={classes.buttons} >
+                        {!isFavourite && <button >
+                            add to favourites
+                        </button>}
                     </Box>
                 </Box>
             </CardContent>
