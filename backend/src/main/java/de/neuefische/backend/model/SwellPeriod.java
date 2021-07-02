@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WaveDirection {
+public class SwellPeriod {
     private double sg;
 }

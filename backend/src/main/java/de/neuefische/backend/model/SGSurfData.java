@@ -16,8 +16,8 @@ public class SGSurfData {
     private WindSpeed windSpeed;
     private WindDirection windDirection;
     private WaterTemperature waterTemperature;
-    private WaveHeight waveHeight;
-    private WavePeriod wavePeriod;
-    private WaveDirection waveDirection;
+    private SwellHeight swellHeight;
+    private SwellPeriod swellPeriod;
+    private SwellDirection swellDirection;
 
 }

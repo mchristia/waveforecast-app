@@ -2,72 +2,123 @@ import styled from "styled-components/macro";
 import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
-import useSurfSpot from "../hooks/useSurfSpots";
-import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 export default function SearchPage({surfSpots}){
 
-        const classes = useStyles();
-        const [filterCountry, setFilterCountry] = useState({
-            name: '',
-        });
+    const classes = useStyles();
 
-        const handleChangeCountry = (event) => {
-            const name = event.target.name;
-            setFilterCountry({
-                ...filterCountry,
-                [name]: event.target.value,
-            });
+    const [filterContinent, setFilterContinent] = useState({name: ''});
 
-        };
+    const [filterCountry, setFilterCountry] = useState({name: ''});
 
-        console.log(surfSpots);
+    const handleChangeContinent = (event) => {
+        const name = event.target.name;
+        setFilterContinent({...filterContinent, [name]: event.target.value,});
+    };
 
-    const history = useHistory();
-    function handleClick() {
+    const handleChangeCountry = (event) => {
+        const name = event.target.name;
+        setFilterCountry({...filterCountry, [name]: event.target.value,});
+    };
 
-        history.push("/map");
+    let continents = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.continent))]
+    let countries = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.country))]
+
+    if(filterContinent.name !== ""){
+        countries = [...new Set(surfSpots?.map((spot) => {
+            if(spot.spotLocationDetails.continent === filterContinent.name)
+             return spot.spotLocationDetails.country;
+        }))]
     }
+    console.log(filterContinent.name)
+    console.log(countries)
 
     return(
         <Wrapper >
-            <div>
-                <Button component={Link} to={"/map"}>go to maps</Button>
+            <div className="head">
+            <section className="buttons">
+                <div className="b1">
+                    <Button component={Link} to={"/"}>Back to Start</Button>
+                </div>
+                <div className="b2">
+                    <Button component={Link} to={"/map"}>go to maps</Button>
+                </div>
+            </section>
+            <div className="filter" >
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="age-native-simple">Continent</InputLabel>
+                    <Select
+                        native
+                        value={filterContinent.name}
+                        onChange={handleChangeContinent}
+                        inputProps={{
+                            name: 'name',
+                            id: 'continent',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {continents.map((continent) =>(<option value={continent}>{continent}</option>))}
+                    </Select>
+                </FormControl>
+                <div>
+                </div>
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="age-native-simple">Country</InputLabel>
+                    <Select
+                        native
+                        value={filterCountry.name}
+                        onChange={handleChangeCountry}
+                        inputProps={{
+                            name: 'name',
+                            id: 'country',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {countries.map((country) =>(<option value={country}>{country}</option>))}
+                    </Select>
+                </FormControl>
             </div>
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Country</InputLabel>
-                <Select
-                    native
-                    value={filterCountry.name}
-                    onChange={handleChangeCountry}
-                    inputProps={{
-                        name: 'name',
-
-                    }}
-                >
-                    <option aria-label="None" value="" />
-                    <option value={"France"}>France</option>
-                    <option value={"Portugal"}>Portugal</option>
-                    <option value={"Spain"}>Spain</option>
-                </Select>
-            </FormControl>
-
+            </div>
             <div>
-                <SpotList surfSpots={surfSpots}  filterCountry={filterCountry}/>
+                <SpotList surfSpots={surfSpots}
+                          filterContinent={filterContinent}
+                          filterCountry={filterCountry}/>
             </div>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-  button{
-    container:flex;
-    flex-flow: row-reverse;
-    
-  }
+  
   FormControll{
     border: darkblue solid 1px;
+  }
+  .head{
+    position: sticky;
+    top:0;
+    z-index: 2;
+    background-color: white;
+  }
+  .filter{
+    display: flex;
+    justify-content: space-around;
+  }
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+  .b1{
+    margin: 5px;
+    border: solid black 1px;
+    border-radius: 3px;
+    background-image: linear-gradient(45deg, lightblue, yellow);
+  }
+  .b2{
+    margin: 5px;
+    border: solid black 1px;
+    border-radius: 3px;
+    background-image: linear-gradient(45deg, lightblue, yellow);
   }
 `
 
