@@ -25,9 +25,9 @@ function App() {
               <PrivateRoute path ={"/map"}>
                   <SearchMapPage  />
               </PrivateRoute>
-              <Route path ={"/user"}>
+              <PrivateRoute path ={"/user"}>
                   <FavouritesPage />
-              </Route>
+              </PrivateRoute>
               <PrivateRoute path ={"/:id"}>
                   <SpotDetailsPage />
               </PrivateRoute>

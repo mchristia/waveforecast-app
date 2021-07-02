@@ -19,8 +19,7 @@ export const getFavourites = (token) =>{
         },
     })
     console.log(token)
-    return axios.get("/api/favourites/" + {username:"Mario"}, config)
+    return axios.get("/api/favourites/", config)
         .then(response => response.data)
-        .then(data => console.log(data))
 
 }

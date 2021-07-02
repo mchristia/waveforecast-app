@@ -5,12 +5,14 @@ import {Link} from "react-router-dom";
 
 export default function SpotList({filterCountry, surfSpots, filterContinent}){
 
-
+    console.log(filterContinent)
+    console.log(filterCountry)
     if(filterContinent?.name === '' && filterCountry?.name === ''){
         return (
             <Wrapper>
+                {console.log(surfSpots)}
                 <ul>
-                    {surfSpots.map((spot) => (
+                    {surfSpots?.map((spot) => (
                         <li>
                             <Link to={"/" + spot.id}>
                                 <ListItem key={spot.id} spot={spot}/>
@@ -24,7 +26,7 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
                             return (
                                 <li>
@@ -42,7 +44,7 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
                             return (
                                 <li>
@@ -60,7 +62,7 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
                             return (
