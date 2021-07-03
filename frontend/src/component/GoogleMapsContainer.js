@@ -57,10 +57,8 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                     }} onCloseClick={()=> {
                         setSelected(null);
 
-                    }}><Link to={"/" + selected.id}>
+                    }}>
                         <ListItem key={selected.id} spot={selected}/>
-                    </Link>
-
                     </InfoWindow>
                 ) : null}
             </GoogleMap>

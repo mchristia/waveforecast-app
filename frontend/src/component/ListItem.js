@@ -57,7 +57,7 @@ import useFavourites from "../hooks/useFavourites";
         }
     });
 
-export default function ListItem({spot, favourite, setFavouriteSpopts}){
+export default function ListItem({spot, favourite, setFavouriteSpots}){
     const classes = useStyles();
     const {token} = useContext(AuthContext)
     const [isFavourite, setIsFavourite] = useState(favourite)
@@ -70,7 +70,7 @@ export default function ListItem({spot, favourite, setFavouriteSpopts}){
     }
     function handleRemove() {
         removeFromFavourites(spot.id, token)
-            .then((item) => setFavouriteSpopts(item))
+            .then((item) => setFavouriteSpots(item))
             .then(() => setIsFavourite(false))
     }
 
