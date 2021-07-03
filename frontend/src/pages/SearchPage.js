@@ -5,36 +5,18 @@ import SpotList from "../component/SpotList";
 import {Link} from "react-router-dom";
 import useSurfSpot from "../hooks/useSurfSpots";
 import useFavourites from "../hooks/useFavourites";
+import useFilter from "../hooks/useFilter";
 
 export default function SearchPage(){
     const {surfSpots} = useSurfSpot();
     const {favourites, setFavourites} = useFavourites();
+    const {handleChangeCountry,
+        handleChangeContinent,
+        continents,
+        countries,
+        filterCountry,
+        filterContinent} = useFilter(surfSpots);
     const classes = useStyles();
-
-    const [filterContinent, setFilterContinent] = useState({name: ''});
-    const [filterCountry, setFilterCountry] = useState({name: ''});
-
-    const handleChangeContinent = (event) => {
-        const name = event.target.name;
-        setFilterContinent({...filterContinent, [name]: event.target.value,});
-    };
-
-    const handleChangeCountry = (event) => {
-        const name = event.target.name;
-        setFilterCountry({...filterCountry, [name]: event.target.value,});
-    };
-
-    let continents = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.continent))]
-    let countries = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.country))]
-
-    if(filterContinent.name !== ""){
-        countries = [...new Set(surfSpots?.map((spot) => {
-            if(spot.spotLocationDetails.continent === filterContinent.name)
-             return spot.spotLocationDetails.country;
-        }))]
-    }
-    console.log(filterContinent.name)
-    console.log(countries)
 
     return(
         <Wrapper >
