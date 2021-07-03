@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom"
 import {addToFavourites} from "../service/surfSpotDataService";
 import AuthContext from "../context/AuthContext";
 
-export default function DetailsHeader({surfSpot}){
+export default function DetailsHeader({surfSpot, id}){
 
     const {token} = useContext(AuthContext)
     const history = useHistory();
@@ -14,8 +14,8 @@ export default function DetailsHeader({surfSpot}){
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
     const [isFavourite, setIsFavourite] = useState(false)
 
-    function handleAdd(surfSpot) {
-        addToFavourites(surfSpot.id, token).then(() => setIsFavourite(true))
+    function handleAdd() {
+        addToFavourites(id, token).then(() => setIsFavourite(true))
     }
 
     return(

@@ -19,7 +19,7 @@ export const addToFavourites = (id, token) =>{
         },
     })
 
-    return axios.post("/api/favourites", {id}, config)
-        .then(response => response.data)
-        .then(data => console.log(data))
+    return axios.post("/api/favourites/add/", {id}, config)
+        .then((response) => response.data)
+
 }

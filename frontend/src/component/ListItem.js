@@ -42,6 +42,16 @@ import AuthContext from "../context/AuthContext";
           margin: 0,
           padding: 0,
 
+        },
+        buttons: {
+            display: "flex",
+
+        },
+        add:{
+            alignSelf: "flex-start",
+        },
+        remove:{
+            alignSelf: "flex-end" ,
         }
     });
 
@@ -52,9 +62,9 @@ export default function ListItem({spot, isFavourite}){
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
     console.log(currentSurfData)
 
-    // function handleAdd(surfSpot) {
-    //     addToFavourites(surfSpot.id, token).then(() => isFavourite = true)
-    // }
+    function handleAdd(surfSpot) {
+        addToFavourites(surfSpot.id, token).then(() => isFavourite = true)
+    }
 
     return(
         <Card className={classes.root} variant="outlined">
@@ -98,8 +108,11 @@ export default function ListItem({spot, isFavourite}){
                         </div>
                     </Box>
                     <Box className={classes.buttons} >
-                        {!isFavourite && <button >
+                        {!isFavourite && <button className={classes.add} onClick={handleAdd}>
                             add to favourites
+                        </button>}
+                        {isFavourite && <button className={classes.remove}>
+                            remove from favourites
                         </button>}
                     </Box>
                 </Box>

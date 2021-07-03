@@ -27,7 +27,7 @@ export default function SpotDetailsPage(){
         return (
             <Wrapper>
                 <div className="overview">
-                    <DetailsHeader  surfSpot={surfSpot} />
+                    <DetailsHeader  surfSpot={surfSpot} id={id}/>
                 </div>
                 <section className="table">
                     <DetailTable surfSpot={surfSpot} />

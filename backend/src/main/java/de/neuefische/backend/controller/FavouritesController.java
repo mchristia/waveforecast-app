@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.dto.AddDto;
 import de.neuefische.backend.model.SurfSpot;
 import de.neuefische.backend.service.FavouritesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class FavouritesController {
       return favouritesService.getAllFavourites(principal.getName());
     }
 
-    @PostMapping
-    public SurfSpot addToFavourites(Principal principal, @RequestBody String id){
-        return favouritesService.addToFavourites(principal.getName(), id);
+    @PostMapping("/add/")
+    public SurfSpot addToFavourites(Principal principal, @RequestBody AddDto addDto){
+        return favouritesService.addToFavourites(principal.getName(), addDto.getId());
     }
 
     @DeleteMapping()
