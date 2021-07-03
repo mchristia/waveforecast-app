@@ -21,5 +21,5 @@ export default function useFavourites(){
 
     }, [token])
 
-    return {favourites}
+    return {favourites, setFavourites}
 }

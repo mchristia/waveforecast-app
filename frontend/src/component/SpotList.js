@@ -24,13 +24,19 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                     {surfSpots?.map((spot) => {
                         if (existsInFavourites(spot)) {
                             return <li>
-                                <Link to={"/" + spot.id}>
+                                <Link to={{
+                                    pathname: "/" + spot.id,
+                                    state: {favourite: true}
+                                }}>
                                     <ListItem key={spot.id} spot={spot} isFavourite={true}/>
                                 </Link>
                             </li>
                         } else {
                             return <li>
-                                <Link to={"/" + spot.id}>
+                                <Link to={{
+                                    pathname: "/" + spot.id,
+                                    state: {favourite: false}
+                                }}>
                                     <ListItem key={spot.id} spot={spot} isFavourite={false}/>
                                 </Link>
                             </li>

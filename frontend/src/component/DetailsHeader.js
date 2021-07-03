@@ -2,20 +2,31 @@ import React, {useContext, useState} from "react"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import styled from "styled-components/macro";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import {useHistory} from "react-router-dom"
-import {addToFavourites} from "../service/surfSpotDataService";
+import {useHistory, useLocation} from "react-router-dom"
+import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
 import AuthContext from "../context/AuthContext";
+import useFavourites from "../hooks/useFavourites";
 
 export default function DetailsHeader({surfSpot, id}){
 
+    const favourite = useLocation()
     const {token} = useContext(AuthContext)
+    const {favourites, setFavourites} = useFavourites();
     const history = useHistory();
     const now = Date.now()
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
-    const [isFavourite, setIsFavourite] = useState(false)
+    const [isFavourite, setIsFavourite] = useState(favourite.state.favourite)
 
+    console.log(favourite.state.favourite)
+    console.log(isFavourite)
     function handleAdd() {
         addToFavourites(id, token).then(() => setIsFavourite(true))
+    }
+    function handleRemove() {
+        console.log(favourites)
+        removeFromFavourites(id, token)
+            .then((item) => setFavourites(item))
+            .then(() => setIsFavourite(false))
     }
 
     return(
@@ -73,7 +84,12 @@ export default function DetailsHeader({surfSpot, id}){
                         </p>
                     </div>
                 </div>
-                <button onClick={handleAdd}>Add to Favourites</button>
+                {!isFavourite &&
+                <button onClick={handleAdd}>Add to Favourites
+                </button>}
+                {isFavourite &&
+                <button onClick={handleRemove}>Remove from Favourites
+                </button>}
             </section>
         </Wrapper>
     )

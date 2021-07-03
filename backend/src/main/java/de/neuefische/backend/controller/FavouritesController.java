@@ -27,13 +27,13 @@ public class FavouritesController {
       return favouritesService.getAllFavourites(principal.getName());
     }
 
-    @PostMapping("/add/")
+    @PostMapping("/add")
     public SurfSpot addToFavourites(Principal principal, @RequestBody AddDto addDto){
         return favouritesService.addToFavourites(principal.getName(), addDto.getId());
     }
 
-    @DeleteMapping()
-    public List<SurfSpot> deleteAll(Principal principal, @RequestBody String id){
+    @DeleteMapping("/delete/{id}")
+    public List<SurfSpot> deleteAll(Principal principal, @PathVariable String id){
         return favouritesService.deleteById(principal.getName(), id);
     }
 

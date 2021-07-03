@@ -19,7 +19,17 @@ export const addToFavourites = (id, token) =>{
         },
     })
 
-    return axios.post("/api/favourites/add/", {id}, config)
+    return axios.post("/api/favourites/add", {id}, config)
         .then((response) => response.data)
 
+}
+
+export const removeFromFavourites = (id, token) =>{
+    const config = ({
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    return axios.delete("/api/favourites/delete/"+id, config)
+        .then((response) => response.data)
 }

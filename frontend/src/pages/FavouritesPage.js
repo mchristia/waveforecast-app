@@ -3,7 +3,7 @@ import useFavourites from "../hooks/useFavourites";
 
 export default function FavouritesPage(){
 
-    const {favourites} = useFavourites();
+    const {favourites, setFavourites} = useFavourites();
 
 
     return(
@@ -17,6 +17,7 @@ export default function FavouritesPage(){
             <div>
                <SpotList surfSpots={favourites}
                          favouriteSpots={favourites}
+                         setFavouriteSpots={setFavourites}
                          filterCountry={{name: ''}}
                          filterContinent={{name: ''}}/>
             </div>
