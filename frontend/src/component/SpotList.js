@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import {Link} from "react-router-dom";
 
-export default function SpotList({surfSpots, favouriteSpots, filterCountry, filterContinent}){
+export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent}){
 console.log(favouriteSpots)
 console.log(surfSpots)
 console.log(favouriteSpots. includes(surfSpots[0]))
@@ -24,21 +24,11 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                     {surfSpots?.map((spot) => {
                         if (existsInFavourites(spot)) {
                             return <li>
-                                <Link to={{
-                                    pathname: "/" + spot.id,
-                                    state: {favourite: true}
-                                }}>
-                                    <ListItem key={spot.id} spot={spot} isFavourite={true}/>
-                                </Link>
+                                <ListItem key={spot.id} spot={spot} favourite={true} setFavouriteSpopts={setFavouriteSpots}/>
                             </li>
                         } else {
                             return <li>
-                                <Link to={{
-                                    pathname: "/" + spot.id,
-                                    state: {favourite: false}
-                                }}>
-                                    <ListItem key={spot.id} spot={spot} isFavourite={false}/>
-                                </Link>
+                                    <ListItem key={spot.id} spot={spot} favourite={false} setFavouriteSpopts={setFavouriteSpots}/>
                             </li>
                         }
                     })}

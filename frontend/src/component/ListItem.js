@@ -2,9 +2,11 @@ import {Box, makeStyles, Typography, ThemeProvider} from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
-import {addToFavourites} from "../service/surfSpotDataService";
-import {useContext} from "react";
+import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
+import {useContext, useState} from "react";
 import AuthContext from "../context/AuthContext";
+import {Link} from "react-router-dom";
+import useFavourites from "../hooks/useFavourites";
 
     const useStyles = makeStyles({
         root: {
@@ -55,68 +57,80 @@ import AuthContext from "../context/AuthContext";
         }
     });
 
-export default function ListItem({spot, isFavourite}){
+export default function ListItem({spot, favourite, setFavouriteSpopts}){
     const classes = useStyles();
     const {token} = useContext(AuthContext)
-    console.log(spot)
+    const [isFavourite, setIsFavourite] = useState(favourite)
+    console.log(isFavourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
     console.log(currentSurfData)
 
-    function handleAdd(surfSpot) {
-        addToFavourites(surfSpot.id, token).then(() => isFavourite = true)
+    function handleAdd() {
+        addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
+    }
+    function handleRemove() {
+        removeFromFavourites(spot.id, token)
+            .then((item) => setFavouriteSpopts(item))
+            .then(() => setIsFavourite(false))
     }
 
     return(
         <Card className={classes.root} variant="outlined">
             <CardContent className={classes.content} >
-                <Box  borderColor="black">
-                    <Box className={classes.title}  >
-                        <Typography className={classes.title} variant="h5" component="h1">
-                            {spot.spotLocationDetails.name}
-                        </Typography>
+                <Link to={{
+                pathname: "/" + spot.id,
+                state: {favourite: isFavourite}
+            }}>
+                    <Box  borderColor="black">
+
+                        <Box className={classes.title}  >
+                            <Typography className={classes.title} variant="h5" component="h1">
+                                {spot.spotLocationDetails.name}
+                            </Typography>
+                        </Box>
+                        <Box className={classes.subtitle} >
+                            <p className={classes.text}>
+                                {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
+                            </p>
+                        </Box>
+                        <Box className={classes.databox} >
+                            <div>
+                                <p>
+                                    Air: {currentSurfData?.airTemperature.sg} °C
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    Water: {currentSurfData?.waterTemperature.sg} °C
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    {currentSurfData?.swellHeight.sg} m
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    {currentSurfData?.swellPeriod.sg} s
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    {currentSurfData?.windSpeed.sg} km/h
+                                </p>
+                            </div>
+                        </Box>
                     </Box>
-                    <Box className={classes.subtitle} >
-                        <p className={classes.text}>
-                            {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
-                        </p>
-                    </Box>
-                    <Box className={classes.databox} >
-                        <div>
-                            <p>
-                                Air: {currentSurfData?.airTemperature.sg} °C
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                Water: {currentSurfData?.waterTemperature.sg} °C
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.swellHeight.sg} m
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.swellPeriod.sg} s
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.windSpeed.sg} km/h
-                            </p>
-                        </div>
-                    </Box>
-                    <Box className={classes.buttons} >
-                        {!isFavourite && <button className={classes.add} onClick={handleAdd}>
-                            add to favourites
-                        </button>}
-                        {isFavourite && <button className={classes.remove}>
-                            remove from favourites
-                        </button>}
-                    </Box>
-                </Box>
+                </Link>
             </CardContent>
+            <Box className={classes.buttons} >
+            {!isFavourite && <button className={classes.add} onClick={handleAdd}>
+                add to favourites
+            </button>}
+            {isFavourite && <button className={classes.remove} onClick={handleRemove}>
+                remove from favourites
+            </button>}
+        </Box>
         </Card>
 
     )

@@ -8,7 +8,7 @@ import useFavourites from "../hooks/useFavourites";
 
 export default function SearchPage(){
     const {surfSpots} = useSurfSpot();
-    const {favourites} = useFavourites();
+    const {favourites, setFavourites} = useFavourites();
     const classes = useStyles();
 
     const [filterContinent, setFilterContinent] = useState({name: ''});
@@ -86,6 +86,7 @@ export default function SearchPage(){
             <div>
                 <SpotList surfSpots={surfSpots}
                           favouriteSpots={favourites}
+                          setFavouriteSpots={setFavourites}
                           filterContinent={filterContinent}
                           filterCountry={filterCountry}/>
             </div>
