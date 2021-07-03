@@ -12,7 +12,6 @@ export default function SearchPage(){
     const classes = useStyles();
 
     const [filterContinent, setFilterContinent] = useState({name: ''});
-
     const [filterCountry, setFilterCountry] = useState({name: ''});
 
     const handleChangeContinent = (event) => {

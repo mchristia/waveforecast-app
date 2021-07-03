@@ -41,13 +41,15 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
+                            if (existsInFavourites(spot)) {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={true} setFavouriteSpopts={setFavouriteSpots}/>
                                 </li>
-                            )
+                            } else {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={false} setFavouriteSpopts={setFavouriteSpots}/>
+                                </li>
+                            }
                         }
                     })}
                 </ul>
@@ -59,13 +61,15 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
+                            if (existsInFavourites(spot)) {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={true} setFavouriteSpopts={setFavouriteSpots}/>
                                 </li>
-                            )
+                            } else {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={false} setFavouriteSpopts={setFavouriteSpots}/>
+                                </li>
+                            }
                         }
                     })}
                 </ul>
@@ -78,13 +82,15 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
+                            if (existsInFavourites(spot)) {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={true} setFavouriteSpopts={setFavouriteSpots}/>
                                 </li>
-                            )
+                            } else {
+                                return <li>
+                                    <ListItem key={spot.id} spot={spot} favourite={false} setFavouriteSpopts={setFavouriteSpots}/>
+                                </li>
+                            }
                         }
                     })}
                 </ul>

@@ -82,7 +82,6 @@ export default function ListItem({spot, favourite, setFavouriteSpopts}){
                 state: {favourite: isFavourite}
             }}>
                     <Box  borderColor="black">
-
                         <Box className={classes.title}  >
                             <Typography className={classes.title} variant="h5" component="h1">
                                 {spot.spotLocationDetails.name}
