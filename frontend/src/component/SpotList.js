@@ -1,7 +1,7 @@
 import ListItem from "./ListItem";
 import React from "react";
 import styled from "styled-components/macro";
-import {setListItem} from "../service/tagFavouritesService";
+import TagFavourites from "../service/TagFavourites";
 
 
 export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent}){
@@ -15,10 +15,11 @@ console.log(favouriteSpots. includes(surfSpots[0]))
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots?.map((spot) => (
-                        setListItem(spot, setFavouriteSpots, favouriteSpots)
+                    {surfSpots?.map((spot) =>
+                       <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                        // setListItem(spot, setFavouriteSpots, favouriteSpots)
 
-                    ))}
+                    )}
                 </ul>
             </Wrapper>
         )
@@ -28,7 +29,7 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
-                            return setListItem(spot, setFavouriteSpots, favouriteSpots)
+                           return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
 
                         }
                     })}
@@ -41,7 +42,7 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
-                            return setListItem(spot, setFavouriteSpots, favouriteSpots)
+                             return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
 
                         }
                     })}
@@ -55,7 +56,7 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
-                            return setListItem(spot, setFavouriteSpots, favouriteSpots)
+                            return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
 
                         }
                     })}

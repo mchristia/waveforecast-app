@@ -70,8 +70,12 @@ export default function ListItem({spot, favourite, setFavouriteSpots}){
     }
     function handleRemove() {
         removeFromFavourites(spot.id, token)
-            .then((item) => setFavouriteSpots(item))
+            .then((item) => {
+                console.log(item);
+                setFavouriteSpots(item)
+            })
             .then(() => setIsFavourite(false))
+            .catch(error => console.error(error))
     }
 
     return(
