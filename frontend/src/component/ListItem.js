@@ -63,17 +63,13 @@ export default function ListItem({spot, favourite, setFavouriteSpots}){
     const [isFavourite, setIsFavourite] = useState(favourite)
     console.log(isFavourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
-    console.log(currentSurfData)
+    console.log(setFavouriteSpots)
 
     function handleAdd() {
         addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
     }
     function handleRemove() {
         removeFromFavourites(spot.id, token)
-            .then((item) => {
-                console.log(item);
-                setFavouriteSpots(item)
-            })
             .then(() => setIsFavourite(false))
             .catch(error => console.error(error))
     }

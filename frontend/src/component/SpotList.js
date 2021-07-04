@@ -5,21 +5,19 @@ import TagFavourites from "../service/TagFavourites";
 
 
 export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent}){
-console.log(favouriteSpots)
-console.log(surfSpots)
-console.log(favouriteSpots. includes(surfSpots[0]))
 
 
     if(filterContinent?.name === '' && filterCountry?.name === ''){
-        console.log("1")
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots?.map((spot) =>
-                       <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
-                        // setListItem(spot, setFavouriteSpots, favouriteSpots)
-
-                    )}
+                    {surfSpots?.map((spot) => {
+                        return <li text-decoration= "none" list-style-type="none">
+                                     <TagFavourites spot={spot}
+                                                    favouriteSpots={favouriteSpots}
+                                                    setFavouriteSpots={setFavouriteSpots}/>
+                        </li>
+                    })}
                 </ul>
             </Wrapper>
         )
@@ -29,8 +27,9 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
-                           return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
-
+                           return <li text-decoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                           </li>
                         }
                     })}
                 </ul>
@@ -42,8 +41,9 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                 <ul>
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
-                             return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
-
+                             return <li text-decoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                             </li>
                         }
                     })}
                 </ul>
@@ -56,8 +56,9 @@ console.log(favouriteSpots. includes(surfSpots[0]))
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
-                            return <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
-
+                            return <li text-decoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                            </li>
                         }
                     })}
                 </ul>

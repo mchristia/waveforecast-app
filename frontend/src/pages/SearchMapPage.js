@@ -7,11 +7,13 @@ import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
 import useSurfSpot from "../hooks/useSurfSpots";
+import useFavourites from "../hooks/useFavourites";
 
 const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
      const {surfSpots} = useSurfSpot();
+     const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -56,7 +58,12 @@ const libraries = ["places"];
                 </button>
             </div>
             <box className="map">
-                <GoogleMapsContainer surfSpots={surfSpots} center={center} onMapLoad={onMapLoad}/>
+                <GoogleMapsContainer surfSpots={surfSpots}
+                                     center={center}
+                                     onMapLoad={onMapLoad}
+                                     favouriteSpots={favourites}
+                                     setFavouriteSpots={setFavourites}
+                />
             </box>
         </Wrapper>
     )

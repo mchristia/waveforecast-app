@@ -8,6 +8,7 @@ import React from "react";
 export default function FavouritesPage(){
 
     const {favourites, setFavourites} = useFavourites();
+    const fromFavouritePage = true;
     const {handleChangeCountry,
         handleChangeContinent,
         continents,
@@ -33,8 +34,10 @@ export default function FavouritesPage(){
                <SpotList surfSpots={favourites}
                          favouriteSpots={favourites}
                          setFavouriteSpots={setFavourites}
-                         filterCountry={{name: ''}}
-                         filterContinent={{name: ''}}/>
+                         filterCountry={filterCountry}
+                         filterContinent={filterContinent}
+
+               />
             </div>
         </Wrapper>
     )

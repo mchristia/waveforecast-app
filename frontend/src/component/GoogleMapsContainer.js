@@ -3,6 +3,7 @@ import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
 import {Link} from "react-router-dom";
+import TagFavourites from "../service/TagFavourites";
 
 const libraries = ["places"];
 
@@ -11,7 +12,7 @@ const options = {
     zoomControl: true,
 };
 
-export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
+export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots}){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -58,7 +59,8 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                         setSelected(null);
 
                     }}>
-                        <ListItem key={selected.id} spot={selected}/>
+                        <TagFavourites spot={selected} favouriteSpots={favouriteSpots}
+                                       setFavouriteSpots={setFavouriteSpots}/>
                     </InfoWindow>
                 ) : null}
             </GoogleMap>
