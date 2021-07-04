@@ -1,4 +1,4 @@
-import {Box, makeStyles, Typography, ThemeProvider} from "@material-ui/core";
+import {Box, makeStyles, Typography} from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
@@ -6,7 +6,6 @@ import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataServ
 import {useContext, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
-import useFavourites from "../hooks/useFavourites";
 
     const useStyles = makeStyles({
         root: {
@@ -61,9 +60,8 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
     const classes = useStyles();
     const {token} = useContext(AuthContext)
     const [isFavourite, setIsFavourite] = useState(favourite)
-    console.log(isFavourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
-    console.log(fromFavouritePage)
+
 
     function handleAdd() {
         addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
@@ -82,7 +80,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
     return(
         <Card className={classes.root} variant="outlined">
             <CardContent className={classes.content} >
-                <Link to={{
+                <Link text-decoration="none" to={{
                 pathname: "/" + spot.id,
                 state: {favourite: isFavourite}
             }}>

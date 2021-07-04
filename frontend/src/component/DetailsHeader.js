@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react"
-import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+import {getDirection, rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import styled from "styled-components/macro";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import {useHistory, useLocation} from "react-router-dom"
@@ -40,7 +40,10 @@ export default function DetailsHeader({surfSpot, id}){
                 </button>
                 <div className="subtitle">
                     <p>{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
-                    <p>{new Date(now).toLocaleDateString()}</p>
+                    <p>{new Date(now).toLocaleTimeString(navigator.language, {
+                        hour: '2-digit',
+                        minute:'2-digit'
+                    })}</p>
                 </div>
 
             </div>
@@ -58,7 +61,7 @@ export default function DetailsHeader({surfSpot, id}){
                     </div>
                     <div>
                         <p>
-                            Wave Direction:  {currentSurfData?.swellDirection.sg}
+                            Wave Direction:  {getDirection(currentSurfData?.swellDirection.sg)}
                         </p>
                     </div>
                     <div>
@@ -75,7 +78,7 @@ export default function DetailsHeader({surfSpot, id}){
                     </div>
                     <div>
                         <p>
-                            Wind Direction: {currentSurfData?.windDirection.sg}
+                            Wind Direction: {getDirection(currentSurfData?.windDirection.sg)}
                         </p>
                     </div>
                     <div>
@@ -84,13 +87,15 @@ export default function DetailsHeader({surfSpot, id}){
                         </p>
                     </div>
                 </div>
+            </section>
+            <div className="add-remove">
                 {!isFavourite &&
                 <button onClick={handleAdd}>Add to Favourites
                 </button>}
                 {isFavourite &&
                 <button onClick={handleRemove}>Remove from Favourites
                 </button>}
-            </section>
+            </div>
         </Wrapper>
     )
 }
@@ -108,6 +113,7 @@ const Wrapper = styled.section`
   
   h2{
     text-align: center;
+    padding-top: 10px;
     padding-bottom: 0px;
     margin-bottom: 0px;
   }
@@ -129,6 +135,10 @@ const Wrapper = styled.section`
     display: flex;
     flex-flow: column ;
     font-size: 14px;
+    p{
+      padding: 1px;
+      margin: 1px;
+    }
     
   }
   
@@ -136,7 +146,10 @@ const Wrapper = styled.section`
     display: flex;
     flex-flow: column ;
     font-size: 14px;
-    
+    p{
+      padding: 1px;
+      margin: 1px;
+    }
   }
   .body.p{
     padding: 0px;
@@ -145,7 +158,11 @@ const Wrapper = styled.section`
   
   .button2{
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .add-remove{
+    display: flex;
+    justify-content: flex-end;
   }
 `

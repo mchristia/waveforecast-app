@@ -10,10 +10,10 @@ export default function HomePage(){
                 Wind und Wellen
             </p>
             <div>
-                <Link to={"/search"}>
+                <Link className="link" to={"/search"}>
                     <Button className="spotList" variant="outlined" >Look for Spots here</Button>
                 </Link>
-                <Link to={"/user"} >
+                <Link className="link" to={"/user"} >
                     <Button className="favourites" variant="outlined" >See Favourites here</Button>
                 </Link>
             </div>
@@ -22,7 +22,15 @@ export default function HomePage(){
 }
 
 const Wrapper = styled.div`
-    Button{
-      background-image: linear-gradient(45deg, lightblue, yellow);
-    }
+  background-image: url("/frontend/src/img/background-picture.png");
+
+  Button {
+    border-radius: 50%;
+    background-image: linear-gradient(45deg, lightblue, yellow);
+
+  }
+
+  .link {
+    text-decoration: none;
+  }
 `

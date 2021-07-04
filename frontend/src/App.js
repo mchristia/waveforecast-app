@@ -7,10 +7,12 @@ import LoginPage from "./pages/LoginPage";
 import AuthProvider from "./context/AuthProvider";
 import PrivateRoute from './routing/PrivateRoute'
 import FavouritesPage from "./pages/FavouritesPage";
+import styled from "styled-components/macro";
 
 function App() {
 
   return (
+      <Wrapper>
       <AuthProvider>
           <Switch>
               <Route path ={"/"} exact>
@@ -31,10 +33,14 @@ function App() {
               <PrivateRoute path ={"/:id"}>
                   <SpotDetailsPage />
               </PrivateRoute>
-
           </Switch>
       </AuthProvider>
+      </Wrapper>
   );
 }
 
 export default App;
+
+const Wrapper = styled.div`
+  
+`

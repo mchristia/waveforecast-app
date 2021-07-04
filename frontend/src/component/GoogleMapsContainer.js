@@ -1,8 +1,6 @@
 import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api";
-import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
-import {Link} from "react-router-dom";
 import TagFavourites from "../service/TagFavourites";
 
 const libraries = ["places"];
@@ -52,7 +50,7 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
                 ))}
                 <Marker />
                 {selected ? (
-                    <InfoWindow className="infoWindow" position={{
+                    <InfoWindow className="infoWindow" background-color="black" position={{
                         lat: parseFloat(selected.spotLocationDetails.latitude),
                         lng: parseFloat(selected.spotLocationDetails.longitude)
                     }} onCloseClick={()=> {
@@ -73,7 +71,14 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
 }
 
 const Wrapper = styled.div`
-  a {
+  .infoWindow {
     text-decoration: none;
+    .gm-style-iw-t{
+      border-radius: 0;
+    }
+    .gm-style-iw-d{
+      background-color: green;
+    }
+    
   }
 `
