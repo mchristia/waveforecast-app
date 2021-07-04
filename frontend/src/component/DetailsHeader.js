@@ -95,11 +95,11 @@ export default function DetailsHeader({surfSpot, id}){
             </section>
             <div className="add-remove">
                 {!isFavourite &&
-                <button onClick={handleAdd}>
+                <button className="add-re-bu" onClick={handleAdd}>
                     <StarOutlineIcon/>
                 </button>}
                 {isFavourite &&
-                <button onClick={handleRemove}>
+                <button className="add-re-bu" onClick={handleRemove}>
                     <StarIcon/>
                 </button>}
             </div>
@@ -167,6 +167,7 @@ const Wrapper = styled.section`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+    background-color: transparent;
   }
   img{
     position: absolute;
@@ -176,5 +177,9 @@ const Wrapper = styled.section`
   .add-remove{
     display: flex;
     justify-content: flex-end;
+    
+  }
+  .add-re-bu{
+    background-color: transparent;
   }
 `

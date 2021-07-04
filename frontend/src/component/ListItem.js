@@ -3,9 +3,11 @@ import CardContent from "@material-ui/core/CardContent"
 import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
     const useStyles = makeStyles({
         root: {
@@ -50,9 +52,11 @@ import {Link} from "react-router-dom";
         },
         add:{
             alignSelf: "flex-start",
+            backgroundColor: "transparent"
         },
         remove:{
             alignSelf: "flex-end" ,
+            backgroundColor: "transparent"
         }
     });
 
@@ -127,10 +131,10 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
             </CardContent>
             <Box className={classes.buttons} >
             {!isFavourite && <button className={classes.add} onClick={handleAdd}>
-                add to favourites
+                <StarOutlineIcon/>
             </button>}
             {isFavourite && <button className={classes.remove} onClick={handleRemove}>
-                remove from favourites
+                <StarIcon/>
             </button>}
         </Box>
         </Card>

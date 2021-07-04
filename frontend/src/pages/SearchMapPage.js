@@ -8,8 +8,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
 import useSurfSpot from "../hooks/useSurfSpots";
 import useFavourites from "../hooks/useFavourites";
-import HomeIcon from '@material-ui/icons/Home';
-import ExploreIcon from '@material-ui/icons/Explore';
+
 
 const libraries = ["places"];
 
