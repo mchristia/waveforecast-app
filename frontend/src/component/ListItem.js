@@ -57,20 +57,25 @@ import useFavourites from "../hooks/useFavourites";
         }
     });
 
-export default function ListItem({spot, favourite, setFavouriteSpots}){
+export default function ListItem({spot, favourite, setFavouriteSpots, fromFavouritePage}){
     const classes = useStyles();
     const {token} = useContext(AuthContext)
     const [isFavourite, setIsFavourite] = useState(favourite)
     console.log(isFavourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
-    console.log(setFavouriteSpots)
+    console.log(fromFavouritePage)
 
     function handleAdd() {
         addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
     }
     function handleRemove() {
         removeFromFavourites(spot.id, token)
-            .then(() => setIsFavourite(false))
+            .then((item) => {
+                setIsFavourite(false)
+                if(fromFavouritePage){
+                   setFavouriteSpots(item)
+                }
+            })
             .catch(error => console.error(error))
     }
 

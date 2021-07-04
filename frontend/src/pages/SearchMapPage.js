@@ -15,6 +15,7 @@ const libraries = ["places"];
      const {surfSpots} = useSurfSpot();
      const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
+     const fromFavouritePage = false;
      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -63,6 +64,7 @@ const libraries = ["places"];
                                      onMapLoad={onMapLoad}
                                      favouriteSpots={favourites}
                                      setFavouriteSpots={setFavourites}
+                                     fromFavouritePage={fromFavouritePage}
                 />
             </box>
         </Wrapper>

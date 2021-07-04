@@ -36,7 +36,7 @@ export default function FavouritesPage(){
                          setFavouriteSpots={setFavourites}
                          filterCountry={filterCountry}
                          filterContinent={filterContinent}
-
+                         fromFavouritePage={fromFavouritePage}
                />
             </div>
         </Wrapper>

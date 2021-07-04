@@ -12,7 +12,7 @@ const options = {
     zoomControl: true,
 };
 
-export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots}){
+export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots, fromFavouritePage}){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -60,7 +60,10 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
 
                     }}>
                         <TagFavourites spot={selected} favouriteSpots={favouriteSpots}
-                                       setFavouriteSpots={setFavouriteSpots}/>
+                                       setFavouriteSpots={setFavouriteSpots}
+                                       fromFavouritePage={fromFavouritePage}
+
+                        />
                     </InfoWindow>
                 ) : null}
             </GoogleMap>

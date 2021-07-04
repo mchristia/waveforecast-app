@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import TagFavourites from "../service/TagFavourites";
 
 
-export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent}){
+export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent, fromFavouritePage}){
 
 
     if(filterContinent?.name === '' && filterCountry?.name === ''){
@@ -15,7 +15,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                         return <li text-decoration= "none" list-style-type="none">
                                      <TagFavourites spot={spot}
                                                     favouriteSpots={favouriteSpots}
-                                                    setFavouriteSpots={setFavouriteSpots}/>
+                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
                         </li>
                     })}
                 </ul>
@@ -28,7 +28,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
                            return <li text-decoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
                            </li>
                         }
                     })}
@@ -42,7 +42,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                     {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
                              return <li text-decoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
                              </li>
                         }
                     })}
@@ -57,7 +57,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
                             return <li text-decoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
                             </li>
                         }
                     })}

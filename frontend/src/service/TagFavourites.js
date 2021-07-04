@@ -1,7 +1,7 @@
 import ListItem from "../component/ListItem";
 import React from "react";
 
-export default function TagFavourites({spot, favouriteSpots, setFavouriteSpots}){
+export default function TagFavourites({spot, favouriteSpots, setFavouriteSpots, fromFavouritePage}){
 
     function existsInFavourites(spot, favouriteSpots){
         if(favouriteSpots.length !== 0){
@@ -20,14 +20,18 @@ export default function TagFavourites({spot, favouriteSpots, setFavouriteSpots})
         return <ListItem key={spot.id}
                          spot={spot}
                          favourite={true}
-                         setFavouriteSpots={setFavouriteSpots}/>
+                         setFavouriteSpots={setFavouriteSpots}
+                         fromFavouritePage={fromFavouritePage}
+        />
 
     } else {
 
         return <ListItem key={spot.id}
                          spot={spot}
                          favourite={false}
-                         setFavouriteSpots={setFavouriteSpots}/>
+                         setFavouriteSpots={setFavouriteSpots}
+                         fromFavouritePage={fromFavouritePage}
+        />
 
     }
 }

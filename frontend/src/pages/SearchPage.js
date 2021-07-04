@@ -10,6 +10,7 @@ export default function SearchPage(){
 
     const {surfSpots} = useSurfSpot();
     const {favourites, setFavourites} = useFavourites();
+    const fromFavouritePage = false;
     const {handleChangeCountry,
         handleChangeContinent,
         continents,
@@ -34,7 +35,9 @@ export default function SearchPage(){
                           favouriteSpots={favourites}
                           setFavouriteSpots={setFavourites}
                           filterContinent={filterContinent}
-                          filterCountry={filterCountry}/>
+                          filterCountry={filterCountry}
+                          fromFavouritePage={fromFavouritePage}
+                />
             </div>
         </Wrapper>
     )
