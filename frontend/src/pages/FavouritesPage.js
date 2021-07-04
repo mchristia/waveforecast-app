@@ -15,12 +15,10 @@ export default function FavouritesPage(){
         countries,
         filterCountry,
         filterContinent} = useFilter(favourites);
+    const title = "Your Favourites"
 
     return(
         <Wrapper>
-            <div>
-                <h3>Your Favourites</h3>
-            </div>
             <div>
                 <SurfSpotFilter filterContinent={filterContinent}
                                 filterCountry={filterCountry}
@@ -28,6 +26,7 @@ export default function FavouritesPage(){
                                 handleChangeCountry={handleChangeCountry}
                                 continents={continents}
                                 countries={countries}
+                                title={title}
                 />
             </div>
             <div>

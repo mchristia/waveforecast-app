@@ -17,18 +17,18 @@ export default function SearchPage(){
         countries,
         filterCountry,
         filterContinent} = useFilter(surfSpots);
+    const title = "Look for Spots";
 
     return(
         <Wrapper >
-            <div>
-                <h3>Look for Spots</h3>
-            </div>
+
             <SurfSpotFilter filterContinent={filterContinent}
                             filterCountry={filterCountry}
                             handleChangeContinent={handleChangeContinent}
                             handleChangeCountry={handleChangeCountry}
                             continents={continents}
                             countries={countries}
+                            title={title}
             />
             <div>
                 <SpotList surfSpots={surfSpots}

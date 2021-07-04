@@ -2,16 +2,16 @@ import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components/macro";
-import useSurfSpot from "../hooks/useSurfSpots";
-import useFavourites from "../hooks/useFavourites";
-import useFilter from "../hooks/useFilter";
+import ExploreIcon from '@material-ui/icons/Explore';
+import HomeIcon from '@material-ui/icons/Home';
 
 export default function SurfSpotFilter({filterContinent,
                                            filterCountry,
                                            handleChangeContinent,
                                            handleChangeCountry,
                                            continents,
-                                           countries}) {
+                                           countries,
+                                           title}) {
 
     const classes = useStyles();
 
@@ -19,10 +19,17 @@ export default function SurfSpotFilter({filterContinent,
         <Wrapper className="head">
             <section className="buttons">
                 <div className="b1">
-                    <Button component={Link} to={"/home"}>Back to Start</Button>
+                    <Button component={Link} to={"/home"}>
+                    <HomeIcon/>
+                    </Button>
+                </div>
+                <div>
+                    <h3>{title}</h3>
                 </div>
                 <div className="b2">
-                    <Button component={Link} to={"/map"}>go to maps</Button>
+                    <Button component={Link} to={"/map"}>
+                        <ExploreIcon/>
+                    </Button>
                 </div>
             </section>
             <div className="filter" >

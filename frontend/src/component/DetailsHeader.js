@@ -6,6 +6,8 @@ import {useHistory, useLocation} from "react-router-dom"
 import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
 import AuthContext from "../context/AuthContext";
 import useFavourites from "../hooks/useFavourites";
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
 export default function DetailsHeader({surfSpot, id}){
 
@@ -33,6 +35,9 @@ export default function DetailsHeader({surfSpot, id}){
         <Wrapper>
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
+                <div>
+                    <img src="/frontend/src/img/app-icon.jpg" alt="icon" width="15px" height="15px"/>
+                </div>
                 <button className="button2" onClick={() => {
                     history.push("/search");
                 }}>
@@ -90,10 +95,12 @@ export default function DetailsHeader({surfSpot, id}){
             </section>
             <div className="add-remove">
                 {!isFavourite &&
-                <button onClick={handleAdd}>Add to Favourites
+                <button onClick={handleAdd}>
+                    <StarOutlineIcon/>
                 </button>}
                 {isFavourite &&
-                <button onClick={handleRemove}>Remove from Favourites
+                <button onClick={handleRemove}>
+                    <StarIcon/>
                 </button>}
             </div>
         </Wrapper>
@@ -127,7 +134,7 @@ const Wrapper = styled.section`
   }
   .body{
     display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
     
   }
   
@@ -137,7 +144,7 @@ const Wrapper = styled.section`
     font-size: 14px;
     p{
       padding: 1px;
-      margin: 1px;
+      margin: 2px;
     }
     
   }
@@ -148,7 +155,7 @@ const Wrapper = styled.section`
     font-size: 14px;
     p{
       padding: 1px;
-      margin: 1px;
+      margin: 2px;
     }
   }
   .body.p{
@@ -160,6 +167,11 @@ const Wrapper = styled.section`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+  }
+  img{
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
   }
   .add-remove{
     display: flex;
