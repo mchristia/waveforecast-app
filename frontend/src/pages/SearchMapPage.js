@@ -66,7 +66,7 @@ const libraries = ["places"];
                     <ListAltIcon />
                 </button>
             </div>
-            <box className="map">
+            <div className="map">
                 <GoogleMapsContainer surfSpots={surfSpots}
                                      center={center}
                                      onMapLoad={onMapLoad}
@@ -74,7 +74,7 @@ const libraries = ["places"];
                                      setFavouriteSpots={setFavourites}
                                      fromFavouritePage={fromFavouritePage}
                 />
-            </box>
+            </div>
         </Wrapper>
     )
 }
@@ -94,7 +94,7 @@ const Wrapper = styled.div`
     top: 1rem;
     left: 50%;
     z-index: 2;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: lightblue;
   }
   
   .button2{
@@ -102,14 +102,14 @@ const Wrapper = styled.div`
     z-index: 2;
     top: 1rem;
     right: 5.5rem;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: lightblue;
   }
   .button3{
     position: absolute;
     z-index: 2;
     top: 1rem;
     right: 2rem;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: lightblue;
   }
   
   .map{

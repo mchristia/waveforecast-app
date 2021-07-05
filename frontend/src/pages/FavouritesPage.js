@@ -42,4 +42,10 @@ export default function FavouritesPage(){
     )
 }
 const Wrapper = styled.div`
+  background-image: url("/images/app-logo-above1.png");
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 `

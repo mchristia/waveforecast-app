@@ -43,6 +43,13 @@ export default function SearchPage(){
 }
 
 const Wrapper = styled.div`
+  background-image: url("/images/app-logo-above1.png");
+  height: 100%;
+  overflow-y: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
   .head{
     position: sticky;
     z-index: 3;

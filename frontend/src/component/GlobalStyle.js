@@ -8,7 +8,7 @@ export default createGlobalStyle`
       html, body {
         margin: 0;
         font-family: Arial;
-        height: 100%
+        height: 100%;
       }
      
 `

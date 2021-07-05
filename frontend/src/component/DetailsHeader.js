@@ -109,7 +109,7 @@ export default function DetailsHeader({surfSpot, id}){
 
 const Wrapper = styled.section`
   border-bottom: black solid 2px;
-  background-image: linear-gradient(45deg, lightblue, yellow);
+  background-color: lightblue;
   border-top-right-radius: 2%;
   border-top-left-radius: 2%;
   
@@ -168,6 +168,7 @@ const Wrapper = styled.section`
     top: 0.5rem;
     right: 0.5rem;
     background-color: transparent;
+    border: none;
   }
   img{
     position: absolute;
@@ -177,9 +178,11 @@ const Wrapper = styled.section`
   .add-remove{
     display: flex;
     justify-content: flex-end;
+   
     
   }
   .add-re-bu{
-    background-color: transparent;
+    background-color: transparent; 
+    border: none;
   }
 `

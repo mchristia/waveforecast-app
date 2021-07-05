@@ -29,7 +29,6 @@ export default function SurfSpotFilter({filterContinent,
                     </Button>
                 </div>
                 <div className="b2">
-
                         {title === "Your Favourites" ?
                             <Button component={Link} to={"/search"}>
                                 <ListAltIcon/>
@@ -75,7 +74,7 @@ export default function SurfSpotFilter({filterContinent,
                         }}
                     >
                         <option aria-label="None" value="" />
-                        {countries.map((country) =>(<option value={country}>{country}</option>))}
+                        {countries.map((country) =>(<option key={country} value={country}>{country}</option>))}
                     </Select>
                 </FormControl>
             </div>
@@ -87,10 +86,17 @@ const Wrapper = styled.div`
   position: sticky;
   top: 0;
   z-index: 3;
-  background-color: white;
+  background-color: lightblue;
+  //border-bottom: solid mediumblue 1px;
+  //border-left: solid mediumblue 1px;
+  //border-right: solid mediumblue 1px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   
   FormControll{
-    border: darkblue solid 1px;
+  //  border: darkblue solid 1px;
   }
   h3{
     position: sticky;
@@ -101,34 +107,29 @@ const Wrapper = styled.div`
     position: sticky;
     top:0;
     z-index: 2;
-    background-color: white;
   }
   .filter{
     display: flex;
     justify-content: space-around;
   }
   .buttons{
-   
     display: flex;
     justify-content: space-between;
   }
   .b1{
     margin: 2px;
-    border: solid black 1px;
     border-radius: 3px;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: transparent;
   }
   .b2{
     margin: 2px;
-    border: solid black 1px;
     border-radius: 3px;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: transparent;
   }
   .b3{
     margin: 2px;
-    border: solid black 1px;
     border-radius: 3px;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: transparent;
   }
 `
 const useStyles = makeStyles((theme) => ({

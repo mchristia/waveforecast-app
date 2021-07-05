@@ -34,16 +34,17 @@ export default function HomePage(){
 }
 
 const Wrapper = styled.div`
-  background-image: url("/images/background-picture.png");
+  background-image: url("/images/app-logo-above1.png");
   height: 100%;
   background-size: cover;                      
   background-repeat: no-repeat;
-  background-position: -367px;
+  background-position: center;
 
 
   Button {
     border-radius: 50%;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: lightblue;
+    border: none;
 
   }
 

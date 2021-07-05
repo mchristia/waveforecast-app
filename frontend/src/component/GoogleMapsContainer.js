@@ -38,7 +38,7 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
                 onLoad={onMapLoad}
             >
                 {surfSpots.map((spot) =>(
-                    <Marker key={spot.spotLocationDetails.id}
+                    <img src="/images/" key={spot.spotLocationDetails.id}
                             position={{
                                 lat: parseFloat(spot.spotLocationDetails.latitude),
                                 lng: parseFloat(spot.spotLocationDetails.longitude)
