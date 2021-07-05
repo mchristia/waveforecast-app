@@ -6,8 +6,10 @@ import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import useSurfSpot from "../hooks/useSurfSpots";
 import useFavourites from "../hooks/useFavourites";
+
 
 
 const libraries = ["places"];
@@ -54,6 +56,11 @@ const libraries = ["places"];
 
                 </button>
                 <button className="button2" onClick={() => {
+                    history.push("/user");
+                }}>
+                    <FavoriteIcon />
+                </button>
+                <button className="button3" onClick={() => {
                     history.push("/search");
                 }}>
                     <ListAltIcon />
@@ -91,6 +98,13 @@ const Wrapper = styled.div`
   }
   
   .button2{
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    right: 5.5rem;
+    background-image: linear-gradient(45deg, lightblue, yellow);
+  }
+  .button3{
     position: absolute;
     z-index: 2;
     top: 1rem;

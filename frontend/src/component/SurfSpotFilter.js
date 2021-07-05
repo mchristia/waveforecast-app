@@ -4,6 +4,8 @@ import React from "react";
 import styled from "styled-components/macro";
 import ExploreIcon from '@material-ui/icons/Explore';
 import HomeIcon from '@material-ui/icons/Home';
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export default function SurfSpotFilter({filterContinent,
                                            filterCountry,
@@ -18,15 +20,26 @@ export default function SurfSpotFilter({filterContinent,
     return(
         <Wrapper className="head">
             <section className="buttons">
+                <div>
+                    <h3>{title}</h3>
+                </div>
                 <div className="b1">
                     <Button component={Link} to={"/home"}>
                     <HomeIcon/>
                     </Button>
                 </div>
-                <div>
-                    <h3>{title}</h3>
-                </div>
                 <div className="b2">
+
+                        {title === "Your Favourites" ?
+                            <Button component={Link} to={"/search"}>
+                                <ListAltIcon/>
+                            </Button>
+                                :
+                            <Button component={Link} to={"/user"}>
+                                <FavoriteIcon/>
+                            </Button>}
+                </div>
+                <div className="b3">
                     <Button component={Link} to={"/map"}>
                         <ExploreIcon/>
                     </Button>
@@ -78,6 +91,7 @@ const Wrapper = styled.div`
   h3{
     position: sticky;
     z-index: 3;
+    margin:2px;
   }
   .head{
     position: sticky;
@@ -94,13 +108,19 @@ const Wrapper = styled.div`
     justify-content: space-between;
   }
   .b1{
-    margin: 5px;
+    margin: 2px;
     border: solid black 1px;
     border-radius: 3px;
     background-image: linear-gradient(45deg, lightblue, yellow);
   }
   .b2{
-    margin: 5px;
+    margin: 2px;
+    border: solid black 1px;
+    border-radius: 3px;
+    background-image: linear-gradient(45deg, lightblue, yellow);
+  }
+  .b3{
+    margin: 2px;
     border: solid black 1px;
     border-radius: 3px;
     background-image: linear-gradient(45deg, lightblue, yellow);
