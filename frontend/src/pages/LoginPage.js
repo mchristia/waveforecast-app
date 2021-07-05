@@ -39,5 +39,9 @@ export default function LoginPage(){
 }
 
 const Wrapper = styled.div`
-  background-image: url("/frontend/src/img/background-picture.png");
+  background-image: url("/images/Aloha-App.gif");
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: -367px;
 `

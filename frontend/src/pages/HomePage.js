@@ -9,9 +9,9 @@ export default function HomePage(){
 
     return(
         <Wrapper>
-            <p>
+            <div>
                 Wind und Wellen
-            </p>
+            </div>
             <div>
                 <Link className="link" to={"/search"}>
                     <Button className="spotList" variant="outlined" >
@@ -34,7 +34,12 @@ export default function HomePage(){
 }
 
 const Wrapper = styled.div`
-  background-image: url("/frontend/src/img/background-picture.png");
+  background-image: url("/images/background-picture.png");
+  height: 100%;
+  background-size: cover;                      
+  background-repeat: no-repeat;
+  background-position: -367px;
+
 
   Button {
     border-radius: 50%;

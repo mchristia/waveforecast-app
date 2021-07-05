@@ -21,8 +21,7 @@ export default function SearchPage(){
 
     return(
         <Wrapper >
-
-            <SurfSpotFilter filterContinent={filterContinent}
+            <SurfSpotFilter className="head" filterContinent={filterContinent}
                             filterCountry={filterCountry}
                             handleChangeContinent={handleChangeContinent}
                             handleChangeCountry={handleChangeCountry}
@@ -44,8 +43,7 @@ export default function SearchPage(){
 }
 
 const Wrapper = styled.div`
-  
-  h3{
+  .head{
     position: sticky;
     z-index: 3;
   

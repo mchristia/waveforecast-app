@@ -1,6 +1,3 @@
-import {Box, makeStyles, Typography} from "@material-ui/core";
-import CardContent from "@material-ui/core/CardContent"
-import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
 import React, {useContext, useState} from "react";
@@ -8,60 +5,64 @@ import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import StarIcon from '@material-ui/icons/Star';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import styled from "styled-components/macro";
 
-    const useStyles = makeStyles({
-        root: {
-            minWidth: 150,
-            minHeight: 30,
-            background: "linear-gradient(45deg, lightblue, yellow)",
-        },
-        content: {
-            padding: 8,
-            margin: 1,
-        },
-       title: {
-           textAlign: "center",
-       },
-        subtitle:{
-            textAlign: "center",
-            margin: 0,
-            padding: 0,
+    const Wrapper = styled.div `
+      text-decoration: none;
+      min-width: 200px;
+      min-height: 40px;
+      background-image: linear-gradient(45deg, lightblue, yellow);
+      border: solid mediumblue 1px;
+      border-radius: 5px;
+        
+      .content {
+        padding: 8px;
+        margin: 1px;
+        
+      }
+      .link{
+        text-decoration: none;
+      }
+      .title {
+        text-align: center;
+      }
+      .subtitle{
+        text-align: center;
+        margin: 0;
+        padding: 0;
+       } 
+      .databox{
+        display: flex;
+        text-align: center ;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        font-size: 12px;
+      }
+      .weather{
+        display: flex;
+        flex-direction: column;
 
-        },
-        databox:{
-            display: "flex",
-            textAlign: "center" ,
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            fontSize: 12,
-        },
-        weather:{
-            display: "flex",
-           flexDirection: "column"
+      }
+      .text{
+        font-size: 11px ;
+        margin: 0;
+        padding: 0;
+      }
+      .buttons {
+        display: flex;
 
-        },
-        text:{
-            fontSize: 11 ,
-          margin: 0,
-          padding: 0,
-
-        },
-        buttons: {
-            display: "flex",
-
-        },
-        add:{
-            alignSelf: "flex-start",
-            backgroundColor: "transparent"
-        },
-        remove:{
-            alignSelf: "flex-end" ,
-            backgroundColor: "transparent"
-        }
-    });
+      }
+      .add{
+        align-self: flex-start;
+        background-color: transparent;
+      }
+      .remove{
+        align-self: flex-end ;
+        background-color: transparent;
+      }
+    `
 
 export default function ListItem({spot, favourite, setFavouriteSpots, fromFavouritePage}){
-    const classes = useStyles();
     const {token} = useContext(AuthContext)
     const [isFavourite, setIsFavourite] = useState(favourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
@@ -82,24 +83,24 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
     }
 
     return(
-        <Card className={classes.root} variant="outlined">
-            <CardContent className={classes.content} >
-                <Link text-decoration="none" to={{
+        <Wrapper >
+            <div className="content" >
+                <Link className="link" to={{
                 pathname: "/" + spot.id,
                 state: {favourite: isFavourite}
             }}>
-                    <Box  borderColor="black">
-                        <Box className={classes.title}  >
-                            <Typography className={classes.title} variant="h5" component="h1">
+                    <div >
+                        <div className="title"  >
+                            <div className="title" >
                                 {spot.spotLocationDetails.name}
-                            </Typography>
-                        </Box>
-                        <Box className={classes.subtitle} >
-                            <p className={classes.text}>
+                            </div>
+                        </div>
+                        <div className="subtitle" >
+                            <p className="text">
                                 {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
                             </p>
-                        </Box>
-                        <Box className={classes.databox} >
+                        </div>
+                        <div className="databox" >
                             <div>
                                 <p>
                                     Air: {currentSurfData?.airTemperature.sg} °C
@@ -125,21 +126,80 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                                     {currentSurfData?.windSpeed.sg} km/h
                                 </p>
                             </div>
-                        </Box>
-                    </Box>
+                        </div>
+                    </div>
                 </Link>
-            </CardContent>
-            <Box className={classes.buttons} >
-            {!isFavourite && <button className={classes.add} onClick={handleAdd}>
-                <StarOutlineIcon/>
-            </button>}
-            {isFavourite && <button className={classes.remove} onClick={handleRemove}>
-                <StarIcon/>
-            </button>}
-        </Box>
-        </Card>
-
+            </div>
+            <div className="buttons">
+                {!isFavourite && <button className="add" onClick={handleAdd}>
+                    <StarOutlineIcon/>
+                </button>}
+                {isFavourite && <button className="remove" onClick={handleRemove}>
+                    <StarIcon/>
+                </button>}
+            </div>
+        </Wrapper>
     )
+
+    // )    return(
+    //     <Card className={classes.root} variant="outlined">
+    //         <CardContent className={classes.content} >
+    //             <Link text-decoration="none" to={{
+    //             pathname: "/" + spot.id,
+    //             state: {favourite: isFavourite}
+    //         }}>
+    //                 <div  borderColor="black">
+    //                     <div className={classes.title}  >
+    //                         <Typography className={classes.title} variant="h5" component="h1">
+    //                             {spot.spotLocationDetails.name}
+    //                         </Typography>
+    //                     </div>
+    //                     <div className={classes.subtitle} >
+    //                         <p className={classes.text}>
+    //                             {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
+    //                         </p>
+    //                     </div>
+    //                     <div className={classes.databox} >
+    //                         <div>
+    //                             <p>
+    //                                 Air: {currentSurfData?.airTemperature.sg} °C
+    //                             </p>
+    //                         </div>
+    //                         <div>
+    //                             <p>
+    //                                 Water: {currentSurfData?.waterTemperature.sg} °C
+    //                             </p>
+    //                         </div>
+    //                         <div>
+    //                             <p>
+    //                                 {currentSurfData?.swellHeight.sg} m
+    //                             </p>
+    //                         </div>
+    //                         <div>
+    //                             <p>
+    //                                 {currentSurfData?.swellPeriod.sg} s
+    //                             </p>
+    //                         </div>
+    //                         <div>
+    //                             <p>
+    //                                 {currentSurfData?.windSpeed.sg} km/h
+    //                             </p>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </Link>
+    //         </CardContent>
+    //         <div className={classes.buttons} >
+    //         {!isFavourite && <button className={classes.add} onClick={handleAdd}>
+    //             <StarOutlineIcon/>
+    //         </button>}
+    //         {isFavourite && <button className={classes.remove} onClick={handleRemove}>
+    //             <StarIcon/>
+    //         </button>}
+    //     </div>
+    //     </Card>
+    //
+    // )
 }
 //
 // const Wrapper = styled.div`

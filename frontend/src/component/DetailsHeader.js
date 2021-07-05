@@ -36,7 +36,7 @@ export default function DetailsHeader({surfSpot, id}){
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
                 <div>
-                    <img src="/frontend/src/img/app-icon.jpg" alt="icon" width="15px" height="15px"/>
+                    <img src="/images/app-icon.jpg" alt="icon" width="30px" height="30px"/>
                 </div>
                 <button className="button2" onClick={() => {
                     history.push("/search");

@@ -84,6 +84,10 @@ export default function SurfSpotFilter({filterContinent,
 }
 
 const Wrapper = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: white;
   
   FormControll{
     border: darkblue solid 1px;
@@ -104,6 +108,7 @@ const Wrapper = styled.div`
     justify-content: space-around;
   }
   .buttons{
+   
     display: flex;
     justify-content: space-between;
   }

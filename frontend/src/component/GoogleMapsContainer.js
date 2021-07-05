@@ -50,7 +50,7 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
                 ))}
                 <Marker />
                 {selected ? (
-                    <InfoWindow className="infoWindow" background-color="black" position={{
+                    <InfoWindow className="infoWindow" text-decoration="none" position={{
                         lat: parseFloat(selected.spotLocationDetails.latitude),
                         lng: parseFloat(selected.spotLocationDetails.longitude)
                     }} onCloseClick={()=> {
@@ -73,12 +73,16 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
 const Wrapper = styled.div`
   .infoWindow {
     text-decoration: none;
-    .gm-style-iw-t{
-      border-radius: 0;
-    }
-    .gm-style-iw-d{
-      background-color: green;
-    }
     
+  } 
+  .infoWindow.gm-style-iw-a.gm-style-iw-t.gm-style-iw gm-style-iw-c{
+        max-width: 340px;
   }
+  
+  .infoWindow.gm-style-iw-a.gm-style-iw-t.gm-style-iw gm-style-iw-c.gm-style-iw-d{
+      min-width: 330px;
+  }
+
+  
 `
+//gm-style-iw-a.gm-style-iw-t
