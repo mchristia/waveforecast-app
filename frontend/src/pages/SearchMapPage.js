@@ -43,7 +43,14 @@ const libraries = ["places"];
     if(loadError) return "Error loading Maps";
     if(!isLoaded) return "Loading Maps";
 
+     const styles = {
 
+         largeIcon: {
+             width: 60,
+             height: 60,
+         },
+
+     };
     return(
         <Wrapper>
             <div className="header">
@@ -52,7 +59,7 @@ const libraries = ["places"];
                     onClick={() => {
                         panTo({lat: center.lat, lng: center.lng,});
                     }}>
-                    <CenterFocusStrongIcon/>
+                    <CenterFocusStrongIcon iconStyle={styles.largeIcon}/>
 
                 </button>
                 <button className="button2" onClick={() => {
@@ -94,7 +101,8 @@ const Wrapper = styled.div`
     top: 1rem;
     left: 50%;
     z-index: 2;
-    background-color: lightblue;
+    background-color: transparent;
+    border: none;
   }
   
   .button2{
@@ -102,14 +110,16 @@ const Wrapper = styled.div`
     z-index: 2;
     top: 1rem;
     right: 5.5rem;
-    background-color: lightblue;
+    background-color: transparent;
+    border: none;
   }
   .button3{
     position: absolute;
     z-index: 2;
     top: 1rem;
     right: 2rem;
-    background-color: lightblue;
+    background-color: transparent;
+    border: none;
   }
   
   .map{
@@ -121,10 +131,11 @@ const Wrapper = styled.div`
     position: absolute;
     top: 1rem;
     left:1rem;
-    color: darkblue;
+    color: lightblue;
     z-index: 2;
     margin: 1px;
     padding: 1px;
     font-size: 1.5rem;
+    text-shadow: black;
   }
 `

@@ -38,13 +38,19 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
                 onLoad={onMapLoad}
             >
                 {surfSpots.map((spot) =>(
-                    <img src="/images/" key={spot.spotLocationDetails.id}
+                    <Marker key={spot.spotLocationDetails.id}
                             position={{
                                 lat: parseFloat(spot.spotLocationDetails.latitude),
                                 lng: parseFloat(spot.spotLocationDetails.longitude)
                             }}
                             onClick={()=>{
                                 setSelected(spot)
+                            }}
+                            icon={{
+                                url:"/images/app-icon.jpg",
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(20, 20),
+                                scaledSize: new window.google.maps.Size(40, 40),
                             }}
                     />
                 ))}

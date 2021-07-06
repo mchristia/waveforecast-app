@@ -8,6 +8,16 @@ import AuthContext from "../context/AuthContext";
 import useFavourites from "../hooks/useFavourites";
 import StarIcon from '@material-ui/icons/Star';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import {
+    BiWater,
+    FaTemperatureLow,
+    GiEchoRipples,
+    GiWindsock,
+    IoWaterOutline,
+    MdTimer,
+    RiWindyFill
+} from "react-icons/all";
+
 
 export default function DetailsHeader({surfSpot, id}){
 
@@ -35,61 +45,50 @@ export default function DetailsHeader({surfSpot, id}){
         <Wrapper>
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
-                <div>
-                    <img src="/images/app-icon.jpg" alt="icon" width="30px" height="30px"/>
-                </div>
                 <button className="button2" onClick={() => {
                     history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>
                 <div className="subtitle">
-                    <p>{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
-                    <p>{new Date(now).toLocaleTimeString(navigator.language, {
+                    <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
+                    <p className="p2">{new Date(now).toLocaleTimeString(navigator.language, {
                         hour: '2-digit',
                         minute:'2-digit'
                     })}</p>
                 </div>
-
             </div>
             <section className="body">
                 <div className="body-left">
                     <div>
-                        <p>
-                            Air: {currentSurfData?.airTemperature.sg}
-                        </p>
+                        <FaTemperatureLow size={20}/> {currentSurfData?.airTemperature.sg}
+
                     </div>
                     <div>
-                        <p>
-                            Water: {currentSurfData?.waterTemperature.sg}
-                        </p>
+                        <IoWaterOutline size={20}/> {currentSurfData?.waterTemperature.sg}
+
                     </div>
                     <div>
-                        <p>
-                            Wave Direction:  {getDirection(currentSurfData?.swellDirection.sg)}
-                        </p>
+                       <GiEchoRipples size={20}/> {getDirection(currentSurfData?.swellDirection.sg)}
+
                     </div>
                     <div>
-                        <p>
-                            Wave Height: {currentSurfData?.swellHeight.sg}
-                        </p>
+                        <BiWater size={20}/> {currentSurfData?.swellHeight.sg}
+
                     </div>
                 </div>
                 <div className="body-right">
                     <div>
-                        <p>
-                            Wave Period: {currentSurfData?.swellPeriod.sg}
-                        </p>
+                        <MdTimer size={20}/> {currentSurfData?.swellPeriod.sg}
+
                     </div>
                     <div>
-                        <p>
-                            Wind Direction: {getDirection(currentSurfData?.windDirection.sg)}
-                        </p>
+                        <GiWindsock size={20}/>{getDirection(currentSurfData?.windDirection.sg)}
+
                     </div>
                     <div>
-                        <p>
-                            Wind Speed: {currentSurfData?.windSpeed.sg}
-                        </p>
+                        <RiWindyFill size={20}/> {currentSurfData?.windSpeed.sg}
+
                     </div>
                 </div>
             </section>
@@ -108,7 +107,7 @@ export default function DetailsHeader({surfSpot, id}){
 }
 
 const Wrapper = styled.section`
-  border-bottom: black solid 2px;
+  position: relative;
   background-color: lightblue;
   border-top-right-radius: 2%;
   border-top-left-radius: 2%;
@@ -127,10 +126,20 @@ const Wrapper = styled.section`
   
   .subtitle{
     display: flex;
-    justify-content: space-between ;
+    justify-content: flex-end;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  
+  .p1{
+    flex-grow: 1;
+    text-align: end;
+  }
+  
+  .p2{
+    flex-grow: 1;
+    text-align: end;
   }
   .body{
     display: flex;
@@ -170,11 +179,7 @@ const Wrapper = styled.section`
     background-color: transparent;
     border: none;
   }
-  img{
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-  }
+ 
   .add-remove{
     display: flex;
     justify-content: flex-end;

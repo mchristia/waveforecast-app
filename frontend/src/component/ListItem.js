@@ -6,6 +6,15 @@ import {Link} from "react-router-dom";
 import StarIcon from '@material-ui/icons/Star';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import styled from "styled-components/macro";
+import {
+    BiWater,
+    FaTemperatureLow,
+    IoWaterOutline,
+    MdTimer,
+    RiWindyFill,
+    AiFillStar,
+    AiOutlineStar
+} from "react-icons/all";
 
 
 export default function ListItem({spot, favourite, setFavouriteSpots, fromFavouritePage}){
@@ -48,29 +57,24 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                         </div>
                         <div className="databox" >
                             <div>
-                                <p>
-                                    Air: {currentSurfData?.airTemperature.sg} °C
-                                </p>
+                                <FaTemperatureLow size={20}/> {currentSurfData?.airTemperature.sg} °C
+
                             </div>
                             <div>
-                                <p>
-                                    Water: {currentSurfData?.waterTemperature.sg} °C
-                                </p>
+                                <IoWaterOutline size={20}/> {currentSurfData?.waterTemperature.sg} °C
+
                             </div>
                             <div>
-                                <p>
-                                    {currentSurfData?.swellHeight.sg} m
-                                </p>
+                                <BiWater size={20}/> {currentSurfData?.swellHeight.sg} m
+
                             </div>
                             <div>
-                                <p>
-                                    {currentSurfData?.swellPeriod.sg} s
-                                </p>
+                                <MdTimer size={20}/>{currentSurfData?.swellPeriod.sg} s
+
                             </div>
                             <div>
-                                <p>
-                                    {currentSurfData?.windSpeed.sg} km/h
-                                </p>
+                                <RiWindyFill size={20}/>{currentSurfData?.windSpeed.sg} km/h
+
                             </div>
                         </div>
                     </div>
@@ -78,10 +82,10 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
             </div>
             <div className="buttons">
                 {!isFavourite && <button className="add" onClick={handleAdd}>
-                    <StarOutlineIcon/>
+                    <AiOutlineStar size={30}/>
                 </button>}
                 {isFavourite && <button className="remove" onClick={handleRemove}>
-                    <StarIcon/>
+                    <AiFillStar size={30}/>
                 </button>}
             </div>
         </Wrapper>
@@ -89,59 +93,73 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 }
 
 const Wrapper = styled.div `
-      text-decoration: none;
-      min-width: 200px;
-      min-height: 40px;
-      background-color: lightblue;
-      border-radius: 5px;
-        
-      .content {
-        padding: 8px;
-        margin: 1px;
-        background-color: transparent;
-        
-      }
-      .link{
-        text-decoration: none;
-      }
-      .title {
-        text-align: center;
-      }
-      .subtitle{
-        text-align: center;
-        margin: 0;
-        padding: 0;
-       } 
-      .databox{
-        display: flex;
-        text-align: center ;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        font-size: 12px;
-      }
-      .weather{
-        display: flex;
-        flex-direction: column;
 
-      }
-      .text{
-        font-size: 11px ;
-        margin: 0;
-        padding: 0;
-      }
-      .buttons {
-        display: flex;
-        justify-content: flex-end;
+  text-decoration: none;
+  min-width: 200px;
+  min-height: 40px;
+  background-color: lightblue;
+  border-radius: 5px;
+  color: black;
 
-      }
-      .add{
-        align-self: flex-start;
-        background-color: transparent;
-        border: none;
-      }
-      .remove{
-        align-self: flex-end ;
-        background-color: transparent;
-        border: none;
-      }
-    `
+  .content {
+    padding: 8px;
+    margin: 1px;
+    background-color: transparent;
+
+  }
+
+  .link {
+    text-decoration: none;
+    color: black;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .databox {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-content: space-between;
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-top: 1rem;
+
+    div {
+      padding: 8px 1rem;
+    }
+
+  }
+
+  .text {
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
+  .add {
+    align-self: flex-start;
+    background-color: transparent;
+    border: none;
+  }
+
+  .remove {
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+  }
+`
