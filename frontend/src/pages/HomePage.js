@@ -4,21 +4,25 @@ import styled from "styled-components"
 
 export default function HomePage(){
 
-
     return(
         <Wrapper>
             <p>
                 Wind und Wellen
             </p>
             <div>
-                <Button className="spotList" variant="outlined" component={Link} to={"/search"} >Look for Spots here</Button>
+                <Link to={"/search"}>
+                    <Button className="spotList" variant="outlined" >Look for Spots here</Button>
+                </Link>
+                <Link to={"/user"} >
+                    <Button className="favourites" variant="outlined" >See Favourites here</Button>
+                </Link>
             </div>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-    .spotList{
+    Button{
       background-image: linear-gradient(45deg, lightblue, yellow);
     }
 `

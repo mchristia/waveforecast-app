@@ -1,32 +1,33 @@
 import { useParams } from 'react-router-dom';
 import styled from "styled-components/macro";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {getSurfSpot} from "../service/surfSpotDataService";
 import DetailsHeader from "../component/DetailsHeader";
 import DetailTable from "../component/DeatailsTable";
-import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+import AuthContext from "../context/AuthContext";
 
 export default function SpotDetailsPage(){
     const { id } = useParams();
     const [surfSpot, setSurfSpot] = useState();
+    const {token} = useContext(AuthContext)
 
+    console.log(token)
     useEffect(() =>{
-        getSurfSpot(id)
-            .then((item) => {
-                setSurfSpot(item);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    },[id])
+        if(token){
+            getSurfSpot(id, token)
+                .then(setSurfSpot)
+                .catch(error => {
+                    console.error(error);
+                })
+        }
 
-    const now = Date.now()
+    },[id, token])
 
     if(surfSpot){
         return (
             <Wrapper>
                 <div className="overview">
-                    <DetailsHeader  surfSpot={surfSpot}/>
+                    <DetailsHeader  surfSpot={surfSpot} />
                 </div>
                 <section className="table">
                     <DetailTable surfSpot={surfSpot} />

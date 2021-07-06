@@ -1,6 +1,7 @@
 import ListItem from "./ListItem";
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components/macro";
+import {Link} from "react-router-dom";
 
 export default function SpotList({filterCountry, surfSpots, filterContinent}){
 
@@ -10,11 +11,11 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
             <Wrapper>
                 <ul>
                     {surfSpots.map((spot) => (
-                     <a href={"/" + spot.id}>
                         <li>
-                            <ListItem key={spot.id} spot={spot}/>
+                            <Link to={"/" + spot.id}>
+                                <ListItem key={spot.id} spot={spot}/>
+                            </Link>
                         </li>
-                    </a>
                     ))}
                 </ul>
             </Wrapper>
@@ -25,11 +26,13 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
                 <ul>
                     {surfSpots.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
-                            return <a href={"/" + spot.id}>
+                            return (
                                 <li>
-                                    <ListItem key={spot.id} spot={spot}/>
+                                    <Link to={"/" + spot.id}>
+                                        <ListItem key={spot.id} spot={spot}/>
+                                    </Link>
                                 </li>
-                            </a>
+                            )
                         }
                     })}
                 </ul>
@@ -41,11 +44,13 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
                 <ul>
                     {surfSpots.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
-                            return <a href={"/" + spot.id}>
+                            return (
                                 <li>
-                                    <ListItem key={spot.id} spot={spot}/>
+                                    <Link to={"/" + spot.id}>
+                                        <ListItem key={spot.id} spot={spot}/>
+                                    </Link>
                                 </li>
-                            </a>
+                            )
                         }
                     })}
                 </ul>
@@ -58,11 +63,13 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
                     {surfSpots.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
-                            return <a href={"/" + spot.id}>
+                            return (
                                 <li>
-                                    <ListItem key={spot.id} spot={spot}/>
+                                    <Link to={"/" + spot.id}>
+                                        <ListItem key={spot.id} spot={spot}/>
+                                    </Link>
                                 </li>
-                            </a>
+                            )
                         }
                     })}
                 </ul>

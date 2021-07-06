@@ -2,6 +2,7 @@ import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/a
 import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
+import {Link} from "react-router-dom";
 
 const libraries = ["places"];
 
@@ -56,9 +57,9 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                     }} onCloseClick={()=> {
                         setSelected(null);
 
-                    }}><a href={"/" + selected.id}>
+                    }}><Link to={"/" + selected.id}>
                         <ListItem key={selected.id} spot={selected}/>
-                    </a>
+                    </Link>
 
                     </InfoWindow>
                 ) : null}

@@ -3,9 +3,10 @@ import {Button, FormControl, InputLabel, makeStyles, Select} from "@material-ui/
 import React, {useEffect, useState} from 'react';
 import SpotList from "../component/SpotList";
 import {Link} from "react-router-dom";
+import useSurfSpot from "../hooks/useSurfSpots";
 
-export default function SearchPage({surfSpots}){
-
+export default function SearchPage(){
+    const {surfSpots} = useSurfSpot();
     const classes = useStyles();
 
     const [filterContinent, setFilterContinent] = useState({name: ''});
@@ -39,7 +40,7 @@ export default function SearchPage({surfSpots}){
             <div className="head">
             <section className="buttons">
                 <div className="b1">
-                    <Button component={Link} to={"/"}>Back to Start</Button>
+                    <Button component={Link} to={"/home"}>Back to Start</Button>
                 </div>
                 <div className="b2">
                     <Button component={Link} to={"/map"}>go to maps</Button>

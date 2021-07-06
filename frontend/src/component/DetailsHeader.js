@@ -9,18 +9,19 @@ export default function DetailsHeader({surfSpot}){
     const history = useHistory();
     const now = Date.now()
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
+
     return(
         <Wrapper>
             <div className="title">
                 <h2>{surfSpot?.spotLocationDetails.name}</h2>
                 <button className="button2" onClick={() => {
-                    history.goBack();
+                    history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>
                 <div className="subtitle">
                     <p>{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
-                    <p>{new Date(now).toUTCString()}</p>
+                    <p>{new Date(now).toLocaleDateString()}</p>
                 </div>
 
             </div>

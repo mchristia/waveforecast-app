@@ -30,7 +30,12 @@ public class SurfSpotService {
         for(SurfSpot spot : surfSpotRepo.findAll()){
             SurfSpot surfSpotWithSGData = sgApiService.getSGData(spot.getSpotLocationDetails().getLongitude(),
                     spot.getSpotLocationDetails().getLatitude());
-            surfSpotRepo.save(surfSpotWithSGData);
+            if(surfSpotWithSGData.getSurfData() == null){
+                return;
+            }else{
+                surfSpotRepo.save(surfSpotWithSGData);
+            }
+
         }
     }
     public List<SurfSpot> getAllSurfSpots() {

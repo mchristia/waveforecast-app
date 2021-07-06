@@ -6,16 +6,17 @@ import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
+import useSurfSpot from "../hooks/useSurfSpots";
 
 const libraries = ["places"];
 
- function SearchMapPage({surfSpots}, geoLocation ) {
-
-    const history = useHistory();
-    const {isLoaded, loadError} = useLoadScript({
+ function SearchMapPage( geoLocation ) {
+     const {surfSpots} = useSurfSpot();
+     const history = useHistory();
+     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
-    });
+     });
 
      const center = {
          lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
@@ -49,7 +50,7 @@ const libraries = ["places"];
 
                 </button>
                 <button className="button2" onClick={() => {
-                    history.goBack();
+                    history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>
