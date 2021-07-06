@@ -54,25 +54,48 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                             </p>
                         </div>
                         <div className="databox" >
-                            <div>
-                                <FaTemperatureLow size={20}/> {currentSurfData?.airTemperature.sg} °C
-
+                            <div className="airTemp">
+                                <div>
+                                    <FaTemperatureLow size={20}/>
+                                </div>
+                                <p>
+                                    {currentSurfData?.airTemperature.sg} °C
+                                </p>
                             </div>
-                            <div>
-                                <IoWaterOutline size={20}/> {currentSurfData?.waterTemperature.sg} °C
-
+                            <div className="waterTemp">
+                                <div >
+                                    <IoWaterOutline size={20}/>
+                                </div>
+                                <p>
+                                    {currentSurfData?.waterTemperature.sg} °C
+                                </p>
                             </div>
-                            <div>
-                                <BiWater size={20}/> {currentSurfData?.swellHeight.sg} m
+                            <div className="height">
+                                <div >
+                                    <BiWater size={20}/>
 
+                                </div>
+                                <p>
+                                    {currentSurfData?.swellHeight.sg} m
+                                </p>
                             </div>
-                            <div>
-                                <MdTimer size={20}/>{currentSurfData?.swellPeriod.sg} s
+                            <div className="period">
+                                <div >
+                                    <MdTimer size={20}/>
 
+                                </div>
+                                <p>
+                                    {currentSurfData?.swellPeriod.sg} s
+                                </p>
                             </div>
-                            <div>
-                                <RiWindyFill size={20}/>{currentSurfData?.windSpeed.sg} km/h
+                            <div className="wind">
+                                <div >
+                                    <RiWindyFill size={20}/>
 
+                                </div>
+                                <p>
+                                    {currentSurfData?.windSpeed.sg} km/h
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -100,9 +123,10 @@ const Wrapper = styled.div `
   color: black;
 
   .content {
-    padding: 8px;
     margin: 1px;
-    background-color: transparent;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.75rem;
 
   }
 
@@ -118,23 +142,65 @@ const Wrapper = styled.div `
 
   .subtitle {
     text-align: center;
-    margin: 0;
     padding: 0;
+    margin-bottom: 1rem;
   }
 
   .databox {
     display: flex;
-    text-align: center;
     justify-content: space-around;
-    align-content: space-between;
     flex-wrap: wrap;
     font-size: 12px;
-    
+  }
+
+  .airTemp {
+    display: flex;
 
     div {
-      padding: 8px 1rem;
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
     }
+  }
 
+  .waterTemp {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .period {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .height {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .wind {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
   }
 
   .text {
