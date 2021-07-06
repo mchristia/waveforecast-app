@@ -87,13 +87,10 @@ const Wrapper = styled.div`
   top: 0;
   z-index: 3;
   background-color: lightblue;
-  //border-bottom: solid mediumblue 1px;
-  //border-left: solid mediumblue 1px;
-  //border-right: solid mediumblue 1px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0;
+  margin-right: 0;
   
   FormControll{
   //  border: darkblue solid 1px;
@@ -115,6 +112,7 @@ const Wrapper = styled.div`
   .buttons{
     display: flex;
     justify-content: space-between;
+    padding: 1rem;
   }
   .b1{
     margin: 2px;

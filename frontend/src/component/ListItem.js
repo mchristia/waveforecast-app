@@ -3,8 +3,6 @@ import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataServ
 import React, {useContext, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Link} from "react-router-dom";
-import StarIcon from '@material-ui/icons/Star';
-import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import styled from "styled-components/macro";
 import {
     BiWater,
@@ -131,7 +129,7 @@ const Wrapper = styled.div `
     align-content: space-between;
     flex-wrap: wrap;
     font-size: 12px;
-    margin-top: 1rem;
+    
 
     div {
       padding: 8px 1rem;

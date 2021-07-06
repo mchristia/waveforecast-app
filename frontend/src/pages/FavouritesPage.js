@@ -19,8 +19,7 @@ export default function FavouritesPage(){
 
     return(
         <Wrapper>
-            <div>
-                <SurfSpotFilter filterContinent={filterContinent}
+                <SurfSpotFilter className="header" filterContinent={filterContinent}
                                 filterCountry={filterCountry}
                                 handleChangeContinent={handleChangeContinent}
                                 handleChangeCountry={handleChangeCountry}
@@ -28,7 +27,7 @@ export default function FavouritesPage(){
                                 countries={countries}
                                 title={title}
                 />
-            </div>
+
             <div>
                <SpotList surfSpots={favourites}
                          favouriteSpots={favourites}
@@ -44,8 +43,14 @@ export default function FavouritesPage(){
 const Wrapper = styled.div`
   background-image: url("/images/app-logo-above1.png");
   height: 100%;
+  overflow-y: auto;
   background-size: cover;
-  background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  
+  .header{
+      position: sticky;
+      z-index: 3;
+  }
+  
 `

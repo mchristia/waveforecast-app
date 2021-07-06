@@ -49,9 +49,9 @@ const Wrapper = styled.div`
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-}
-  .head{
+
+  .head {
     position: sticky;
     z-index: 3;
-  
+  }
 `

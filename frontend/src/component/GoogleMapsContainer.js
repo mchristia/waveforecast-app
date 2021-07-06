@@ -81,14 +81,5 @@ const Wrapper = styled.div`
     text-decoration: none;
     
   } 
-  .infoWindow.gm-style-iw-a.gm-style-iw-t.gm-style-iw gm-style-iw-c{
-        max-width: 340px;
-  }
-  
-  .infoWindow.gm-style-iw-a.gm-style-iw-t.gm-style-iw gm-style-iw-c.gm-style-iw-d{
-      min-width: 330px;
-  }
-
   
 `
-//gm-style-iw-a.gm-style-iw-t

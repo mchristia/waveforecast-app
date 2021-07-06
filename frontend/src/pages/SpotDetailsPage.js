@@ -42,21 +42,14 @@ export default function SpotDetailsPage(){
 
 const Wrapper = styled.div`
 
-  background-image: url("/images/app-logo-above1.png");
-  height: 100%;
-  overflow-y: auto;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-
   margin: 1px;
   padding: 1px;
 
   .overview{
-    padding: 1%;
+    padding: 0;
   }
   
   .table{
-    margin-top: 2%;
+    margin-top: 0;
   }
 `

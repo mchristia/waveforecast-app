@@ -7,7 +7,7 @@ export default createGlobalStyle`
       
       html, body {
         margin: 0;
-        font-family: Arial;
+        font-family: "Bradley Hand";
         height: 100%;
       }
      

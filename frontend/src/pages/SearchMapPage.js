@@ -43,14 +43,7 @@ const libraries = ["places"];
     if(loadError) return "Error loading Maps";
     if(!isLoaded) return "Loading Maps";
 
-     const styles = {
 
-         largeIcon: {
-             width: 60,
-             height: 60,
-         },
-
-     };
     return(
         <Wrapper>
             <div className="header">
@@ -59,7 +52,7 @@ const libraries = ["places"];
                     onClick={() => {
                         panTo({lat: center.lat, lng: center.lng,});
                     }}>
-                    <CenterFocusStrongIcon iconStyle={styles.largeIcon}/>
+                    <CenterFocusStrongIcon />
 
                 </button>
                 <button className="button2" onClick={() => {
@@ -128,10 +121,12 @@ const Wrapper = styled.div`
   }
   
   h1{
+    font-family: "Bradley Hand";
     position: absolute;
     top: 1rem;
     left:1rem;
     color: lightblue;
+    text-shadow: 0 0 5px black;
     z-index: 2;
     margin: 1px;
     padding: 1px;

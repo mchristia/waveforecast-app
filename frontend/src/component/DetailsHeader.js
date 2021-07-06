@@ -15,7 +15,9 @@ import {
     GiWindsock,
     IoWaterOutline,
     MdTimer,
-    RiWindyFill
+    RiWindyFill,
+    AiFillStar,
+    AiOutlineStar
 } from "react-icons/all";
 
 
@@ -51,57 +53,91 @@ export default function DetailsHeader({surfSpot, id}){
                     <ListAltIcon />
                 </button>
                 <div className="subtitle">
-                    <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
+                    <div>
+                        <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
+                    </div>
+                    <div>
                     <p className="p2">{new Date(now).toLocaleTimeString(navigator.language, {
                         hour: '2-digit',
                         minute:'2-digit'
                     })}</p>
                 </div>
+                </div>
             </div>
             <section className="body">
                 <div className="body-left">
-                    <div>
-                        <FaTemperatureLow size={20}/> {currentSurfData?.airTemperature.sg}
+                    <div className="airTemp">
+                        <div>
+                            <FaTemperatureLow size={20}/>
 
+                        </div>
+                        <p>
+                            {currentSurfData?.airTemperature.sg} °C
+                        </p>
+                    </div >
+                    <div className="waterTemp">
+                        <div >
+                            <IoWaterOutline size={20}/>
+                        </div>
+                        <p>
+                            {currentSurfData?.waterTemperature.sg} °C
+                        </p>
                     </div>
-                    <div>
-                        <IoWaterOutline size={20}/> {currentSurfData?.waterTemperature.sg}
+                    <div className="waveDir">
+                        <div >
+                            <GiEchoRipples size={20}/>
+                        </div>
+                        <p>
+                            {getDirection(currentSurfData?.swellDirection.sg)}
+                        </p>
+                    </div>
 
+                    <div className="height">
+                        <div>
+                            <BiWater size={20}/>
+                        </div>
+                        <p>
+                            {currentSurfData?.swellHeight.sg} m
+                        </p>
                     </div>
-                    <div>
-                       <GiEchoRipples size={20}/> {getDirection(currentSurfData?.swellDirection.sg)}
 
-                    </div>
-                    <div>
-                        <BiWater size={20}/> {currentSurfData?.swellHeight.sg}
-
-                    </div>
                 </div>
                 <div className="body-right">
-                    <div>
-                        <MdTimer size={20}/> {currentSurfData?.swellPeriod.sg}
-
+                    <div className="period">
+                        <div>
+                            <MdTimer size={20}/>
+                        </div>
+                        <p>
+                            {currentSurfData?.swellPeriod.sg} s
+                        </p>
                     </div>
-                    <div>
-                        <GiWindsock size={20}/>{getDirection(currentSurfData?.windDirection.sg)}
-
+                    <div className="windDir">
+                        <div>
+                            <GiWindsock size={20}/>
+                        </div>
+                        <p>
+                            {getDirection(currentSurfData?.windDirection.sg)}
+                        </p>
                     </div>
-                    <div>
-                        <RiWindyFill size={20}/> {currentSurfData?.windSpeed.sg}
-
+                    <div className="wind">
+                        <div >
+                            <RiWindyFill size={20}/>
+                        </div>
+                        <p>
+                        {currentSurfData?.windSpeed.sg} km/h
+                    </p>
                     </div>
                 </div>
-            </section>
-            <div className="add-remove">
                 {!isFavourite &&
-                <button className="add-re-bu" onClick={handleAdd}>
-                    <StarOutlineIcon/>
-                </button>}
+                    <button className="add-re-bu" onClick={handleAdd}>
+                        <AiOutlineStar size={30}/>
+                    </button>}
                 {isFavourite &&
-                <button className="add-re-bu" onClick={handleRemove}>
-                    <StarIcon/>
-                </button>}
-            </div>
+                    <button className="add-re-bu" onClick={handleRemove}>
+                        <AiFillStar size={30}/>
+                    </button>}
+            </section>
+
         </Wrapper>
     )
 }
@@ -114,7 +150,6 @@ const Wrapper = styled.section`
   
   .title{
     padding-top: 2px;
-    
   }
   
   h2{
@@ -126,24 +161,25 @@ const Wrapper = styled.section`
   
   .subtitle{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
   }
   
   .p1{
-    flex-grow: 1;
     text-align: end;
   }
   
   .p2{
-    flex-grow: 1;
+    position: absolute;
+    right: 1rem;
     text-align: end;
   }
   .body{
     display: flex;
    justify-content: space-around;
+    padding-bottom: 1rem;
     
   }
   
@@ -157,7 +193,6 @@ const Wrapper = styled.section`
     }
     
   }
-  
   .body-right{
     display: flex;
     flex-flow: column ;
@@ -167,6 +202,63 @@ const Wrapper = styled.section`
       margin: 2px;
     }
   }
+  
+  .airTemp{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .waterTemp{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .waveDir{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .height{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .period{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .windDir{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
+  .wind{
+    display: flex;
+    div{
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+  
   .body.p{
     padding: 0px;
     margin: 0px;
@@ -187,6 +279,9 @@ const Wrapper = styled.section`
     
   }
   .add-re-bu{
+    position: absolute;
+    right: 0.5rem;
+    top: 11.5rem;
     background-color: transparent; 
     border: none;
   }
