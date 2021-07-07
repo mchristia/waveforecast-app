@@ -27,7 +27,7 @@ export default function TagFavourites({spot, favouriteSpots, setFavouriteSpots, 
 }
 
 const Wrapper = styled.div`
-    
+    border-radius: 10px;
       -webkit-box-shadow: 2px 4px 22px 7px rgba(0,0,0,0.83);
       box-shadow: 2px 4px 22px 2px rgba(0,0,0,0.83);
   

@@ -14,6 +14,7 @@ export default function HomePage(){
     const {surfSpots} = useSurfSpot()
     const {favourites, setFavourites} = useFavourites();
     const random1 = Math.floor(Math.random() * surfSpots.length);
+    const random2 = Math.floor(Math.random() * surfSpots.length);
 
     console.log(surfSpots[random1])
     return(
@@ -50,6 +51,17 @@ export default function HomePage(){
                 : null
                 }
             </div>
+            <div className="preview2">
+                {surfSpots?.length > 0 ?
+                    <ListItem
+                        fromFavouritePage={false}
+                        setFavouriteSpots={setFavourites}
+                        favourite={favourites}
+                        spot={surfSpots[random2]}/>
+
+                : null
+                }
+            </div>
         </Wrapper>
     )
 }
@@ -60,6 +72,7 @@ const Wrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  
 
   .header {
     display: flex;
@@ -70,9 +83,20 @@ const Wrapper = styled.div`
   }
 
   .preview1 {
-    margin-top: 35%;
+    margin-top: 15%;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 4px 22px 7px rgba(0,0,0,0.83);
+    box-shadow: 2px 4px 22px 2px rgba(0,0,0,0.83);
+    
+  }
+  
+  .preview2 {
+    margin-top: 15%;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 10px;
     -webkit-box-shadow: 2px 4px 22px 7px rgba(0,0,0,0.83);
     box-shadow: 2px 4px 22px 2px rgba(0,0,0,0.83);
     

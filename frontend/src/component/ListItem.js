@@ -119,7 +119,7 @@ const Wrapper = styled.div `
   min-width: 200px;
   min-height: 40px;
   background-color: lightblue;
-  border-radius: 5px;
+  border-radius: 10px;
   color: black;
 
   .content {
