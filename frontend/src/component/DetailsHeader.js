@@ -66,10 +66,12 @@ export default function DetailsHeader({surfSpot, id}){
                         </Button>
                 </div>
                 <div className="b3">
-                    <Button component={Link} onClick={() =>{
-                           history.push({pathname:"/map",
-                            state:{lat: surfSpot.spotLocationDetails.latitude,
-                           lng: surfSpot.spotLocationDetails.longitude}})
+                    <Button onClick={() =>{
+                           history.push({
+                               pathname:"/map",
+                               state: { lat: surfSpot.spotLocationDetails.latitude,
+                                   lng: surfSpot.spotLocationDetails.longitude
+                               }})
                     }}>
                         <ExploreIcon/>
                     </Button>

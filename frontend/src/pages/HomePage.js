@@ -4,9 +4,16 @@ import styled from "styled-components"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import ExploreIcon from '@material-ui/icons/Explore';
+import useSurfSpot from "../hooks/useSurfSpots";
+import useFavourites from "../hooks/useFavourites";
+import ListItem from "../component/ListItem";
 
 export default function HomePage(){
 
+    const {surfSpots} = useSurfSpot()
+    const {favourites, setFavourites} = useFavourites();
+    const random1 = Math.floor(Math.random() * surfSpots.length);
+    const random2 = Math.random() * surfSpots.length;
     return(
         <Wrapper>
             <div>
@@ -28,6 +35,15 @@ export default function HomePage(){
                         <FavoriteIcon/>
                     </Button>
                 </Link>
+            </div>
+            <div>
+                {/*{surfSpots ? <ListItem*/}
+                {/*    fromFavouritePage={false}*/}
+                {/*    setFavouriteSpots={setFavourites}*/}
+                {/*    favourite={favourites}*/}
+                {/*    spot={surfSpots[random1]}/> : null*/}
+                {/*}*/}
+
             </div>
         </Wrapper>
     )
