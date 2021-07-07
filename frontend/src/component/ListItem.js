@@ -20,7 +20,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
     const [isFavourite, setIsFavourite] = useState(favourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
 
-
+    console.log(spot)
     function handleAdd() {
         addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
     }

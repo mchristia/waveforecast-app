@@ -14,6 +14,8 @@ export default function HomePage(){
     const {favourites, setFavourites} = useFavourites();
     const random1 = Math.floor(Math.random() * surfSpots.length);
     const random2 = Math.random() * surfSpots.length;
+
+    console.log(surfSpots[random1])
     return(
         <Wrapper>
             <div>
@@ -37,12 +39,12 @@ export default function HomePage(){
                 </Link>
             </div>
             <div>
-                {/*{surfSpots ? <ListItem*/}
-                {/*    fromFavouritePage={false}*/}
-                {/*    setFavouriteSpots={setFavourites}*/}
-                {/*    favourite={favourites}*/}
-                {/*    spot={surfSpots[random1]}/> : null*/}
-                {/*}*/}
+                {surfSpots ? <ListItem
+                    fromFavouritePage={false}
+                    setFavouriteSpots={setFavourites}
+                    favourite={favourites}
+                    spot={surfSpots[random1]}/> : null
+                }
 
             </div>
         </Wrapper>

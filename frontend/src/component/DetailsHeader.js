@@ -6,8 +6,6 @@ import {Link, useHistory, useLocation} from "react-router-dom"
 import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
 import AuthContext from "../context/AuthContext";
 import useFavourites from "../hooks/useFavourites";
-import StarIcon from '@material-ui/icons/Star';
-import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import {
     BiWater,
     FaTemperatureLow,
@@ -20,7 +18,6 @@ import {
     AiOutlineStar
 } from "react-icons/all";
 import {Button} from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExploreIcon from "@material-ui/icons/Explore";
 
