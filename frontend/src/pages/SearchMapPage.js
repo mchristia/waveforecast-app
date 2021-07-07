@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import  { useLoadScript } from "@react-google-maps/api";
 import styled from "styled-components/macro";
 import {useHistory, useLocation} from "react-router-dom"
@@ -9,6 +9,7 @@ import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import useSurfSpot from "../hooks/useSurfSpots";
 import useFavourites from "../hooks/useFavourites";
+import {getSurfSpot} from "../service/surfSpotDataService";
 
 
 
@@ -16,22 +17,25 @@ const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
 
+
      const spotLocation = useLocation()
-     const {surfSpots} = useSurfSpot();
+     const {surfSpots, token} = useSurfSpot();
      const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
      const fromFavouritePage = false;
+
      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
      });
+
     let currentLocation = {
-        lat: parseFloat(spotLocation.state.lat),
-        lng: parseFloat(spotLocation.state.lng)
+        lat: spotLocation.state?.lat ? parseFloat(spotLocation.state.lat): 0,
+        lng: spotLocation.state?.lng ? parseFloat(spotLocation.state.lng): 0
     }
 
      const center = () => {
-         if(!currentLocation.lat){
+         if(currentLocation.lat === 0){
            return {
                lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
                lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
@@ -67,8 +71,8 @@ const libraries = ["places"];
                 <button className="button1"
                     onClick={() => {
                         currentLocation = {
-                            lat: undefined,
-                            lng: undefined
+                            lat: 0,
+                            lng: 0
                         }
                         panTo(center());
                     }}>
