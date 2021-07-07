@@ -66,7 +66,11 @@ export default function DetailsHeader({surfSpot, id}){
                         </Button>
                 </div>
                 <div className="b3">
-                    <Button component={Link} to={"/map"}>
+                    <Button component={Link} onClick={() =>{
+                           history.push({pathname:"/map",
+                            state:{lat: surfSpot.spotLocationDetails.latitude,
+                           lng: surfSpot.spotLocationDetails.longitude}})
+                    }}>
                         <ExploreIcon/>
                     </Button>
                 </div>
@@ -82,32 +86,6 @@ export default function DetailsHeader({surfSpot, id}){
                     })}</p>
                 </div>
             </div>
-            {/*<div className="title">*/}
-            {/*    <h2>{surfSpot?.spotLocationDetails.name}</h2>*/}
-            {/*    <button className="button2" onClick={() => {*/}
-            {/*        history.push({pathname:"/map",*/}
-            {/*        state:{lat: surfSpot.spotLocationDetails.latitude,*/}
-            {/*        lng: surfSpot.spotLocationDetails.longitude}});*/}
-            {/*    }}>*/}
-            {/*        <ListAltIcon />*/}
-            {/*    </button>*/}
-            {/*    /!*<button className="button2" onClick={() => {*!/*/}
-            {/*    /!*    history.push("/search");*!/*/}
-            {/*    /!*}}>*!/*/}
-            {/*    /!*    <ListAltIcon />*!/*/}
-            {/*    /!*</button>*!/*/}
-            {/*    <div className="subtitle">*/}
-            {/*        <div>*/}
-            {/*            <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>*/}
-            {/*        </div>*/}
-            {/*        <div>*/}
-            {/*        <p className="p2">{new Date(now).toLocaleTimeString(navigator.language, {*/}
-            {/*            hour: '2-digit',*/}
-            {/*            minute:'2-digit'*/}
-            {/*        })}</p>*/}
-            {/*    </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <section className="body">
                 <div className="body-left">
                     <div className="airTemp">
