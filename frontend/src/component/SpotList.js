@@ -1,4 +1,3 @@
-import ListItem from "./ListItem";
 import React from "react";
 import styled from "styled-components/macro";
 import TagFavourites from "../service/TagFavourites";

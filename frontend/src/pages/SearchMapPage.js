@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useRef} from "react";
 import  { useLoadScript } from "@react-google-maps/api";
 import styled from "styled-components/macro";
 import {useHistory, useLocation} from "react-router-dom"
@@ -9,7 +9,7 @@ import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import useSurfSpot from "../hooks/useSurfSpots";
 import useFavourites from "../hooks/useFavourites";
-import {getSurfSpot} from "../service/surfSpotDataService";
+
 
 
 
@@ -19,7 +19,7 @@ const libraries = ["places"];
 
 
      const spotLocation = useLocation()
-     const {surfSpots, token} = useSurfSpot();
+     const {surfSpots} = useSurfSpot();
      const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
      const fromFavouritePage = false;

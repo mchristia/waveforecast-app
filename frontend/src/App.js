@@ -1,4 +1,4 @@
-import {Switch, Route, useHistory} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import SearchMapPage from "./pages/SearchMapPage";
