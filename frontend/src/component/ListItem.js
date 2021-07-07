@@ -59,7 +59,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                                     <FaTemperatureLow size={20}/>
                                 </div>
                                 <p>
-                                    {currentSurfData?.airTemperature.sg} °C
+                                    {currentSurfData?.airTemperature.sg.toFixed(1)} °C
                                 </p>
                             </div>
                             <div className="waterTemp">
@@ -67,7 +67,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                                     <IoWaterOutline size={20}/>
                                 </div>
                                 <p>
-                                    {currentSurfData?.waterTemperature.sg} °C
+                                    {currentSurfData?.waterTemperature.sg.toFixed(1)} °C
                                 </p>
                             </div>
                             <div className="height">
@@ -76,7 +76,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.swellHeight.sg} m
+                                    {currentSurfData?.swellHeight.sg.toFixed(1)} m
                                 </p>
                             </div>
                             <div className="period">
@@ -85,7 +85,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.swellPeriod.sg} s
+                                    {Math.round(currentSurfData?.swellPeriod.sg)} s
                                 </p>
                             </div>
                             <div className="wind">
@@ -94,7 +94,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.windSpeed.sg} km/h
+                                    {Math.round(currentSurfData?.windSpeed.sg)} km/h
                                 </p>
                             </div>
                         </div>

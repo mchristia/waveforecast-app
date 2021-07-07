@@ -93,7 +93,7 @@ export default function DetailsHeader({surfSpot, id}){
 
                         </div>
                         <p>
-                            {currentSurfData?.airTemperature.sg} °C
+                            {currentSurfData?.airTemperature.sg.toFixed(1)} °C
                         </p>
                     </div >
                     <div className="waterTemp">
@@ -101,7 +101,7 @@ export default function DetailsHeader({surfSpot, id}){
                             <IoWaterOutline size={20}/>
                         </div>
                         <p>
-                            {currentSurfData?.waterTemperature.sg} °C
+                            {currentSurfData?.waterTemperature.sg.toFixed(1)} °C
                         </p>
                     </div>
                     <div className="waveDir">
@@ -118,7 +118,7 @@ export default function DetailsHeader({surfSpot, id}){
                             <BiWater size={20}/>
                         </div>
                         <p>
-                            {currentSurfData?.swellHeight.sg} m
+                            {currentSurfData?.swellHeight.sg.toFixed(1)} m
                         </p>
                     </div>
 
@@ -129,7 +129,7 @@ export default function DetailsHeader({surfSpot, id}){
                             <MdTimer size={20}/>
                         </div>
                         <p>
-                            {currentSurfData?.swellPeriod.sg} s
+                            {Math.round(currentSurfData?.swellPeriod.sg)} s
                         </p>
                     </div>
                     <div className="windDir">
@@ -145,7 +145,7 @@ export default function DetailsHeader({surfSpot, id}){
                             <RiWindyFill size={20}/>
                         </div>
                         <p>
-                        {currentSurfData?.windSpeed.sg} km/h
+                        {Math.round(currentSurfData?.windSpeed.sg)} km/h
                     </p>
                     </div>
                 </div>
@@ -267,6 +267,7 @@ const Wrapper = styled.section`
 
   .airTemp {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -276,6 +277,7 @@ const Wrapper = styled.section`
 
   .waterTemp {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -285,6 +287,7 @@ const Wrapper = styled.section`
 
   .waveDir {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -294,6 +297,7 @@ const Wrapper = styled.section`
 
   .height {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -303,6 +307,7 @@ const Wrapper = styled.section`
 
   .period {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -312,6 +317,7 @@ const Wrapper = styled.section`
 
   .windDir {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -321,6 +327,7 @@ const Wrapper = styled.section`
 
   .wind {
     display: flex;
+    padding: 1px;
 
     div {
       margin-left: 1em;
@@ -350,7 +357,7 @@ const Wrapper = styled.section`
   .add-re-bu {
     position: absolute;
     right: 0.5rem;
-    top: 12rem;
+    bottom: 0.75rem;
     background-color: transparent;
     border: none;
   }

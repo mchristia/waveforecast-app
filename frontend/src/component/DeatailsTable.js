@@ -93,10 +93,10 @@ export default function DetailTable({surfSpot}){
                                 minute:'2-digit'
                             })}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">{row.height}</StyledTableCell>
-                                <StyledTableCell align="center">{row.period}</StyledTableCell>
+                                <StyledTableCell align="center">{row.height.toFixed(1)}</StyledTableCell>
+                                <StyledTableCell align="center">{Math.round(row.period)}</StyledTableCell>
                                 <StyledTableCell align="center">{getDirection(row.direction)}</StyledTableCell>
-                                <StyledTableCell align="center">{row.windspeed}</StyledTableCell>
+                                <StyledTableCell align="center">{Math.round(row.windspeed)}</StyledTableCell>
                                 <StyledTableCell align="center">{getDirection(row.winddirection)}</StyledTableCell>
                         </StyledTableRow>
                     ))}
