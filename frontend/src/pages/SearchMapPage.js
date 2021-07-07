@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useState} from "react";
 import  { useLoadScript } from "@react-google-maps/api";
 import styled from "styled-components/macro";
-import {useHistory} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
@@ -15,6 +15,8 @@ import useFavourites from "../hooks/useFavourites";
 const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
+
+     const spotLocation = useLocation()
      const {surfSpots} = useSurfSpot();
      const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
@@ -24,10 +26,31 @@ const libraries = ["places"];
         libraries,
      });
 
+
+     // console.log(geoLocation.coords.longitude)
      const center = {
          lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
          lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
      }
+
+     //     () => {
+     //         console.log("hello if")
+     //     if(!spotLocation){
+     //         console.log("no locations")
+     //       return {
+     //           lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
+     //           lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
+     //       }
+     //     }else{
+     //         console.log("locations")
+     //       return{
+     //           lat: parseFloat(spotLocation.state.lat),
+     //           lng: parseFloat(spotLocation.state.lng)
+     //       }
+     //     }
+     //
+     // } console.log(center)
+
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) =>{

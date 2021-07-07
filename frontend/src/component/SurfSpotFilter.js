@@ -112,6 +112,7 @@ const Wrapper = styled.div`
   .buttons{
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     padding: 1rem;
   }
   .b1{

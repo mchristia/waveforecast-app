@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react"
 import {getDirection, rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
 import styled from "styled-components/macro";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import {useHistory, useLocation} from "react-router-dom"
+import {Link, useHistory, useLocation} from "react-router-dom"
 import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
 import AuthContext from "../context/AuthContext";
 import useFavourites from "../hooks/useFavourites";
@@ -19,6 +19,10 @@ import {
     AiFillStar,
     AiOutlineStar
 } from "react-icons/all";
+import {Button} from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ExploreIcon from "@material-ui/icons/Explore";
 
 
 export default function DetailsHeader({surfSpot, id}){
@@ -43,27 +47,67 @@ export default function DetailsHeader({surfSpot, id}){
             .then(() => setIsFavourite(false))
     }
 
+
+
     return(
         <Wrapper>
-            <div className="title">
-                <h2>{surfSpot?.spotLocationDetails.name}</h2>
-                <button className="button2" onClick={() => {
-                    history.push("/search");
-                }}>
-                    <ListAltIcon />
-                </button>
-                <div className="subtitle">
-                    <div>
-                        <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
-                    </div>
-                    <div>
+            <section className="buttons">
+                <div>
+                    <h2>{surfSpot?.spotLocationDetails.name}</h2>
+                </div>
+                <div className="b1">
+                    <Button component={Link} to={"/search"}>
+                        <ListAltIcon/>
+                    </Button>
+                </div>
+                <div className="b2">
+                        <Button component={Link} to={"/user"}>
+                            <FavoriteIcon/>
+                        </Button>
+                </div>
+                <div className="b3">
+                    <Button component={Link} to={"/map"}>
+                        <ExploreIcon/>
+                    </Button>
+                </div>
+            </section>
+            <div className="subtitle">
+                <div>
+                    <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>
+                </div>
+                <div>
                     <p className="p2">{new Date(now).toLocaleTimeString(navigator.language, {
                         hour: '2-digit',
                         minute:'2-digit'
                     })}</p>
                 </div>
-                </div>
             </div>
+            {/*<div className="title">*/}
+            {/*    <h2>{surfSpot?.spotLocationDetails.name}</h2>*/}
+            {/*    <button className="button2" onClick={() => {*/}
+            {/*        history.push({pathname:"/map",*/}
+            {/*        state:{lat: surfSpot.spotLocationDetails.latitude,*/}
+            {/*        lng: surfSpot.spotLocationDetails.longitude}});*/}
+            {/*    }}>*/}
+            {/*        <ListAltIcon />*/}
+            {/*    </button>*/}
+            {/*    /!*<button className="button2" onClick={() => {*!/*/}
+            {/*    /!*    history.push("/search");*!/*/}
+            {/*    /!*}}>*!/*/}
+            {/*    /!*    <ListAltIcon />*!/*/}
+            {/*    /!*</button>*!/*/}
+            {/*    <div className="subtitle">*/}
+            {/*        <div>*/}
+            {/*            <p className="p1">{surfSpot?.spotLocationDetails.continent}, {surfSpot?.spotLocationDetails.country}, {surfSpot?.spotLocationDetails.region}</p>*/}
+            {/*        </div>*/}
+            {/*        <div>*/}
+            {/*        <p className="p2">{new Date(now).toLocaleTimeString(navigator.language, {*/}
+            {/*            hour: '2-digit',*/}
+            {/*            minute:'2-digit'*/}
+            {/*        })}</p>*/}
+            {/*    </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <section className="body">
                 <div className="body-left">
                     <div className="airTemp">
@@ -147,142 +191,190 @@ const Wrapper = styled.section`
   background-color: lightblue;
   border-top-right-radius: 2%;
   border-top-left-radius: 2%;
-  
-  .title{
+
+  h2 {
+    position: sticky;
+    z-index: 3;
+    margin: 2px;
+  }
+
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .filter {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 1rem 0;
+  }
+
+  .b1 {
+    margin: 2px;
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  .b2 {
+    margin: 2px;
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  .b3 {
+    margin: 2px;
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  .title {
     padding-top: 2px;
   }
-  
-  h2{
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }
-  
-  .subtitle{
+
+  .subtitle {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
   }
-  
-  .p1{
+
+  .p1 {
     text-align: end;
+    padding-left: 0.5rem;
+    margin-top: 0;
   }
-  
-  .p2{
-    position: absolute;
-    right: 1rem;
-    text-align: end;
+
+  .p2 {
+    padding-right: 0.5rem;
+    font-size: 14px;
+    margin-top: 0;
   }
-  .body{
+
+  .body {
     display: flex;
-   justify-content: space-around;
+    justify-content: space-around;
     padding-bottom: 1rem;
-    
+
   }
-  
-  .body-left{
+
+  .body-left {
     display: flex;
-    flex-flow: column ;
+    flex-flow: column;
     font-size: 14px;
-    p{
+
+    p {
       padding: 1px;
       margin: 2px;
     }
-    
+
   }
-  .body-right{
+
+  .body-right {
     display: flex;
-    flex-flow: column ;
+    flex-flow: column;
     font-size: 14px;
-    p{
+
+    p {
       padding: 1px;
       margin: 2px;
     }
   }
-  
-  .airTemp{
+
+  .airTemp {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .waterTemp{
+
+  .waterTemp {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .waveDir{
+
+  .waveDir {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .height{
+
+  .height {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .period{
+
+  .period {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .windDir{
+
+  .windDir {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .wind{
+
+  .wind {
     display: flex;
-    div{
+
+    div {
       margin-left: 1em;
       margin-right: 1em;
     }
   }
-  
-  .body.p{
+
+  .body.p {
     padding: 0px;
     margin: 0px;
   }
-  
-  .button2{
+
+  .button2 {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
     background-color: transparent;
     border: none;
   }
- 
-  .add-remove{
+
+  .add-remove {
     display: flex;
     justify-content: flex-end;
-   
     
   }
-  .add-re-bu{
+
+  .add-re-bu {
     position: absolute;
     right: 0.5rem;
-    top: 11.5rem;
-    background-color: transparent; 
+    top: 12rem;
+    background-color: transparent;
     border: none;
   }
 `

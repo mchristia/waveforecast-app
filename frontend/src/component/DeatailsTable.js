@@ -76,11 +76,11 @@ export default function DetailTable({surfSpot}){
                     <TableRow>
                         <StyledTableCell>Date</StyledTableCell>
                         <StyledTableCell>Time (h)</StyledTableCell>
-                        <StyledTableCell align="right">Wave height (m)</StyledTableCell>
-                        <StyledTableCell align="right">Period (s)</StyledTableCell>
-                        <StyledTableCell align="right">Wave Direction</StyledTableCell>
-                        <StyledTableCell align="right">Wind Speed (km/h)</StyledTableCell>
-                        <StyledTableCell align="right">Wind Direction</StyledTableCell>
+                        <StyledTableCell align="center">Wave height (m)</StyledTableCell>
+                        <StyledTableCell align="center">Period (s)</StyledTableCell>
+                        <StyledTableCell align="center">Wave Direction</StyledTableCell>
+                        <StyledTableCell align="center">Wind Speed (km/h)</StyledTableCell>
+                        <StyledTableCell align="center">Wind Direction</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -93,11 +93,11 @@ export default function DetailTable({surfSpot}){
                                 minute:'2-digit'
                             })}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{row.height}</StyledTableCell>
-                                <StyledTableCell align="right">{row.period}</StyledTableCell>
-                                <StyledTableCell align="right">{getDirection(row.direction)}</StyledTableCell>
-                                <StyledTableCell align="right">{row.windspeed}</StyledTableCell>
-                                <StyledTableCell align="right">{getDirection(row.winddirection)}</StyledTableCell>
+                                <StyledTableCell align="center">{row.height}</StyledTableCell>
+                                <StyledTableCell align="center">{row.period}</StyledTableCell>
+                                <StyledTableCell align="center">{getDirection(row.direction)}</StyledTableCell>
+                                <StyledTableCell align="center">{row.windspeed}</StyledTableCell>
+                                <StyledTableCell align="center">{getDirection(row.winddirection)}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

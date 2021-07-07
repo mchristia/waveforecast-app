@@ -137,20 +137,21 @@ const Wrapper = styled.div `
 
   .title {
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .subtitle {
     text-align: center;
     padding: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 12px;
   }
 
   .databox {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .airTemp {
