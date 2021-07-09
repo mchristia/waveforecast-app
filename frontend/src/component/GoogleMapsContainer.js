@@ -79,7 +79,6 @@ export default function GoogleMapsContainer({ center, surfSpots, onMapLoad, setF
 const Wrapper = styled.div`
   .infoWindow {
     text-decoration: none;
-    
   } 
   
 `
