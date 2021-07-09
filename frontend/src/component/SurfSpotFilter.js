@@ -57,7 +57,8 @@ export default function SurfSpotFilter({filterContinent,
                         }}
                     >
                         <option aria-label="None" value="" />
-                        {continents.map((continent) =>(<option value={continent}>{continent}</option>))}
+                        {continents.map((continent) =>(
+                            <option key={continent} value={continent}>{continent}</option>))}
                     </Select>
                 </FormControl>
                 <div>
@@ -74,7 +75,8 @@ export default function SurfSpotFilter({filterContinent,
                         }}
                     >
                         <option aria-label="None" value="" />
-                        {countries.map((country) =>(<option key={country} value={country}>{country}</option>))}
+                        {countries.map((country) =>(
+                            <option key={country} value={country}>{country}</option>))}
                     </Select>
                 </FormControl>
             </div>

@@ -11,7 +11,6 @@ export default function AuthProvider({children}){
             .then(res => res.data)
             .then((item) => {
                 setToken(item);
-                console.log(item)
             })
             .then(() => history.push("/home"))
             .catch(error => console.error(error.message))

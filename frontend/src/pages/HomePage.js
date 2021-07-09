@@ -16,7 +16,6 @@ export default function HomePage(){
     const random1 = Math.floor(Math.random() * surfSpots.length);
     const random2 = Math.floor(Math.random() * surfSpots.length);
 
-    console.log(surfSpots[random1])
     return(
         <Wrapper>
             <section className="header">

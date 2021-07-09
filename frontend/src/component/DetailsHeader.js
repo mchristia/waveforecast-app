@@ -26,25 +26,20 @@ export default function DetailsHeader({surfSpot, id}){
 
     const favourite = useLocation()
     const {token} = useContext(AuthContext)
-    const {favourites, setFavourites} = useFavourites();
+    const {setFavourites} = useFavourites();
     const history = useHistory();
     const now = Date.now()
     const currentSurfData = rightTimeToShowCurrentTemp(surfSpot)
     const [isFavourite, setIsFavourite] = useState(favourite.state.favourite)
 
-    console.log(favourite.state.favourite)
-    console.log(isFavourite)
     function handleAdd() {
         addToFavourites(id, token).then(() => setIsFavourite(true))
     }
     function handleRemove() {
-        console.log(favourites)
         removeFromFavourites(id, token)
             .then((item) => setFavourites(item))
             .then(() => setIsFavourite(false))
     }
-
-
 
     return(
         <Wrapper>

@@ -7,13 +7,14 @@ export default function useSurfSpot(){
     const [surfSpots, setSurfSpots] = useState([])
     const {token} = useContext(AuthContext)
 
-    const header = ({
+
+
+    useEffect(() => {
+        const header = ({
         headers: {
             Authorization: `Bearer ${token}`,
         },
-    })
-
-    useEffect(() => {
+        })
         if(token){
             axios.get("/api/surfspots/all", header)
                 .then((response) => response.data)

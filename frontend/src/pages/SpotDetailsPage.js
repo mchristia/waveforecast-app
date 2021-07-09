@@ -11,7 +11,6 @@ export default function SpotDetailsPage(){
     const [surfSpot, setSurfSpot] = useState();
     const {token} = useContext(AuthContext)
 
-    console.log(token)
     useEffect(() =>{
         if(token){
             getSurfSpot(id, token)

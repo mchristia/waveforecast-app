@@ -66,6 +66,7 @@ export default function GoogleMapsContainer({ center, surfSpots, onMapLoad, setF
                         <TagFavourites spot={selected} favouriteSpots={favouriteSpots}
                                        setFavouriteSpots={setFavouriteSpots}
                                        fromFavouritePage={fromFavouritePage}
+                                       hasShadow={false}
 
                         />
                     </InfoWindow>
