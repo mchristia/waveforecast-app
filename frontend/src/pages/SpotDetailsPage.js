@@ -27,7 +27,7 @@ export default function SpotDetailsPage(){
         return (
             <Wrapper>
                 <div className="overview">
-                    <DetailsHeader  surfSpot={surfSpot} />
+                    <DetailsHeader surfSpot={surfSpot} id={id}/>
                 </div>
                 <section className="table">
                     <DetailTable surfSpot={surfSpot} />
@@ -41,14 +41,15 @@ export default function SpotDetailsPage(){
 }
 
 const Wrapper = styled.div`
-  margin: 2px;
-  padding: 5px;
+
+  margin: 1px;
+  padding: 1px;
 
   .overview{
-    padding: 1%;
+    padding: 0;
   }
   
   .table{
-    margin-top: 2%;
+    margin-top: 0;
   }
 `

@@ -76,9 +76,9 @@ public class FavouritesService {
 
         if(listOfFavourites.contains(spotToDelete)){
             listOfFavourites.remove(spotToDelete);
-            return listOfFavourites;
-        }else{
-            return listOfFavourites;
+            user.setListOfFavourites(listOfFavourites);
+            appUserRepo.save(user);
         }
+        return listOfFavourites;
     }
 }

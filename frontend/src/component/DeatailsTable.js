@@ -9,7 +9,8 @@ import {
     TableRow,
     withStyles
 } from "@material-ui/core";
-import React, {useRef, useState} from "react";
+import React from "react";
+import {getDirection} from "../service/surfSpotCalculationService";
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -36,9 +37,15 @@ function createData(date, time, height, period, direction, windspeed, winddirect
 
 const useStyles = makeStyles({
     table: {
+
         width: "100%",
         overflowY: 'auto'
     },
+
+    date:{
+        fontSize: 9,
+        borderRight: "black",
+    }
 
 });
 
@@ -48,7 +55,7 @@ export default function DetailTable({surfSpot}){
     const classes = useStyles();
     const rows = []
     console.log(surfSpot)
-    console.log(new Date(surfSpot?.surfData[0].time).toDateString())
+    console.log(new Date(Date.parse(surfSpot?.surfData[0].time)).getHours())
 
     surfSpot?.surfData.forEach(element => {
 
@@ -61,36 +68,36 @@ export default function DetailTable({surfSpot}){
             element.windDirection.sg))
     })
     console.log(rows)
-    const now = Date.now()
+
     return(
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Date</StyledTableCell>
-                        <StyledTableCell>Time</StyledTableCell>
-                        <StyledTableCell align="right">Wave height</StyledTableCell>
-                        <StyledTableCell align="right">Period</StyledTableCell>
-                        <StyledTableCell align="right">Direction</StyledTableCell>
-                        <StyledTableCell align="right">Wind Speed</StyledTableCell>
+                        <StyledTableCell>Time (h)</StyledTableCell>
+                        <StyledTableCell align="right">Wave height (m)</StyledTableCell>
+                        <StyledTableCell align="right">Period (s)</StyledTableCell>
+                        <StyledTableCell align="right">Wave Direction</StyledTableCell>
+                        <StyledTableCell align="right">Wind Speed (km/h)</StyledTableCell>
                         <StyledTableCell align="right">Wind Direction</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
                         <StyledTableRow key={row.date}>
-                            <StyledTableCell component="th" scope="row" >{row.date.toDateString()}
+                            <StyledTableCell className={classes.date} component="th" scope="row" >{row.date.toDateString()}
                                 </StyledTableCell>
                             <StyledTableCell component="th" scope="row">{row.date.toLocaleTimeString(navigator.language, {
-                                    hour: '2-digit',
-                                    minute:'2-digit'
-                                })}
+                                hour: '2-digit',
+                                minute:'2-digit'
+                            })}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.height}</StyledTableCell>
                                 <StyledTableCell align="right">{row.period}</StyledTableCell>
-                                <StyledTableCell align="right">{row.direction}</StyledTableCell>
+                                <StyledTableCell align="right">{getDirection(row.direction)}</StyledTableCell>
                                 <StyledTableCell align="right">{row.windspeed}</StyledTableCell>
-                                <StyledTableCell align="right">{row.winddirection}</StyledTableCell>
+                                <StyledTableCell align="right">{getDirection(row.winddirection)}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

@@ -6,13 +6,19 @@ import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import CenterFocusStrongIcon from "@material-ui/icons/CenterFocusStrong"
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import useSurfSpot from "../hooks/useSurfSpots";
+import useFavourites from "../hooks/useFavourites";
+
+
 
 const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
      const {surfSpots} = useSurfSpot();
+     const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
+     const fromFavouritePage = false;
      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -46,18 +52,29 @@ const libraries = ["places"];
                     onClick={() => {
                         panTo({lat: center.lat, lng: center.lng,});
                     }}>
-                    <CenterFocusStrongIcon/>
+                    <CenterFocusStrongIcon />
 
                 </button>
                 <button className="button2" onClick={() => {
+                    history.push("/user");
+                }}>
+                    <FavoriteIcon />
+                </button>
+                <button className="button3" onClick={() => {
                     history.push("/search");
                 }}>
                     <ListAltIcon />
                 </button>
             </div>
-            <box className="map">
-                <GoogleMapsContainer surfSpots={surfSpots} center={center} onMapLoad={onMapLoad}/>
-            </box>
+            <div className="map">
+                <GoogleMapsContainer surfSpots={surfSpots}
+                                     center={center}
+                                     onMapLoad={onMapLoad}
+                                     favouriteSpots={favourites}
+                                     setFavouriteSpots={setFavourites}
+                                     fromFavouritePage={fromFavouritePage}
+                />
+            </div>
         </Wrapper>
     )
 }
@@ -77,15 +94,25 @@ const Wrapper = styled.div`
     top: 1rem;
     left: 50%;
     z-index: 2;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: transparent;
+    border: none;
   }
   
   .button2{
     position: absolute;
     z-index: 2;
     top: 1rem;
+    right: 5.5rem;
+    background-color: transparent;
+    border: none;
+  }
+  .button3{
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
     right: 2rem;
-    background-image: linear-gradient(45deg, lightblue, yellow);
+    background-color: transparent;
+    border: none;
   }
   
   .map{
@@ -94,13 +121,16 @@ const Wrapper = styled.div`
   }
   
   h1{
+    font-family: "Bradley Hand";
     position: absolute;
     top: 1rem;
     left:1rem;
-    color: darkblue;
+    color: lightblue;
+    text-shadow: 0 0 5px black;
     z-index: 2;
     margin: 1px;
     padding: 1px;
     font-size: 1.5rem;
+    text-shadow: black;
   }
 `

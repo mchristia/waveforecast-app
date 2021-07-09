@@ -1,8 +1,7 @@
 import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api";
-import ListItem from "./ListItem";
 import React, {useState} from "react";
 import styled from "styled-components/macro";
-import {Link} from "react-router-dom";
+import TagFavourites from "../service/TagFavourites";
 
 const libraries = ["places"];
 
@@ -11,7 +10,7 @@ const options = {
     zoomControl: true,
 };
 
-export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
+export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots, fromFavouritePage}){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -47,20 +46,28 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
                             onClick={()=>{
                                 setSelected(spot)
                             }}
+                            icon={{
+                                url:"/images/app-icon.jpg",
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(20, 20),
+                                scaledSize: new window.google.maps.Size(40, 40),
+                            }}
                     />
                 ))}
                 <Marker />
                 {selected ? (
-                    <InfoWindow className="infoWindow" position={{
+                    <InfoWindow className="infoWindow" text-decoration="none" position={{
                         lat: parseFloat(selected.spotLocationDetails.latitude),
                         lng: parseFloat(selected.spotLocationDetails.longitude)
                     }} onCloseClick={()=> {
                         setSelected(null);
 
-                    }}><Link to={"/" + selected.id}>
-                        <ListItem key={selected.id} spot={selected}/>
-                    </Link>
+                    }}>
+                        <TagFavourites spot={selected} favouriteSpots={favouriteSpots}
+                                       setFavouriteSpots={setFavouriteSpots}
+                                       fromFavouritePage={fromFavouritePage}
 
+                        />
                     </InfoWindow>
                 ) : null}
             </GoogleMap>
@@ -70,7 +77,9 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad}){
 }
 
 const Wrapper = styled.div`
-  a {
+  .infoWindow {
     text-decoration: none;
-  }
+    
+  } 
+  
 `

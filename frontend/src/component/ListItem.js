@@ -1,111 +1,229 @@
-import {Box, makeStyles, Typography, ThemeProvider} from "@material-ui/core";
-import CardContent from "@material-ui/core/CardContent"
-import Card from "@material-ui/core/Card"
 import {rightTimeToShowCurrentTemp} from "../service/surfSpotCalculationService";
+import {addToFavourites, removeFromFavourites} from "../service/surfSpotDataService";
+import React, {useContext, useState} from "react";
+import AuthContext from "../context/AuthContext";
+import {Link} from "react-router-dom";
+import styled from "styled-components/macro";
+import {
+    BiWater,
+    FaTemperatureLow,
+    IoWaterOutline,
+    MdTimer,
+    RiWindyFill,
+    AiFillStar,
+    AiOutlineStar
+} from "react-icons/all";
 
-    const useStyles = makeStyles({
-        root: {
-            minWidth: 150,
-            minHeight: 30,
-            background: "linear-gradient(45deg, lightblue, yellow)",
-        },
-        content: {
-            padding: 8,
-            margin: 1,
-        },
-       title: {
-           textAlign: "center",
-       },
-        subtitle:{
-            textAlign: "center",
-            margin: 0,
-            padding: 0,
 
-        },
-        databox:{
-            display: "flex",
-            textAlign: "center" ,
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            fontSize: 12,
-        },
-        weather:{
-            display: "flex",
-           flexDirection: "column"
-
-        },
-        text:{
-            fontSize: 11 ,
-          margin: 0,
-          padding: 0,
-
-        }
-    });
-
-export default function ListItem({spot}){
-    const classes = useStyles();
-
-    console.log(spot)
+export default function ListItem({spot, favourite, setFavouriteSpots, fromFavouritePage}){
+    const {token} = useContext(AuthContext)
+    const [isFavourite, setIsFavourite] = useState(favourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
-    console.log(currentSurfData)
+
+
+    function handleAdd() {
+        addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
+    }
+    function handleRemove() {
+        removeFromFavourites(spot.id, token)
+            .then((item) => {
+                setIsFavourite(false)
+                if(fromFavouritePage){
+                   setFavouriteSpots(item)
+                }
+            })
+            .catch(error => console.error(error))
+    }
 
     return(
-        <Card className={classes.root} variant="outlined">
-            <CardContent className={classes.content} >
-                <Box  borderColor="black">
-                    <Box className={classes.title}  >
-                        <Typography className={classes.title} variant="h5" component="h1">
-                            {spot.spotLocationDetails.name}
-                        </Typography>
-                    </Box>
-                    <Box className={classes.subtitle} >
-                        <p className={classes.text}>
-                            {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
-                        </p>
-                    </Box>
-                    <Box className={classes.databox} >
-                        <div>
-                            <p>
-                                Air: {currentSurfData?.airTemperature.sg} °C
+        <Wrapper >
+            <div className="content" >
+                <Link className="link" to={{
+                pathname: "/" + spot.id,
+                state: {favourite: isFavourite}
+            }}>
+                    <div >
+                        <div className="title"  >
+                            <div className="title" >
+                                {spot.spotLocationDetails.name}
+                            </div>
+                        </div>
+                        <div className="subtitle" >
+                            <p className="text">
+                                {spot.spotLocationDetails.continent}, {spot.spotLocationDetails.country}, {spot.spotLocationDetails.region}
                             </p>
                         </div>
-                        <div>
-                            <p>
-                                Water: {currentSurfData?.waterTemperature.sg} °C
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.swellHeight.sg} m
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.swellPeriod.sg} s
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                {currentSurfData?.windSpeed.sg} km/h
-                            </p>
-                        </div>
-                    </Box>
-                </Box>
-            </CardContent>
-        </Card>
+                        <div className="databox" >
+                            <div className="airTemp">
+                                <div>
+                                    <FaTemperatureLow size={20}/>
+                                </div>
+                                <p>
+                                    {currentSurfData?.airTemperature.sg} °C
+                                </p>
+                            </div>
+                            <div className="waterTemp">
+                                <div >
+                                    <IoWaterOutline size={20}/>
+                                </div>
+                                <p>
+                                    {currentSurfData?.waterTemperature.sg} °C
+                                </p>
+                            </div>
+                            <div className="height">
+                                <div >
+                                    <BiWater size={20}/>
 
+                                </div>
+                                <p>
+                                    {currentSurfData?.swellHeight.sg} m
+                                </p>
+                            </div>
+                            <div className="period">
+                                <div >
+                                    <MdTimer size={20}/>
+
+                                </div>
+                                <p>
+                                    {currentSurfData?.swellPeriod.sg} s
+                                </p>
+                            </div>
+                            <div className="wind">
+                                <div >
+                                    <RiWindyFill size={20}/>
+
+                                </div>
+                                <p>
+                                    {currentSurfData?.windSpeed.sg} km/h
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+            <div className="buttons">
+                {!isFavourite && <button className="add" onClick={handleAdd}>
+                    <AiOutlineStar size={30}/>
+                </button>}
+                {isFavourite && <button className="remove" onClick={handleRemove}>
+                    <AiFillStar size={30}/>
+                </button>}
+            </div>
+        </Wrapper>
     )
 }
-//
-// const Wrapper = styled.div`
-//     font-family: Arial;
-//       color: black;
-//       display: flex;
-//       flex-direction: column;
-//       background: lightblue;
-//       border: darkgrey 2px solid;
-//       border-radius: 6px;
-//       padding: 12px;
-//       margin: 12px;
-//       text-align: center;
-// `
+
+const Wrapper = styled.div `
+
+  text-decoration: none;
+  min-width: 200px;
+  min-height: 40px;
+  background-color: lightblue;
+  border-radius: 5px;
+  color: black;
+
+  .content {
+    margin: 1px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.75rem;
+
+  }
+
+  .link {
+    text-decoration: none;
+    color: black;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .subtitle {
+    text-align: center;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  .databox {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-size: 12px;
+  }
+
+  .airTemp {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .waterTemp {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .period {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .height {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .wind {
+    display: flex;
+
+    div {
+      align-self: center;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .text {
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
+  .add {
+    align-self: flex-start;
+    background-color: transparent;
+    border: none;
+  }
+
+  .remove {
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+  }
+`

@@ -1,22 +1,23 @@
 import ListItem from "./ListItem";
 import React from "react";
 import styled from "styled-components/macro";
-import {Link} from "react-router-dom";
+import TagFavourites from "../service/TagFavourites";
 
-export default function SpotList({filterCountry, surfSpots, filterContinent}){
+
+export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, filterCountry, filterContinent, fromFavouritePage}){
 
 
     if(filterContinent?.name === '' && filterCountry?.name === ''){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => (
-                        <li>
-                            <Link to={"/" + spot.id}>
-                                <ListItem key={spot.id} spot={spot}/>
-                            </Link>
+                    {surfSpots?.map((spot) => {
+                        return <li key={spot.id} textDecoration= "none" list-style-type="none">
+                                     <TagFavourites spot={spot}
+                                                    favouriteSpots={favouriteSpots}
+                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
                         </li>
-                    ))}
+                    })}
                 </ul>
             </Wrapper>
         )
@@ -24,15 +25,11 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
-                                </li>
-                            )
+                           return <li key={spot.id} textDecoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                           </li>
                         }
                     })}
                 </ul>
@@ -42,15 +39,11 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.country === filterCountry?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
-                                </li>
-                            )
+                             return <li key={spot.id} textDecoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                             </li>
                         }
                     })}
                 </ul>
@@ -60,16 +53,12 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots.map((spot) => {
+                    {surfSpots?.map((spot) => {
                         if (spot.spotLocationDetails.continent === filterContinent?.name
                             && spot.spotLocationDetails.country === filterCountry?.name) {
-                            return (
-                                <li>
-                                    <Link to={"/" + spot.id}>
-                                        <ListItem key={spot.id} spot={spot}/>
-                                    </Link>
-                                </li>
-                            )
+                            return <li key={spot.id} textDecoration= "none" list-style-type="none">
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
+                            </li>
                         }
                     })}
                 </ul>
@@ -78,12 +67,15 @@ export default function SpotList({filterCountry, surfSpots, filterContinent}){
     }
 }
 const Wrapper = styled.div`
+  
   ul{
-    padding : 2px;
+    padding : 5px;
   }
   
   li{
-    padding: 1%
+    padding: 1%;
+    margin-bottom: 2rem;
+    background-color: transparent;
   }
   a{
     text-decoration: none;
