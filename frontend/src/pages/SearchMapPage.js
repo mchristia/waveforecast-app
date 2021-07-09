@@ -1,7 +1,7 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useRef} from "react";
 import  { useLoadScript } from "@react-google-maps/api";
 import styled from "styled-components/macro";
-import {useHistory} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 import {geolocated} from "react-geolocated";
 import GoogleMapsContainer from "../component/GoogleMapsContainer";
 import ListAltIcon from "@material-ui/icons/ListAlt";
@@ -12,22 +12,42 @@ import useFavourites from "../hooks/useFavourites";
 
 
 
+
 const libraries = ["places"];
 
  function SearchMapPage( geoLocation ) {
+
+
+     const spotLocation = useLocation()
      const {surfSpots} = useSurfSpot();
      const {favourites, setFavourites} = useFavourites();
      const history = useHistory();
      const fromFavouritePage = false;
+
      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
      });
 
-     const center = {
-         lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
-         lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
+    let currentLocation = {
+        lat: spotLocation.state?.lat ? parseFloat(spotLocation.state.lat): 0,
+        lng: spotLocation.state?.lng ? parseFloat(spotLocation.state.lng): 0
+    }
+
+     const center = () => {
+         if(currentLocation.lat === 0){
+           return {
+               lat: geoLocation.coords ? geoLocation.coords.latitude : 50.9632238,
+               lng: geoLocation.coords ? geoLocation.coords.longitude : 6.9369613
+           }
+         }else{
+           return{
+               lat: parseFloat(spotLocation.state.lat),
+               lng: parseFloat(spotLocation.state.lng)
+           }
+         }
      }
+
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) =>{
@@ -50,7 +70,11 @@ const libraries = ["places"];
                 <h1>Surf Spots</h1>
                 <button className="button1"
                     onClick={() => {
-                        panTo({lat: center.lat, lng: center.lng,});
+                        currentLocation = {
+                            lat: 0,
+                            lng: 0
+                        }
+                        panTo(center());
                     }}>
                     <CenterFocusStrongIcon />
 
@@ -68,7 +92,7 @@ const libraries = ["places"];
             </div>
             <div className="map">
                 <GoogleMapsContainer surfSpots={surfSpots}
-                                     center={center}
+                                     center={center()}
                                      onMapLoad={onMapLoad}
                                      favouriteSpots={favourites}
                                      setFavouriteSpots={setFavourites}

@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     table: {
 
         width: "100%",
-        overflowY: 'auto'
+        overflowY: "auto"
     },
 
     date:{
@@ -54,8 +54,6 @@ export default function DetailTable({surfSpot}){
 
     const classes = useStyles();
     const rows = []
-    console.log(surfSpot)
-    console.log(new Date(Date.parse(surfSpot?.surfData[0].time)).getHours())
 
     surfSpot?.surfData.forEach(element => {
 
@@ -67,7 +65,6 @@ export default function DetailTable({surfSpot}){
             element.windSpeed.sg,
             element.windDirection.sg))
     })
-    console.log(rows)
 
     return(
         <TableContainer component={Paper}>
@@ -76,11 +73,11 @@ export default function DetailTable({surfSpot}){
                     <TableRow>
                         <StyledTableCell>Date</StyledTableCell>
                         <StyledTableCell>Time (h)</StyledTableCell>
-                        <StyledTableCell align="right">Wave height (m)</StyledTableCell>
-                        <StyledTableCell align="right">Period (s)</StyledTableCell>
-                        <StyledTableCell align="right">Wave Direction</StyledTableCell>
-                        <StyledTableCell align="right">Wind Speed (km/h)</StyledTableCell>
-                        <StyledTableCell align="right">Wind Direction</StyledTableCell>
+                        <StyledTableCell align="center">Wave height (m)</StyledTableCell>
+                        <StyledTableCell align="center">Period (s)</StyledTableCell>
+                        <StyledTableCell align="center">Wave Direction</StyledTableCell>
+                        <StyledTableCell align="center">Wind Speed (km/h)</StyledTableCell>
+                        <StyledTableCell align="center">Wind Direction</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -93,11 +90,11 @@ export default function DetailTable({surfSpot}){
                                 minute:'2-digit'
                             })}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{row.height}</StyledTableCell>
-                                <StyledTableCell align="right">{row.period}</StyledTableCell>
-                                <StyledTableCell align="right">{getDirection(row.direction)}</StyledTableCell>
-                                <StyledTableCell align="right">{row.windspeed}</StyledTableCell>
-                                <StyledTableCell align="right">{getDirection(row.winddirection)}</StyledTableCell>
+                                <StyledTableCell align="center">{row.height.toFixed(1)}</StyledTableCell>
+                                <StyledTableCell align="center">{Math.round(row.period)}</StyledTableCell>
+                                <StyledTableCell align="center">{getDirection(row.direction)}</StyledTableCell>
+                                <StyledTableCell align="center">{Math.round(row.windspeed)}</StyledTableCell>
+                                <StyledTableCell align="center">{getDirection(row.winddirection)}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

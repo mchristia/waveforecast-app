@@ -23,5 +23,5 @@ export default function useSurfSpot(){
 
     }, [token]);
 
-    return {surfSpots}
+    return {surfSpots, token}
 }

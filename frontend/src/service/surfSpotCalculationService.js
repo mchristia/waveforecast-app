@@ -17,6 +17,7 @@ export const rightTimeToShowCurrentTemp = (surfSpot) => {
             }
         }
     }
+
 }
 
 export const getDirection = (direction) =>{

@@ -10,7 +10,7 @@ export default function useFavourites(){
     const header = ({
         headers: {
             Authorization: `Bearer ${token}`,
-        },
+        }
     })
 
     useEffect(() => {

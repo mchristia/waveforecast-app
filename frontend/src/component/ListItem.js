@@ -20,7 +20,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
     const [isFavourite, setIsFavourite] = useState(favourite)
     const currentSurfData = rightTimeToShowCurrentTemp(spot)
 
-
+    console.log(spot)
     function handleAdd() {
         addToFavourites(spot.id, token).then(() => setIsFavourite(  true))
     }
@@ -59,7 +59,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                                     <FaTemperatureLow size={20}/>
                                 </div>
                                 <p>
-                                    {currentSurfData?.airTemperature.sg} °C
+                                    {currentSurfData?.airTemperature.sg.toFixed(1)} °C
                                 </p>
                             </div>
                             <div className="waterTemp">
@@ -67,7 +67,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
                                     <IoWaterOutline size={20}/>
                                 </div>
                                 <p>
-                                    {currentSurfData?.waterTemperature.sg} °C
+                                    {currentSurfData?.waterTemperature.sg.toFixed(1)} °C
                                 </p>
                             </div>
                             <div className="height">
@@ -76,7 +76,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.swellHeight.sg} m
+                                    {currentSurfData?.swellHeight.sg.toFixed(1)} m
                                 </p>
                             </div>
                             <div className="period">
@@ -85,7 +85,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.swellPeriod.sg} s
+                                    {Math.round(currentSurfData?.swellPeriod.sg)} s
                                 </p>
                             </div>
                             <div className="wind">
@@ -94,7 +94,7 @@ export default function ListItem({spot, favourite, setFavouriteSpots, fromFavour
 
                                 </div>
                                 <p>
-                                    {currentSurfData?.windSpeed.sg} km/h
+                                    {Math.round(currentSurfData?.windSpeed.sg)} km/h
                                 </p>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ const Wrapper = styled.div `
   min-width: 200px;
   min-height: 40px;
   background-color: lightblue;
-  border-radius: 5px;
+  border-radius: 10px;
   color: black;
 
   .content {
@@ -137,20 +137,21 @@ const Wrapper = styled.div `
 
   .title {
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .subtitle {
     text-align: center;
     padding: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 12px;
   }
 
   .databox {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .airTemp {

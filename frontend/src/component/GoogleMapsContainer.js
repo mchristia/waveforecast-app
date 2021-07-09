@@ -10,7 +10,7 @@ const options = {
     zoomControl: true,
 };
 
-export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots, fromFavouritePage}){
+export default function GoogleMapsContainer({ center, surfSpots, onMapLoad, setFavouriteSpots, favouriteSpots, fromFavouritePage}){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -79,7 +79,6 @@ export default function GoogleMapsContainer({center, surfSpots, onMapLoad, setFa
 const Wrapper = styled.div`
   .infoWindow {
     text-decoration: none;
-    
   } 
   
 `

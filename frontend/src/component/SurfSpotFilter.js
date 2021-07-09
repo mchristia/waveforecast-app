@@ -89,8 +89,8 @@ const Wrapper = styled.div`
   background-color: lightblue;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   
   FormControll{
   //  border: darkblue solid 1px;
@@ -112,6 +112,7 @@ const Wrapper = styled.div`
   .buttons{
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     padding: 1rem;
   }
   .b1{
