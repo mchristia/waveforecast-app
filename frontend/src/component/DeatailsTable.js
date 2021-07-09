@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     table: {
 
         width: "100%",
-        overflowY: 'auto'
+        overflowY: "auto"
     },
 
     date:{
@@ -54,8 +54,6 @@ export default function DetailTable({surfSpot}){
 
     const classes = useStyles();
     const rows = []
-    console.log(surfSpot)
-    console.log(new Date(Date.parse(surfSpot?.surfData[0].time)).getHours())
 
     surfSpot?.surfData.forEach(element => {
 
@@ -67,7 +65,6 @@ export default function DetailTable({surfSpot}){
             element.windSpeed.sg,
             element.windDirection.sg))
     })
-    console.log(rows)
 
     return(
         <TableContainer component={Paper}>

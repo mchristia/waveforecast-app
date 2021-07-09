@@ -50,6 +50,7 @@ public class SGApiService {
             SurfSpot updatedSurfSpot = mappingService.mapSGApiResponseToSGSurfData(response.getBody(), longitude, latitude);
             return getEvery3rdHour(updatedSurfSpot);
         }catch(Exception e){
+            System.out.println(longitude+ ", "+ latitude);
             throw new RuntimeException("Json deserialization failed.");
         }
 
