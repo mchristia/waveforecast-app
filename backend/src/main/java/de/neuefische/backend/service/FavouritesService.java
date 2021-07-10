@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class FavouritesService {
@@ -26,7 +24,7 @@ public class FavouritesService {
     }
 
     public List<SurfSpot> getAllFavourites(String id) {
-        AppUser response = appUserRepo.findAppUserBy(id);
+        AppUser response = appUserRepo.findAppUserById(id);
         System.out.println(response);
         return response.getListOfFavourites();
     }
@@ -35,7 +33,7 @@ public class FavouritesService {
         SurfSpot spotToAdd = surfSpotRepo.findSurfSpotById(id);
 
         if(spotToAdd != null){
-            AppUser user = appUserRepo.findAppUserBy(name);
+            AppUser user = appUserRepo.findAppUserById(name);
             List<SurfSpot> listOfFavourites = user.getListOfFavourites();
             if(listOfFavourites.contains(spotToAdd)){
                 return new SurfSpot();
@@ -50,7 +48,7 @@ public class FavouritesService {
     }
 
     public List<SurfSpot> deleteAll(String name) {
-        AppUser user = appUserRepo.findAppUserBy(name);
+        AppUser user = appUserRepo.findAppUserById(name);
         List<SurfSpot> listOfFavourites = user.getListOfFavourites();
 
         if(!listOfFavourites.isEmpty()){
@@ -71,7 +69,7 @@ public class FavouritesService {
 
     public List<SurfSpot> deleteById(String name, String id) {
         SurfSpot spotToDelete = surfSpotRepo.findSurfSpotById(id);
-        AppUser user = appUserRepo.findAppUserBy(name);
+        AppUser user = appUserRepo.findAppUserById(name);
         List<SurfSpot> listOfFavourites= user.getListOfFavourites();
 
         if(listOfFavourites.contains(spotToDelete)){

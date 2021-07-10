@@ -19,4 +19,5 @@ public class SurfSpot {
     private String id;
     private SpotLocationDetails spotLocationDetails;
     private List<SGSurfData> surfData;
+
 }
