@@ -14,7 +14,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                         return <li key={spot.id} textDecoration= "none" list-style-type="none">
                                      <TagFavourites spot={spot}
                                                     favouriteSpots={favouriteSpots}
-                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
+                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                         </li>
                     })}
                 </ul>
@@ -27,7 +27,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                     {surfSpots?.filter((spot) => spot.spotLocationDetails.continent === filterContinent?.name).map((spot) => {
 
                            return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                            </li>
 
                     })}
@@ -41,7 +41,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                     {surfSpots?.filter((spot) => spot.spotLocationDetails.country === filterCountry?.name).map((spot) => {
 
                              return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                              </li>
                     })}
                 </ul>
@@ -55,7 +55,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                         && spot.spotLocationDetails.country === filterCountry?.name).map((spot) =>{
 
                             return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                                <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
+                                <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                             </li>
                         }
 
