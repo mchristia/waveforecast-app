@@ -7,12 +7,13 @@ import de.neuefische.backend.security.repository.AppUserRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -68,7 +69,7 @@ class FavouritesServiceTest {
                 )
         ));
 
-        when(mockedUserRepo.findAppUserById("Mario")).thenReturn(appUser);
+        when(mockedUserRepo.findById("Mario")).thenReturn(Optional.of(appUser));
 
         //When
         List<SurfSpot> surfSpotList = favouritesService.getAllFavourites(appUser.getUsername());
@@ -120,7 +121,7 @@ class FavouritesServiceTest {
     @DisplayName("Method should add a SurfSpot from the List")
     void addToFavourites(){
         //Given
-        AppUser appUser = new AppUser("Mario", "secretepassword", List.of(
+        AppUser appUser = new AppUser("Mario", "secretepassword", new ArrayList<>(List.of(
                 new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
                         .id("43.95339608383859"+"-1.3642210235940333")
                         .name("Plage de St. Girons")
@@ -159,7 +160,7 @@ class FavouritesServiceTest {
                         .swellDirection(new SwellDirection())
                         .build())
                 )
-        ));
+        )));
 
         SurfSpot spotToAdd = new SurfSpot("43.4753051551581"+"-1.5684491397804103",
                 SpotLocationDetails.builder()
@@ -182,7 +183,7 @@ class FavouritesServiceTest {
                     .build())
         );
 
-        when(mockedUserRepo.findAppUserById("Mario")).thenReturn(appUser);
+        when(mockedUserRepo.findById("Mario")).thenReturn(Optional.of(appUser));
         when(mockedSurfSpotRepo.findSurfSpotById(spotToAdd.getId()))
                 .thenReturn(new SurfSpot("43.4753051551581"+"-1.5684491397804103",
                         SpotLocationDetails.builder()
@@ -236,7 +237,7 @@ class FavouritesServiceTest {
     @DisplayName("Method should remove / delete a SurfSpot from the List")
     void deleteById(){
         //Given
-        AppUser appUser = new AppUser("Mario", "secretepassword", List.of(
+        AppUser appUser = new AppUser("Mario", "secretepassword", new ArrayList<>(List.of(
                 new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
                         .id("43.95339608383859"+"-1.3642210235940333")
                         .name("Plage de St. Girons")
@@ -275,7 +276,7 @@ class FavouritesServiceTest {
                         .swellDirection(new SwellDirection())
                         .build())
                 )
-        ));
+        )));
 
         SurfSpot spotToDelete = new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
                 .id("43.95339608383859"+"-1.3642210235940333")
@@ -297,7 +298,7 @@ class FavouritesServiceTest {
                 .build())
         );
 
-        when(mockedUserRepo.findAppUserById("Mario")).thenReturn(appUser);
+        when(mockedUserRepo.findById("Mario")).thenReturn(Optional.of(appUser));
         when(mockedSurfSpotRepo.findSurfSpotById(spotToDelete.getId()))
                 .thenReturn(new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
                         .id("43.95339608383859"+"-1.3642210235940333")
@@ -320,19 +321,19 @@ class FavouritesServiceTest {
                 ));
         //When
         List<SurfSpot> expectedSurfSpot = favouritesService.deleteById(appUser.getUsername(), spotToDelete.getId());
-
         //Then
-        assertThat(expectedSurfSpot, containsInAnyOrder(List.of(
-                new SurfSpot("43.4753051551581"+"-1.5684491397804103",
-                        SpotLocationDetails.builder()
-                                .id("43.4753051551581"+"-1.5684491397804103")
-                                .name("Plage de la Cote de Basques")
-                                .latitude("43.4753051551581")
-                                .longitude("-1.5684491397804103")
-                                .continent("Europa")
-                                .country("France")
-                                .region("Biarritz")
-                                .build(), List.of(SGSurfData.builder()
+        System.out.println(appUser.getListOfFavourites());
+        System.out.println(expectedSurfSpot);
+        assertThat(expectedSurfSpot, containsInAnyOrder (
+                new SurfSpot("43.854448442635984"+"-1.3916103531016923", SpotLocationDetails.builder()
+                        .id("43.854448442635984"+"-1.3916103531016923")
+                        .name("Plage de Moliets")
+                        .latitude("43.854448442635984")
+                        .longitude("-1.3916103531016923")
+                        .continent("Europa")
+                        .country("France")
+                        .region("Biarritz")
+                        .build(), List.of(SGSurfData.builder()
                         .time("")
                         .airTemperature(new AirTemperature())
                         .windSpeed(new WindSpeed())
@@ -343,6 +344,6 @@ class FavouritesServiceTest {
                         .swellDirection(new SwellDirection())
                         .build())
                 )
-        )));
+        ));
     }
 }

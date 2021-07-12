@@ -30,10 +30,6 @@ class SurfSpotControllerTest {
 
     @Autowired
     private SurfSpotRepo surfSpotRepo;
-    @MockBean
-    private SGApiService sgApiService;
-    @Autowired
-    private SurfSpotService surfSpotService ;
 
     @BeforeEach
     public void clearDb(){

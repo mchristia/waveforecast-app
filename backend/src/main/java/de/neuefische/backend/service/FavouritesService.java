@@ -24,7 +24,7 @@ public class FavouritesService {
     }
 
     public List<SurfSpot> getAllFavourites(String id) {
-        AppUser response = appUserRepo.findAppUserById(id);
+        AppUser response = appUserRepo.findById(id).get();
         System.out.println(response);
         return response.getListOfFavourites();
     }
@@ -33,7 +33,7 @@ public class FavouritesService {
         SurfSpot spotToAdd = surfSpotRepo.findSurfSpotById(id);
 
         if(spotToAdd != null){
-            AppUser user = appUserRepo.findAppUserById(name);
+            AppUser user = appUserRepo.findById(name).get();
             List<SurfSpot> listOfFavourites = user.getListOfFavourites();
             if(listOfFavourites.contains(spotToAdd)){
                 return new SurfSpot();
@@ -47,29 +47,9 @@ public class FavouritesService {
         else {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something went wrong");}
     }
 
-    public List<SurfSpot> deleteAll(String name) {
-        AppUser user = appUserRepo.findAppUserById(name);
-        List<SurfSpot> listOfFavourites = user.getListOfFavourites();
-
-        if(!listOfFavourites.isEmpty()){
-
-            for(int i=0; i< listOfFavourites.size(); i++){
-                listOfFavourites.remove(i);
-            }
-
-            user.setListOfFavourites(listOfFavourites);
-            appUserRepo.save(user);
-            return user.getListOfFavourites();
-
-        }else{
-            return listOfFavourites;
-        }
-
-    }
-
     public List<SurfSpot> deleteById(String name, String id) {
         SurfSpot spotToDelete = surfSpotRepo.findSurfSpotById(id);
-        AppUser user = appUserRepo.findAppUserById(name);
+        AppUser user = appUserRepo.findById(name).get();
         List<SurfSpot> listOfFavourites= user.getListOfFavourites();
 
         if(listOfFavourites.contains(spotToDelete)){

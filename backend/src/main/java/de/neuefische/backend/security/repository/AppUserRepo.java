@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface AppUserRepo extends PagingAndSortingRepository<AppUser, String> {
 
-    AppUser findAppUserById(String id);
 
 }
