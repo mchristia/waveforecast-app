@@ -31,6 +31,9 @@ class SurfSpotControllerTest {
     @Autowired
     private SurfSpotRepo surfSpotRepo;
 
+    @MockBean
+    private SurfSpotService surfSpotService;
+
     @BeforeEach
     public void clearDb(){
         surfSpotRepo.deleteAll();
