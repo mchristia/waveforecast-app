@@ -1,6 +1,6 @@
 # Aloha Wave forecast
 
-As passionate surfer my self, knowing the conditions is important for a good surf experience. 
+As passionate surfer myself, knowing the conditions is important for a good surf experience. 
 Within a 4 week project I was able to create my first App ever representing how I imagine 
 a forecast should present important information.
 The App shows the most important information like wave height and period, as well as water 
