@@ -55,7 +55,6 @@ const libraries = ["places"];
     },[]);
 
      const panTo = React.useCallback(({ lat, lng }) => {
-         console.log("in panTo")
          mapRef.current.panTo({ lat, lng });
          mapRef.current.setZoom(12);
      }, []);

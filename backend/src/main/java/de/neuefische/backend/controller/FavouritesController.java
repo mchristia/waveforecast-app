@@ -37,9 +37,4 @@ public class FavouritesController {
         return favouritesService.deleteById(principal.getName(), id);
     }
 
-    @DeleteMapping("/all")
-    public List<SurfSpot> deleteAll(Principal principal){
-        return favouritesService.deleteAll(principal.getName());
-    }
-
 }

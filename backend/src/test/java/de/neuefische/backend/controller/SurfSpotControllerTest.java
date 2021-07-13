@@ -30,10 +30,9 @@ class SurfSpotControllerTest {
 
     @Autowired
     private SurfSpotRepo surfSpotRepo;
+
     @MockBean
-    private SGApiService sgApiService;
-    @Autowired
-    private SurfSpotService surfSpotService ;
+    private SurfSpotService surfSpotService;
 
     @BeforeEach
     public void clearDb(){
@@ -127,6 +126,77 @@ class SurfSpotControllerTest {
                         .build())
                 )
         ));
+    }
+
+    @Test
+    void getSurfSpotByIdShouldReturnSurfSpot(){
+        //Given
+        surfSpotRepo.save(new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
+                .id("43.95339608383859"+"-1.3642210235940333")
+                .name("Plage de St. Girons")
+                .latitude("43.95339608383859")
+                .longitude("-1.3642210235940333")
+                .continent("Europa")
+                .country("France")
+                .region("Landes")
+                .build(), List.of(SGSurfData.builder()
+                .time("")
+                .airTemperature(new AirTemperature())
+                .windSpeed(new WindSpeed())
+                .windDirection(new WindDirection())
+                .waterTemperature(new WaterTemperature())
+                .swellHeight(new SwellHeight())
+                .swellPeriod(new SwellPeriod())
+                .swellDirection(new SwellDirection())
+                .build())
+        ));
+        surfSpotRepo.save(new SurfSpot("43.854448442635984"+"-1.3916103531016923", SpotLocationDetails.builder()
+                .id("43.854448442635984"+"-1.3916103531016923")
+                .name("Plage de Moliets")
+                .latitude("43.854448442635984")
+                .longitude("-1.3916103531016923")
+                .continent("Europa")
+                .country("France")
+                .region("Biarritz")
+                .build(), List.of(SGSurfData.builder()
+                .time("")
+                .airTemperature(new AirTemperature())
+                .windSpeed(new WindSpeed())
+                .windDirection(new WindDirection())
+                .waterTemperature(new WaterTemperature())
+                .swellHeight(new SwellHeight())
+                .swellPeriod(new SwellPeriod())
+                .swellDirection(new SwellDirection())
+                .build())
+        ));
+
+        //When
+        ResponseEntity<SurfSpot> response = testRestTemplate.getForEntity(
+                "http://localhost:" +port+ "/api/surfspots/id/"+"43.854448442635984"+"-1.3916103531016923", SurfSpot.class);
+
+        //Then
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(
+                new SurfSpot("43.95339608383859"+"-1.3642210235940333", SpotLocationDetails.builder()
+                        .id("43.95339608383859"+"-1.3642210235940333")
+                        .name("Plage de St. Girons")
+                        .latitude("43.95339608383859")
+                        .longitude("-1.3642210235940333")
+                        .continent("Europa")
+                        .country("France")
+                        .region("Landes")
+                        .build(), List.of(SGSurfData.builder()
+                        .time("")
+                        .airTemperature(new AirTemperature())
+                        .windSpeed(new WindSpeed())
+                        .windDirection(new WindDirection())
+                        .waterTemperature(new WaterTemperature())
+                        .swellHeight(new SwellHeight())
+                        .swellPeriod(new SwellPeriod())
+                        .swellDirection(new SwellDirection())
+                        .build())
+
+                )));
     }
 
 }

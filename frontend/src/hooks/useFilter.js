@@ -18,8 +18,7 @@ export default function useFilter(surfSpots){
     let countries = [...new Set(surfSpots?.map(spot => spot.spotLocationDetails.country))]
 
     if(filterContinent.name !== ""){
-        countries = [...new Set(surfSpots?.map((spot) => {
-            if(spot.spotLocationDetails.continent === filterContinent.name)
+        countries = [...new Set(surfSpots?.filter((spot) => spot.spotLocationDetails.continent === filterContinent.name).map((spot) => {
                 return spot.spotLocationDetails.country;
         }))]
     }

@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class SGApiService {
 
-    @Value("${storm.glass.key}")
+    @Value("${storm.glass.key:}")
     private String sgApiKey;
 
     private ObjectMappingService mappingService;

@@ -7,13 +7,13 @@ export default function useFavourites(){
     const {token} = useContext(AuthContext)
     const [favourites, setFavourites] = useState([]);
 
-    const header = ({
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    })
 
     useEffect(() => {
+        const header = ({
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
             axios.get("/api/favourites", header)
                 .then(response => response.data)
                 .then(data => setFavourites(data))

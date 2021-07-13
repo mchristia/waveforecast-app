@@ -14,7 +14,7 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
                         return <li key={spot.id} textDecoration= "none" list-style-type="none">
                                      <TagFavourites spot={spot}
                                                     favouriteSpots={favouriteSpots}
-                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
+                                                    setFavouriteSpots={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                         </li>
                     })}
                 </ul>
@@ -24,12 +24,12 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots?.map((spot) => {
-                        if (spot.spotLocationDetails.continent === filterContinent?.name) {
+                    {surfSpots?.filter((spot) => spot.spotLocationDetails.continent === filterContinent?.name).map((spot) => {
+
                            return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                            </li>
-                        }
+
                     })}
                 </ul>
             </Wrapper>
@@ -38,12 +38,11 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots?.map((spot) => {
-                        if (spot.spotLocationDetails.country === filterCountry?.name) {
+                    {surfSpots?.filter((spot) => spot.spotLocationDetails.country === filterCountry?.name).map((spot) => {
+
                              return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} />
+                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                              </li>
-                        }
                     })}
                 </ul>
             </Wrapper>
@@ -52,14 +51,15 @@ export default function SpotList({surfSpots, favouriteSpots, setFavouriteSpots, 
         return (
             <Wrapper>
                 <ul>
-                    {surfSpots?.map((spot) => {
-                        if (spot.spotLocationDetails.continent === filterContinent?.name
-                            && spot.spotLocationDetails.country === filterCountry?.name) {
+                    {surfSpots?.filter((spot) => spot.spotLocationDetails.continent === filterContinent?.name
+                        && spot.spotLocationDetails.country === filterCountry?.name).map((spot) =>{
+
                             return <li key={spot.id} textDecoration= "none" list-style-type="none">
-                            <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage}/>
+                                <TagFavourites spot={spot} favouriteSpots={favouriteSpots} setFavouriteSpot={setFavouriteSpots} fromFavouritePage={fromFavouritePage} hasShadow={true}/>
                             </li>
                         }
-                    })}
+
+                    )}
                 </ul>
             </Wrapper>
         )
